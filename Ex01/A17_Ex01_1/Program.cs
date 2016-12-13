@@ -5,10 +5,15 @@ namespace A17_Ex01_1
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             BinarySequences();
-            Console.WriteLine("\nPress any key to exit...");
+            PrintProgramExitMessage();
+        }
+
+        private static void PrintProgramExitMessage()
+        {
+            Console.WriteLine("{0}Press any key to exit...", Environment.NewLine);
             Console.ReadLine();
         }
 
@@ -20,14 +25,40 @@ namespace A17_Ex01_1
 
             for (byte i = 0; i < 3; i++)
             {
-                numbersAsStrings[i]  = ReadANumber();
+                numbersAsStrings[i]  = ReadInputNumber();
                 numbersAsIntegers[i] = int.Parse(numbersAsStrings[i]);
                 numbersAsBinary[i]   = ConvertStrToBinary(numbersAsIntegers[i]);
             }
             
             Console.WriteLine();
-            Console.WriteLine(string.Join(",\n", numbersAsBinary));
+            Console.WriteLine(string.Join(Environment.NewLine, numbersAsBinary));
             PrintStatistics(numbersAsStrings, numbersAsIntegers, numbersAsBinary);
+        }
+
+        private static string ReadInputNumber()
+        {
+            string number;
+            bool tryAgain = true;
+            do
+            {
+                Console.WriteLine("Please enter a 3-digit (positive) number:");
+                number = Console.ReadLine();
+                int tempNumber; //discarded after use in int.TryParse()
+                if (number.Length != 3)
+                {
+                    Console.WriteLine("Invalid input! More than or less than 3 characters were entered.");
+                }
+                else if (!int.TryParse(number, out tempNumber))
+                {
+                    Console.WriteLine("Invalid input! Invalid number was entered.");
+                }
+                else
+                {
+                    tryAgain = false;
+                }
+            }
+            while (tryAgain);
+            return number;
         }
 
         private static string ConvertStrToBinary(int i_DecimalNumber)
@@ -40,45 +71,28 @@ namespace A17_Ex01_1
             }
 
             if (str.Length == 0)
+            {
                 str.Append("0");
+            }
             return str.ToString();
         }
 
         private static void PrintStatistics(string[] i_NumbersAsStrings, int[] i_NumbersAsIntegers, string[] i_NumbersAsBinary)
         {
-            Console.WriteLine("\nStatistics on given input:\n");
+            Console.WriteLine("{0}Statistics on given input:{0}", Environment.NewLine);
             Console.WriteLine("Average amount of binary digits: {0:0.00}", AvgAmountOfDigits(i_NumbersAsBinary));
             Console.WriteLine("Number of Sequences monotinically increasing: {0}", CountMonotonicSequences(i_NumbersAsStrings, SequenceBehavior.Increasing));
             Console.WriteLine("Number of Sequences monotinically decreasing: {0}", CountMonotonicSequences(i_NumbersAsStrings, SequenceBehavior.Decreasing));
             Console.WriteLine("Average value: {0:0.00}", CalculateAverage(i_NumbersAsIntegers));
         }
 
-        private static string ReadANumber()
-        {
-            string number;
-            bool tryAgain = true;
-            do
-            {
-                Console.WriteLine("Please enter a 3-digit number:");
-                number = Console.ReadLine();
-                int tempNumber; //discarded after use in TryParse()
-                if (number.Length != 3)
-                    Console.WriteLine("Invalid input! More than or less than 3 characters were entered.");
-                else if (!int.TryParse(number, out tempNumber))
-                    Console.WriteLine("Invalid input! Invalid number was entered.");
-                else
-                    tryAgain = false;
-            } while (tryAgain);
-
-            return number;
-        }
-
         private static float AvgAmountOfDigits(string[] i_NumbersAsBinary)
         {
             float totalDigitsCount = 0;
-            foreach (var binaryNumber in i_NumbersAsBinary)
+            foreach (string binaryNumber in i_NumbersAsBinary)
+            {
                 totalDigitsCount += binaryNumber.Length;
-
+            }
             return totalDigitsCount / i_NumbersAsBinary.Length;
         }
 
@@ -92,11 +106,15 @@ namespace A17_Ex01_1
 
         private static byte CountMonotonicSequences(string[] i_NumbersSequences, SequenceBehavior i_MonotonicBehavior)
         {
-            byte count = 0;
-            foreach (var sequence in i_NumbersSequences)
+            byte counter = 0;
+            foreach (string sequence in i_NumbersSequences)
+            {
                 if ((GetSequenceBehavior(sequence) & i_MonotonicBehavior) == i_MonotonicBehavior)
-                    count++;
-            return count;
+                {
+                    counter++;
+                }
+            }
+            return counter;
         }
 
         private static SequenceBehavior GetSequenceBehavior(string i_Sequence)
@@ -104,11 +122,14 @@ namespace A17_Ex01_1
             SequenceBehavior Behavior = SequenceBehavior.NonMonotonic;
             if (char.GetNumericValue(i_Sequence[0]) <= char.GetNumericValue(i_Sequence[1]) &&
                 char.GetNumericValue(i_Sequence[1]) <= char.GetNumericValue(i_Sequence[2]))
+            {
                 Behavior = SequenceBehavior.Increasing;
+            }
             if (char.GetNumericValue(i_Sequence[0]) >= char.GetNumericValue(i_Sequence[1]) &&
                 char.GetNumericValue(i_Sequence[1]) >= char.GetNumericValue(i_Sequence[2]))
+            {
                 Behavior |= SequenceBehavior.Decreasing;
-            
+            }
             return Behavior;
         }
         #endregion
@@ -116,8 +137,10 @@ namespace A17_Ex01_1
         private static float CalculateAverage(int[] i_NumbersAsIntegers)
         {
             float sum = 0;
-            foreach (var number in i_NumbersAsIntegers)
+            foreach (int number in i_NumbersAsIntegers)
+            {
                 sum += number;
+            }
 
             return sum / i_NumbersAsIntegers.Length;
         }
