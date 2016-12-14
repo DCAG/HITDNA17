@@ -12,7 +12,7 @@ namespace A17_Ex01_3
             HighOfHourglass();
         }
 
-        public static void HighOfHourglass()
+        private static void HighOfHourglass()
         {
             int highHourglass = 0;
             bool goodInput = false;
