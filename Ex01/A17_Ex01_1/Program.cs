@@ -31,7 +31,7 @@ namespace A17_Ex01_1
             }
 
             Console.WriteLine();
-            Console.WriteLine(string.Join(Environment.NewLine, numbersAsBinary));
+            Console.WriteLine("The binary numbers are:{0}{1}", Environment.NewLine, string.Join(Environment.NewLine, numbersAsBinary));
             printStatistics(numbersAsStrings, numbersAsIntegers, numbersAsBinary);
         }
 
