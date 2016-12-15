@@ -2,7 +2,7 @@
 
 namespace A17_Ex01_4
 {
-    class Program
+    public class Program
     {
         public static void Main(string[] args)
         {
