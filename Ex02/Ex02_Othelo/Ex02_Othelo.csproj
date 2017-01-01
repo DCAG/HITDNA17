@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A5B3C6BA-E67D-4AE6-B811-5ABB8AAD0C0B}</ProjectGuid>
+    <ProjectGuid>{975AFC86-3A54-4A7C-8F73-D486138EF4C4}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>A17_Ex01_3</RootNamespace>
-    <AssemblyName>A17_Ex01_3</AssemblyName>
+    <RootNamespace>Ex02_Othelo</RootNamespace>
+    <AssemblyName>Ex02_Othelo</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,13 +32,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Coin.cs" />
+    <Compile Include="GameBoard.cs" />
+    <Compile Include="GameManager.cs" />
+    <Compile Include="OtheloMove.cs" />
+    <Compile Include="OtheloPrinter.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\A17_Ex01_2\A17_Ex01_2.csproj">
-      <Project>{a2e29cc3-a099-4db9-84c4-4387e15d2e2a}</Project>
-      <Name>A17_Ex01_2</Name>
-    </ProjectReference>
+    <Reference Include="Ex02.ConsoleUtils">
+      <HintPath>..\..\..\..\..\..\..\temp\Ex02.ConsoleUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
