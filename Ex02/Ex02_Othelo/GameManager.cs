@@ -4,89 +4,102 @@ using System.Text;
 
 namespace Ex02_Othelo
 {
-    enum CoinSideColor
-    {
-        Black,
-        White
-    }
     public class GameManager
     {
-        GameBoard m_Board;
-        Player m_PlayerA;
-        Player m_PlayerB;
-        int m_RoundNumber;
-        OtheloPrinter m_OtheloPrinter;
+        GameBoard m_GameBoard;
+        Player m_Player1, m_Player2;
 
-        public GameManager()//set defaults
+        GameManager()
         {
-            m_PlayerA = new Player() { Type = PlayerType.Human };
-            m_PlayerB = new Player() { Type = PlayerType.Computer };
-            m_RoundNumber = 0;
-            m_OtheloPrinter = new OtheloPrinter();
-        }
+            m_Player1.Name = AskPlayerName();
 
-        internal void Initialize()
-        {
-            //1
-            m_PlayerA.Name = m_OtheloPrinter.ReadPlayerName();
-            //2
-            if (m_OtheloPrinter.ReadIsMultiplayer())
+            if(IsMultiplayer())
             {
-                m_PlayerB.Name = m_OtheloPrinter.ReadPlayerName();
-                m_PlayerB.Type = PlayerType.Human;
+                m_Player2.Name = AskPlayerName();
             }
-            //3
-            m_Board.Size = m_OtheloPrinter.ReadBoardSize();
-        }
 
-        internal void StartGame()
-        {
+            m_GameBoard = new GameBoard(AskBoardSize());
             do
             {
-                StartGameRound();//4
+                m_GameBoard.SetInitialBoard();
+                Play();
             }
-            while (m_OtheloPrinter.ReadAnotherRound());//10
-            m_OtheloPrinter.PrintEndMessage();//10
+            while(PlayerWantsAnotherRound());
         }
 
-        private void StartGameRound()
+        private bool PlayerWantsAnotherRound()
         {
-            m_RoundNumber++;
-            m_Board.SetBoard();
-            Play();
-            //and at the end of the round:
-            CalculateWinner();
+            throw new NotImplementedException();
         }
 
-        void Play()
+        private void Play()
         {
-            m_OtheloPrinter.PrintBoard(m_Board);
-            Player currentTurn = m_PlayerA;
+            PrintBoard(m_GameBoard.Board);
             do
             {
-                m_Board.setSuqre(currentPlayer.PlayTurn()); //parameters are [color] and square [column] and [row]
-                if (currentTurn == m_PlayerA)
+                if (m_GameBoard.HasMoves(m_Player1))
                 {
-                    currentTurn = m_PlayerB;
+                    PlayTurn(m_Player1);
+                    PrintBoard(m_GameBoard.Board);
                 }
                 else
                 {
-                    currentTurn = m_PlayerB;
+                    PrintNoMoves(m_Player1);
                 }
-            }
-            while (m_PlayerA.HasMoves() || m_PlayerB.HasMoves());
+
+                if (m_GameBoard.HasMoves(m_Player2))
+                {
+                    PlayTurn(m_Player2);
+                    PrintBoard(m_GameBoard.Board);
+                }
+                else
+                {
+                    PrintNoMoves(m_Player2);
+                }
+            } while (m_GameBoard.HasMoves(m_Player1) || m_GameBoard.HasMoves(m_Player2));
+
+            PrintHighscore();
         }
 
-        Square PlayTurn(Player i_Player)
+        private void PrintHighscore()
         {
-            if (i_Player.SelectSquare())
-            {
-                Ex02.ConsoleUtils.Screen.Clear();
-            }
+            //m_GameBoard.GetNumOfCoins(Player1);
+            //m_GameBoard.GetNumOfCoins(Player2);
+            throw new NotImplementedException();
         }
-        void GetAvailableSquares(Player i_Player)
+
+        private void PrintNoMoves(Player m_Player1)
         {
-            
+            throw new NotImplementedException();
+        }
+
+        private void PlayTurn(Player m_Player1)
+        {
+            //ask player for his decision
+            //if player input is 'Q' exit
+            //if illegal square was chosen try again
+            //update board
+            throw new NotImplementedException();
+        }
+
+        private void PrintBoard(char[,] board)
+        {
+            throw new NotImplementedException();
+        }
+
+        private int AskBoardSize()
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool IsMultiplayer()
+        {
+            throw new NotImplementedException();
+        }
+
+        private string AskPlayerName()
+        {
+            throw new NotImplementedException();
         }
     }
 }

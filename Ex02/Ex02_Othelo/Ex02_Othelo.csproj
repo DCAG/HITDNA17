@@ -32,11 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Coin.cs" />
     <Compile Include="GameBoard.cs" />
     <Compile Include="GameManager.cs" />
-    <Compile Include="OtheloMove.cs" />
-    <Compile Include="OtheloPrinter.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>

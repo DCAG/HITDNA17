@@ -6,32 +6,25 @@ namespace Ex02_Othelo
 {
     class GameBoard
     {
-        struct Square
+        char[,] m_Board;
+        public char[,] Board
         {
-            byte m_column;
-            byte m_row;
-            static Square Parse(string i_str)
-            {
-                return new Square() { m_column = (byte)i_str[0], m_row = (byte)i_str[1] };
-            }
-        }
-        private byte m_Size;
-        private Coin[,] m_Coin;
-
-        GameBoard(byte i_Size)
-        {
-            m_Size = i_Size;
-            m_Coin = new Coin[m_Size,m_Size];
+            get { return m_Board; }
         }
 
-        void SetSquare(byte i_Column, byte i_Row, CoinSideColor i_CoinSide)
+        public GameBoard(int size)
         {
-            m_Coin[i_Column, i_Row].Flip();// i_CoinSide;
+            m_Board = new char[size, size];
         }
 
-        public void SetBoard()
+        internal bool HasMoves(Player m_Player1)
         {
+            throw new NotImplementedException();
+        }
 
+        internal void SetInitialBoard()
+        {
+            throw new NotImplementedException();
         }
     }
 }
