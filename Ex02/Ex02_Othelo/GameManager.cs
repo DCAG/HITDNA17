@@ -8,8 +8,9 @@ namespace Ex02_Othelo
     {
         GameBoard m_GameBoard;
         Player m_Player1, m_Player2;
+        bool quit;
 
-        GameManager()
+        public GameManager()
         {
             m_Player1.Name = AskPlayerName();
 
@@ -24,7 +25,7 @@ namespace Ex02_Othelo
                 m_GameBoard.SetInitialBoard();
                 Play();
             }
-            while(PlayerWantsAnotherRound());
+            while(!quit && PlayerWantsAnotherRound());
         }
 
         private bool PlayerWantsAnotherRound()
@@ -40,6 +41,8 @@ namespace Ex02_Othelo
                 if (m_GameBoard.HasMoves(m_Player1))
                 {
                     PlayTurn(m_Player1);
+                    if (quit)
+                        break;
                     PrintBoard(m_GameBoard.Board);
                 }
                 else
@@ -50,6 +53,8 @@ namespace Ex02_Othelo
                 if (m_GameBoard.HasMoves(m_Player2))
                 {
                     PlayTurn(m_Player2);
+                    if (quit)
+                        break;
                     PrintBoard(m_GameBoard.Board);
                 }
                 else
@@ -57,8 +62,8 @@ namespace Ex02_Othelo
                     PrintNoMoves(m_Player2);
                 }
             } while (m_GameBoard.HasMoves(m_Player1) || m_GameBoard.HasMoves(m_Player2));
-
-            PrintHighscore();
+            if (!quit)
+                PrintHighscore();
         }
 
         private void PrintHighscore()
@@ -73,13 +78,19 @@ namespace Ex02_Othelo
             throw new NotImplementedException();
         }
 
-        private void PlayTurn(Player m_Player1)
+        private void PlayTurn(Player i_Player)
         {
-            //ask player for his decision
-            //if player input is 'Q' exit
-            //if illegal square was chosen try again
-            //update board
-            throw new NotImplementedException();
+            string move = string.Empty;
+            do
+            {
+                if (i_Player.IsComputer)
+                    move = i_Player.GetRandomMove();
+                else
+                {
+                    //move = ask player for his decision
+                    //if player input is 'Q' exit (){ quit = true ; break;}
+                }
+            } while (!m_GameBoard.UpdateBoard(move)); //if illegal square was chosen try again //update board
         }
 
         private void PrintBoard(char[,] board)

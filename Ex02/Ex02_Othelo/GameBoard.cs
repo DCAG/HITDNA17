@@ -17,12 +17,22 @@ namespace Ex02_Othelo
             m_Board = new char[size, size];
         }
 
-        internal bool HasMoves(Player m_Player1)
+        private string[] GetAvailableMoves(char i_char)
+        {
+            
+        }
+
+        internal bool HasMoves(Player i_Player)
+        {
+            return GetAvailableMoves(i_Player.Symbol).Length > 0;
+        }
+
+        internal void SetInitialBoard()
         {
             throw new NotImplementedException();
         }
 
-        internal void SetInitialBoard()
+        internal bool UpdateBoard(string move)
         {
             throw new NotImplementedException();
         }
