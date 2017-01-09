@@ -7,7 +7,7 @@ namespace Ex02_Othelo
     class Player
     {
         private readonly bool r_IsComputer;
-        private readonly bool m_WhiteDisc;
+        private readonly bool r_WhiteDisc;
         private readonly string m_Name;
 
         public bool IsComputer
@@ -15,6 +15,14 @@ namespace Ex02_Othelo
             get
             {
                 return r_IsComputer;
+            }
+        }
+
+        public bool WhiteDisc
+        {
+            get
+            {
+                return r_WhiteDisc;
             }
         }
 
@@ -26,24 +34,11 @@ namespace Ex02_Othelo
             }
         }
 
-        public bool WhiteDisc
-        {
-            get
-            {
-                return m_WhiteDisc;
-            }
-        }
-
         public Player(string i_Name, bool i_White, bool i_IsComputer)
         {
-            m_Name = i_Name;
-            m_WhiteDisc = i_White;
             r_IsComputer = i_IsComputer;
-        }
-
-        internal string GetRandomMove()
-        {
-            throw new NotImplementedException();
+            r_WhiteDisc = i_White;
+            m_Name = i_Name;
         }
     }
 }

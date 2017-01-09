@@ -9,6 +9,8 @@ namespace Ex02_Othelo
     {
         private const bool v_White = true; //Black = false
         private bool?[,] m_GridBoard;
+        private List<string> m_BlackAvailableMoves;
+        private List<string> m_WhiteAvailableMoves;
 
         public bool?[,] Board
         {
@@ -52,31 +54,6 @@ namespace Ex02_Othelo
         private string ParseCoordinatesToStr(int i_Row, int i_Column)
         {
             return string.Format("{1}{0}", i_Row, (char)('A' + i_Column));
-        }
-
-        private bool tryParseStrToCoordinates(string i_str, out int o_Row, out int o_Column)
-        {
-            Regex pattern = new Regex(@"^(?<column>[A-Z]{1})(?<row>\d{1})$");
-            MatchCollection matches = pattern.Matches(i_str);
-            bool success = false;
-
-            o_Row = -1;
-            o_Column = -1;
-
-            foreach (Match match in matches)
-            {
-                if (match.Success)
-                {
-                    o_Row = int.Parse(match.Groups["row"].Value);
-                    o_Column = char.Parse(match.Groups["column"].Value) - 'A';
-                    success = true;
-                }
-            }
-            /*
-            o_Column = i_str[0] - 'A';
-            o_Row = i_str[1] - '0';
-            */
-            return success;
         }
 
         private bool isLegalMove(int i_X, int i_Y, bool i_WhitePlayer)
@@ -156,7 +133,12 @@ namespace Ex02_Othelo
         public bool UpdateBoard(string i_Square, bool i_WhitePlayer)
         {
             int row, column;
-            return tryParseStrToCoordinates(i_Square, out row, out column) && UpdateBoard(row, column, i_WhitePlayer);
+            bool result = tryParseStrToCoordinates(i_Square, out row, out column) && UpdateBoard(row, column, i_WhitePlayer);
+
+            m_BlackAvailableMoves = getAvailableMoves(!v_White);
+            m_WhiteAvailableMoves = getAvailableMoves(v_White);
+
+            return result;
         }
 
         public bool UpdateBoard(int i_X, int i_Y, bool i_WhitePlayer)
@@ -195,6 +177,13 @@ namespace Ex02_Othelo
                 i_X += i_DeltaX;
                 i_Y += i_DeltaY;
             }
+        }
+
+        public string GetRandomMove(bool i_White)
+        {
+            Random random = new Random();
+
+            return string.Format("{1}{0}", "12345678".ToCharArray().GetValue(random.Next()), "ABCDEFGH".ToCharArray().GetValue(random.Next()));
         }
     }
 }
