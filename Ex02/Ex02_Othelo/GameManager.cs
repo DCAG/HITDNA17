@@ -93,7 +93,7 @@ namespace Ex02_Othelo
 
         private void PrintNoMoves(Player i_Player)
         {
-            Console.WriteLine("{0} has available moves", i_Player);
+            Console.WriteLine("{0} has no available moves", i_Player.Name);
         }
 
         private void PlayTurn(Player i_Player)

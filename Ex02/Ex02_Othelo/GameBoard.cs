@@ -31,6 +31,9 @@ namespace Ex02_Othelo
             {
                 throw new Exception("Illegal GameBoard size");
             }
+            m_AvailableMoves = new Dictionary<bool, List<Point>>();
+            m_AvailableMoves[Black] = new List<Point>();
+            m_AvailableMoves[White] = new List<Point>();
         }
 
         private List<Point> getAvailableMoves(bool i_WhitePlayer)
@@ -115,13 +118,13 @@ namespace Ex02_Othelo
 
         public bool IsOutOfBounds(Point i_Square)
         {
-            return i_Square.X < 0 || m_GridBoard.GetLength(0) < i_Square.X ||
-                   i_Square.Y < 0 || m_GridBoard.GetLength(1) < i_Square.Y;
+            return i_Square.X < 0 || m_GridBoard.GetLength(0) <= i_Square.X ||
+                   i_Square.Y < 0 || m_GridBoard.GetLength(1) <= i_Square.Y;
         }
 
         public bool HasMoves(bool i_WhiteDisc)
         {
-            return getAvailableMoves(i_WhiteDisc).Count > 0;
+            return m_AvailableMoves[i_WhiteDisc].Count > 0;
         }
         
         public void SetInitialBoard()
