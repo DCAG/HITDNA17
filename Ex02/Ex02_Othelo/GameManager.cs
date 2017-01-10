@@ -9,14 +9,19 @@ namespace Ex02_Othelo
         GameBoard m_GameBoard;
         Player m_Player1, m_Player2;
         bool quit;
-
+        private const bool v_ComputerPlayer = true;
+        private const string k_ComputerPlayerName = "Computer";
         public GameManager()
         {
-            m_Player1.Name = AskPlayerName();
+            m_Player1 = new Player(AskPlayerName(), GameBoard.White, !v_ComputerPlayer);
 
-            if(TwoPlayers())
+            if (TwoPlayers())
             {
-                m_Player2.Name = AskPlayerName();
+                m_Player2 = new Player(AskPlayerName(),GameBoard.Black,!v_ComputerPlayer);
+            }
+            else
+            {
+                m_Player2 = new Player(k_ComputerPlayerName, GameBoard.Black, v_ComputerPlayer);
             }
 
             m_GameBoard = new GameBoard(BoardSize());

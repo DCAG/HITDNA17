@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ex02_Othelo
 {
-    class Player
+    struct Player
     {
         private readonly bool r_IsComputer;
         private readonly bool r_WhiteDisc;

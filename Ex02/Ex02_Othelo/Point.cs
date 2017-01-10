@@ -12,5 +12,11 @@
             m_X = i_X;
             m_Y = i_Y;
         }
+
+        public void Add(Point i_Addition)
+        {
+            m_X += i_Addition.m_X;
+            m_Y += i_Addition.m_Y;
+        }
     }
 }
