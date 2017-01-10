@@ -2,13 +2,15 @@
 {
     struct Point
     {
-        private int v1;
-        private int v2;
+        private int m_X;
+        private int m_Y;
+        public int X { get { return m_X; } set { m_X = value; } }
+        public int Y { get { return m_Y; } set { m_Y = value; } }
 
-        public Point(int v1, int v2)
+        public Point(int i_X, int i_Y)
         {
-            this.v1 = v1;
-            this.v2 = v2;
+            m_X = i_X;
+            m_Y = i_Y;
         }
     }
 }
