@@ -15,7 +15,7 @@ namespace Ex02_Othelo
         {
             m_Player1 = new Player(AskPlayerName(), GameBoard.White, !v_ComputerPlayer);
 
-            if (TwoPlayers())
+            if (AskYesNoQuestion("Is 2nd player human? (computer is default)"))
             {
                 m_Player2 = new Player(AskPlayerName(),GameBoard.Black,!v_ComputerPlayer);
             }
@@ -30,12 +30,20 @@ namespace Ex02_Othelo
                 m_GameBoard.SetInitialBoard();
                 Play();
             }
-            while(!quit && PlayerWantsAnotherRound());
+            while(!quit && AskYesNoQuestion("Play another round?"));
         }
 
-        private bool PlayerWantsAnotherRound()
+        
+        private bool AskYesNoQuestion(string i_Question)
         {
-            throw new NotImplementedException();
+            Console.Write("{0} [y/n]: ",i_Question);
+            string answerStr = Console.ReadLine();
+            while (System.Text.RegularExpressions.Regex.IsMatch(answerStr, "^(y|Y|n|N)$"))
+            {
+                Console.Write("{0} [y/n]: ", i_Question);
+                answerStr = Console.ReadLine();
+            }
+            return System.Text.RegularExpressions.Regex.IsMatch(answerStr, "^(y|Y)$");
         }
 
         private void Play()
@@ -43,7 +51,7 @@ namespace Ex02_Othelo
             PrintBoard(m_GameBoard.Board);
             do
             {
-                if (m_GameBoard.HasMoves(m_Player1))
+                if (m_GameBoard.HasMoves(m_Player1.WhiteDisc))
                 {
                     PlayTurn(m_Player1);
                     if (quit)
@@ -55,7 +63,7 @@ namespace Ex02_Othelo
                     PrintNoMoves(m_Player1);
                 }
 
-                if (m_GameBoard.HasMoves(m_Player2))
+                if (m_GameBoard.HasMoves(m_Player2.WhiteDisc))
                 {
                     PlayTurn(m_Player2);
                     if (quit)
@@ -66,7 +74,7 @@ namespace Ex02_Othelo
                 {
                     PrintNoMoves(m_Player2);
                 }
-            } while (m_GameBoard.HasMoves(m_Player1) || m_GameBoard.HasMoves(m_Player2));
+            } while (m_GameBoard.HasMoves(m_Player1.WhiteDisc) || m_GameBoard.HasMoves(m_Player2.WhiteDisc));
             if (!quit)
                 PrintHighscore();
         }
@@ -95,9 +103,9 @@ namespace Ex02_Othelo
             return success;
         }
 
-        private void PrintNoMoves(Player m_Player1)
+        private void PrintNoMoves(Player i_Player)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("{0} has available moves", i_Player);
         }
 
         private void PlayTurn(Player i_Player)
@@ -174,26 +182,6 @@ namespace Ex02_Othelo
             while (!int.TryParse(Console.ReadLine(), out SizeOfBoard) && SizeOfBoard != 6 && SizeOfBoard != 8);
 
             return SizeOfBoard;
-        }
-
-
-        private bool TwoPlayers()
-        {
-            string answer;
-            bool twoPlayer = false;
-            do
-            {
-                Console.WriteLine("if you want to play with player please write yes, else (with computer) write no");
-                answer = Console.ReadLine();
-
-                if (answer == "yes")
-                {
-                    twoPlayer = true;
-                }
-            }
-            while (answer != "no" || answer != "yes");
-
-            return twoPlayer;
         }
 
         private string AskPlayerName()
