@@ -131,7 +131,7 @@ namespace Ex02_Othelo
             o_Quit = match.Groups["Quit"].Success;
             if (!o_Quit)
             {
-                result = new Point(int.Parse(match.Groups["Column"].Value) - 1, match.Groups["Colum"].Value.ToUpper()[0] - 'A');
+                result = new Point(int.Parse(match.Groups["Row"].Value) - 1, match.Groups["Column"].Value.ToUpper()[0] - 'A');
             }
             return result;
         }

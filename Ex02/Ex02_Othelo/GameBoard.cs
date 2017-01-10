@@ -44,7 +44,7 @@ namespace Ex02_Othelo
             List<Point> availableMoves = new List<Point>();
             for (int i = 0; i < m_GridBoard.GetLength(0); i++)
             {
-                for (int j = 0; i < m_GridBoard.GetLength(1); j++)
+                for (int j = 0; j < m_GridBoard.GetLength(1); j++)
                 {
                     Point square = new Point(i, j);
                     if (isLegalMove(square, i_WhitePlayer))
@@ -143,6 +143,8 @@ namespace Ex02_Othelo
             m_GridBoard[boardCenterPosition - 1, boardCenterPosition    ] = !v_White; //left
             m_GridBoard[boardCenterPosition    , boardCenterPosition    ] =  v_White; //base square
             m_GridBoard[boardCenterPosition    , boardCenterPosition - 1] = !v_White; //up
+
+            updateAvailableMoves();
         }
 
         public void UpdateBoard(Point i_Square, bool i_WhitePlayer)
@@ -159,9 +161,14 @@ namespace Ex02_Othelo
                 flipInDirection(i_Square, new Point(k_Up, k_Right), i_WhitePlayer); //South-West
                 flipInDirection(i_Square, new Point(k_Up, k_Stay), i_WhitePlayer); //West
 
-                m_AvailableMoves[Black] = getAvailableMoves(!v_White);
-                m_AvailableMoves[White] = getAvailableMoves(v_White);
+                updateAvailableMoves();
             }
+        }
+
+        private void updateAvailableMoves()
+        {
+            m_AvailableMoves[Black] = getAvailableMoves(!v_White);
+            m_AvailableMoves[White] = getAvailableMoves(v_White);
         }
 
         public bool IsValidMove(Point i_Square, bool i_WhitePlayer)
