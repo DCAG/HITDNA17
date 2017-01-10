@@ -11,8 +11,7 @@ namespace Ex02_Othelo
         static public bool White { get { return v_White; } }
         static public bool Black { get { return v_White; } }
         private bool?[,] m_GridBoard;
-        private List<Point> m_BlackAvailableMoves;
-        private List<Point> m_WhiteAvailableMoves;
+        private Dictionary<bool,List<Point>> m_AvailableMoves;
 
         public bool?[,] Board
         {
@@ -92,7 +91,7 @@ namespace Ex02_Othelo
             {
                 i_Square.Add(i_Delta);
 
-                if (isOutOfBounds(i_Square) || isEmptySquare(i_Square))
+                if (IsOutOfBounds(i_Square) || isEmptySquare(i_Square))
                 {
                     validDirection = false;
                     break;
@@ -114,7 +113,7 @@ namespace Ex02_Othelo
             return m_GridBoard[i_Square.X, i_Square.Y] == null;
         }
 
-        private bool isOutOfBounds(Point i_Square)
+        public bool IsOutOfBounds(Point i_Square)
         {
             return i_Square.X < 0 || m_GridBoard.GetLength(0) < i_Square.X ||
                    i_Square.Y < 0 || m_GridBoard.GetLength(1) < i_Square.Y;
@@ -129,7 +128,7 @@ namespace Ex02_Othelo
         {
             for (int i = 0; i < m_GridBoard.GetLength(0); i++)
             {
-                for (int j = 0; i < m_GridBoard.GetLength(1); j++)
+                for (int j = 0; j < m_GridBoard.GetLength(1); j++)
                 {
                     m_GridBoard[i, j] = null;
                 }
@@ -146,32 +145,27 @@ namespace Ex02_Othelo
         public void UpdateBoard(Point i_Square, bool i_WhitePlayer)
         {
             const int k_Up = -1, k_Left = -1, k_Down = 1, k_Right = 1, k_Stay = 0;
-
-            flipInDirection(i_Square, new Point(k_Up,   k_Left),  i_WhitePlayer); //North-West 
-            flipInDirection(i_Square, new Point(k_Stay, k_Left),  i_WhitePlayer); //North
-            flipInDirection(i_Square, new Point(k_Down, k_Left),  i_WhitePlayer); //North-East 
-            flipInDirection(i_Square, new Point(k_Down, k_Stay),  i_WhitePlayer); //East 
-            flipInDirection(i_Square, new Point(k_Down, k_Right), i_WhitePlayer); //South-East
-            flipInDirection(i_Square, new Point(k_Stay, k_Right), i_WhitePlayer); //South
-            flipInDirection(i_Square, new Point(k_Up,   k_Right), i_WhitePlayer); //South-West
-            flipInDirection(i_Square, new Point(k_Up,   k_Stay),  i_WhitePlayer); //West
-
-            m_BlackAvailableMoves = getAvailableMoves(!v_White);
-            m_WhiteAvailableMoves = getAvailableMoves(v_White);
-        }
-        /*
-        private bool tryFlipInDirection(int i_X, int i_Y, int i_DeltaX, int i_DeltaY, bool i_WhitePlayer)
-        {
-            bool success = false;
-            if (TestMoveDirection(i_X, i_Y, i_DeltaX, i_DeltaY, i_WhitePlayer))
+            if (IsValidMove(i_Square, i_WhitePlayer))
             {
-                flipInDirection(i_X, i_Y, i_DeltaX, i_DeltaY, i_WhitePlayer); //West
-                success = true;
-            }
+                flipInDirection(i_Square, new Point(k_Up, k_Left), i_WhitePlayer); //North-West 
+                flipInDirection(i_Square, new Point(k_Stay, k_Left), i_WhitePlayer); //North
+                flipInDirection(i_Square, new Point(k_Down, k_Left), i_WhitePlayer); //North-East 
+                flipInDirection(i_Square, new Point(k_Down, k_Stay), i_WhitePlayer); //East 
+                flipInDirection(i_Square, new Point(k_Down, k_Right), i_WhitePlayer); //South-East
+                flipInDirection(i_Square, new Point(k_Stay, k_Right), i_WhitePlayer); //South
+                flipInDirection(i_Square, new Point(k_Up, k_Right), i_WhitePlayer); //South-West
+                flipInDirection(i_Square, new Point(k_Up, k_Stay), i_WhitePlayer); //West
 
-            return success;
+                m_AvailableMoves[Black] = getAvailableMoves(!v_White);
+                m_AvailableMoves[White] = getAvailableMoves(v_White);
+            }
         }
-        */
+
+        public bool IsValidMove(Point i_Square, bool i_WhitePlayer)
+        {
+            return m_AvailableMoves[i_WhitePlayer].Contains(i_Square);
+        }
+
         private void flipInDirection(Point i_Square, Point i_Delta, bool i_WhitePlayer)
         {
             i_Square.Add(i_Delta);
@@ -184,17 +178,8 @@ namespace Ex02_Othelo
 
         public Point GetRandomMove(bool i_White)
         {
-            Point result;
             Random random = new Random();
-            if (i_White)
-            {
-                result = m_WhiteAvailableMoves[random.Next(m_WhiteAvailableMoves.Count)];
-            }
-            else
-            {
-                result = m_BlackAvailableMoves[random.Next(m_BlackAvailableMoves.Count)];
-            }
-            return result;
+            return m_AvailableMoves[i_White][random.Next(m_AvailableMoves[i_White].Count)];
         }
     }
 }

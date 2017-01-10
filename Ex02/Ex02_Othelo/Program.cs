@@ -8,7 +8,8 @@ namespace Ex02_Othelo
     {
         public static void Main()
         {
-            GameManager manager = new GameManager(); 
+            GameManager manager = new GameManager();
+            manager.Start();
         }
     }
 }
