@@ -4,11 +4,12 @@ using System.Text;
 
 namespace Ex02_Othelo
 {
-    class Program
+    internal class Program
     {
         public static void Main()
         {
             GameManager manager = new GameManager();
+
             manager.Start();
         }
     }
