@@ -7,7 +7,7 @@ namespace Ex02_Othelo
     struct Player
     {
         private readonly bool r_IsComputer;
-        private readonly bool r_IsWhiteDisc;
+        private readonly DiscColor r_DiscColor;
         private readonly string m_Name;
         private const char k_WhiteSymbol = 'o';
         private const char k_BlackSymbol = 'x';
@@ -16,7 +16,7 @@ namespace Ex02_Othelo
         {
             get
             {
-                return GetSymbol(r_IsWhiteDisc); 
+                return GetSymbol(r_DiscColor); 
             }
         }
 
@@ -28,11 +28,11 @@ namespace Ex02_Othelo
             }
         }
 
-        public bool DiscColor
+        public DiscColor Color
         {
             get
             {
-                return r_IsWhiteDisc;
+                return r_DiscColor;
             }
         }
 
@@ -44,15 +44,15 @@ namespace Ex02_Othelo
             }
         }
 
-        public Player(string i_Name, bool i_White, bool i_IsComputer)
+        public Player(string i_Name, DiscColor i_DiscColor, bool i_IsComputer)
         {
             r_IsComputer = i_IsComputer;
-            r_IsWhiteDisc = i_White;
+            r_DiscColor = i_DiscColor;
             m_Name = i_Name;
         }
-        static public char GetSymbol(bool discColor)
+        static public char GetSymbol(DiscColor i_DiscColor)
         {
-            return discColor ? k_WhiteSymbol : k_BlackSymbol;
+            return i_DiscColor == DiscColor.None ? ' ' : i_DiscColor == DiscColor.White ? k_WhiteSymbol : k_BlackSymbol;
         }
 
     }

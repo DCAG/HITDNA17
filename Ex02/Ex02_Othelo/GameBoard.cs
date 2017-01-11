@@ -7,40 +7,14 @@ namespace Ex02_Othelo
 {
     enum DiscColor
     {
-        None = 0,
-        Black = 1,
-        White = 2
+        None = -1,
+        Black = 0,
+        White = 1,
     }
     class GameBoard
     {
-        private const bool v_White = true; //Black = false
-        static public bool White { get { return v_White; } }
-        static public bool Black { get { return !v_White; } }
         private DiscColor[,] m_GridBoard;
-        //private Dictionary<bool,List<Point>> m_AvailableMoves;
-        private List<Point> m_AvailableMoves = new List<Point>();
-        private Dictionary<Point, List<Point>> m_RequiredFlips = new Dictionary<Point, List<Point>>();
-
-        private Dictionary<bool,int> m_DiscsCounter;
-
-        public int BlackDiscsCounter { get { return GetDiscsCounter(Black); } }
-        public int WhiteDiscsCounter { get { return GetDiscsCounter(White); } }
-
-        public int GetDiscsCounter(DiscColor i_DiscsColor)
-        {
-            return m_DiscsCounter[i_DiscsColor];
-        }
-
-        private bool m_Turn = White;
-        public bool ThisTurn
-        {
-            get
-            {
-                return m_Turn;
-            }
-        }
-
-        public bool?[,] Board
+        public DiscColor[,] Board
         {
             get
             {
@@ -48,65 +22,88 @@ namespace Ex02_Othelo
             }
         }
 
+        private List<Point> m_AvailableMoves = new List<Point>();
+        private Dictionary<Point, List<Point>> m_RequiredFlips = new Dictionary<Point, List<Point>>();
+
+        private const int k_NumOfColors = 2;
+        private int[] m_DiscsCounter;
+
+        private DiscColor m_Turn = DiscColor.White;
+        public DiscColor ThisTurn
+        {
+            get
+            {
+                return m_Turn;
+            }
+        }
+
         public GameBoard(int i_Size)
         {
-            if ((2 < i_Size) && (i_Size % 2 == 0) && (i_Size == 6 || i_Size == 8))
+            if ((2 < i_Size) && (i_Size % 2 == 0))
             {
-                m_GridBoard = new bool?[i_Size, i_Size];
+                m_GridBoard = new DiscColor[i_Size, i_Size];
             }
             else
             {
                 throw new Exception("Illegal GameBoard size");
             }
+
             m_AvailableMoves = new List<Point>();
-            m_RequiredFlips = new Dictionary<Point, List<Point>>();
-            m_DiscsCounter = new Dictionary<bool, int>();
-            m_DiscsCounter[Black] = 0;
-            m_DiscsCounter[White] = 0;
+            m_RequiredFlips  = new Dictionary<Point, List<Point>>();
+            m_DiscsCounter   = new int[k_NumOfColors];
+        }
+
+        public int GetDiscsCounter(DiscColor i_DiscsColor)
+        {
+            return m_DiscsCounter[(int)i_DiscsColor];
+        }
+        static public DiscColor GetOppositeDiscColor(DiscColor i_DiscColor)
+        {
+            DiscColor result = DiscColor.None;
+            if (i_DiscColor == DiscColor.White)
+            {
+                result = DiscColor.Black;
+            }
+            else if(i_DiscColor == DiscColor.Black)
+            {
+                result = DiscColor.White;
+            }
+
+            return result;
         }
 
         private void updateAvailableMoves()
         {
-            /* inspired by:
-             * https://user.xmission.com/~sgigo/elec/ocreversi/legalmoves.html
-             */
-
+            m_AvailableMoves.Clear();
+            m_RequiredFlips.Clear();
             for (int i = 0; i < m_GridBoard.GetLength(0); i++)
             {
                 for (int j = 0; j < m_GridBoard.GetLength(1); j++)
                 {
-                    tryMove(new Point(i, j));   
+                    tryMove(new Point(i, j));
                 }
             }
         }
 
         private void tryMove(Point i_Square)
         {
-            const int k_Up = -1, k_Left = -1, k_Down = 1, k_Right = 1, k_Stay = 0;
-            /*
-            Point UpLeft  = new Point(-1,-1),
-                Left      = new Point(0, -1),
-                DownLeft  = new Point(1, -1),
-                Down      = new Point(1,  0),
-                DownRight = new Point(1,  1),
-                Right     = new Point(0,  1),
-                UpRight   = new Point(-1, 1),
-                Up        = new Point(-1, 0);
-            */
-            List<Point> toFlip = new List<Point>();
-            toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, new Point(k_Up, k_Left)));   //North-West 
-            toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, new Point(k_Stay, k_Left))); //|| //North
-            toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, new Point(k_Down, k_Left))); //|| //North-East 
-            toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, new Point(k_Down, k_Stay))); //|| //East 
-            toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, new Point(k_Down, k_Right)));//|| //South-East
-            toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, new Point(k_Stay, k_Right)));//|| //South
-            toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, new Point(k_Up,   k_Right)));//|| //South-West
-            toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, new Point(k_Up,   k_Stay))); //West
-
-            if(toFlip.Count > 0)
+            if (isEmptySquare(i_Square))
             {
-                m_AvailableMoves.Add(i_Square);
-                m_RequiredFlips[i_Square] = toFlip;
+                List<Point> toFlip = new List<Point>();
+                toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, getPointDelta(Delta.Down)));
+                toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, getPointDelta(Delta.DownLeft)));
+                toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, getPointDelta(Delta.DownRight)));
+                toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, getPointDelta(Delta.Left)));
+                toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, getPointDelta(Delta.Right)));
+                toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, getPointDelta(Delta.Up)));
+                toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, getPointDelta(Delta.UpLeft)));
+                toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, getPointDelta(Delta.UpRight)));
+
+                if (toFlip.Count > 0)
+                {
+                    m_AvailableMoves.Add(i_Square);
+                    m_RequiredFlips[i_Square] = toFlip;
+                }
             }
         }
 
@@ -118,12 +115,12 @@ namespace Ex02_Othelo
             {
                 i_Square.Add(i_Delta);
 
-                if (IsOutOfBounds(i_Square) || isEmptySquare(i_Square))
+                if (isOutOfBounds(i_Square) || isEmptySquare(i_Square))
                 {
                     toFlip.Clear();
                     break;
                 }
-                else if(m_GridBoard[i_Square.X, i_Square.Y] == !m_Turn)
+                else if(m_GridBoard[i_Square.X, i_Square.Y] == GetOppositeDiscColor(m_Turn))
                 {
                     toFlip.Add(i_Square);
                 }
@@ -133,78 +130,46 @@ namespace Ex02_Othelo
             return toFlip;
         }
 
-        private bool isEmptySquare(Point i_Square)
-        {
-            return m_GridBoard[i_Square.X, i_Square.Y] == null;
-        }
-
-        public bool IsOutOfBounds(Point i_Square)
-        {
-            return i_Square.X < 0 || m_GridBoard.GetLength(0) <= i_Square.X ||
-                   i_Square.Y < 0 || m_GridBoard.GetLength(1) <= i_Square.Y;
-        }
-
-        public bool HasMoves()
-        {
-            return m_AvailableMoves.Count > 0;
-        }
-        
-        public void SetInitialBoard()
+        public void SetInitialBoard(DiscColor i_FirstTurn)
         {
             for (int i = 0; i < m_GridBoard.GetLength(0); i++)
             {
                 for (int j = 0; j < m_GridBoard.GetLength(1); j++)
                 {
-                    m_GridBoard[i, j] = null;
+                    m_GridBoard[i, j] = DiscColor.None;
                 }
             }
 
             int boardCenterPosition = m_GridBoard.GetLength(0) / 2;
 
-            m_GridBoard[boardCenterPosition - 1, boardCenterPosition - 1] =  v_White; //up,left
-            m_GridBoard[boardCenterPosition - 1, boardCenterPosition    ] = !v_White; //left
-            m_GridBoard[boardCenterPosition    , boardCenterPosition    ] =  v_White; //base square
-            m_GridBoard[boardCenterPosition    , boardCenterPosition - 1] = !v_White; //up
+            m_GridBoard[boardCenterPosition - 1, boardCenterPosition - 1] = DiscColor.White; //up,left
+            m_GridBoard[boardCenterPosition - 1, boardCenterPosition    ] = DiscColor.Black; //left
+            m_GridBoard[boardCenterPosition    , boardCenterPosition    ] = DiscColor.White; //base square
+            m_GridBoard[boardCenterPosition    , boardCenterPosition - 1] = DiscColor.Black; //up
 
+            m_DiscsCounter[(int)DiscColor.Black] = 2;
+            m_DiscsCounter[(int)DiscColor.White] = 2;
+
+            m_Turn = i_FirstTurn;
             updateAvailableMoves();
         }
 
         public void UpdateBoard(Point i_Square)
         {
             m_GridBoard[i_Square.X, i_Square.Y] = m_Turn;
-            m_DiscsCounter[ThisTurn]++;
+            m_DiscsCounter[(int)ThisTurn]++;
             foreach (Point toFlip in m_RequiredFlips[i_Square])
             {
                 m_GridBoard[toFlip.X, toFlip.Y] = m_Turn;
-                m_DiscsCounter[ThisTurn]++;
-                m_DiscsCounter[!ThisTurn]--;
+                m_DiscsCounter[(int)ThisTurn]++;
+                m_DiscsCounter[(int)GetOppositeDiscColor(ThisTurn)]--;
             }
-
-            m_Turn = !m_Turn;
+        }
+        public void SwitchTurns()
+        {
+            m_Turn = GetOppositeDiscColor(m_Turn);
             updateAvailableMoves();
         }
-
-        /*
-        public void UpdateBoard(Point i_Square, bool i_WhitePlayer)
-        {
-            const int k_Up = -1, k_Left = -1, k_Down = 1, k_Right = 1, k_Stay = 0;
-            if (IsValidMove(i_Square, i_WhitePlayer))
-            {
-                m_GridBoard[i_Square.X, i_Square.Y] = i_WhitePlayer;
-                flipInDirection(i_Square, new Point(k_Up, k_Left),    i_WhitePlayer); //North-West 
-                flipInDirection(i_Square, new Point(k_Stay, k_Left),  i_WhitePlayer); //North
-                flipInDirection(i_Square, new Point(k_Down, k_Left),  i_WhitePlayer); //North-East 
-                flipInDirection(i_Square, new Point(k_Down, k_Stay),  i_WhitePlayer); //East 
-                flipInDirection(i_Square, new Point(k_Down, k_Right), i_WhitePlayer); //South-East
-                flipInDirection(i_Square, new Point(k_Stay, k_Right), i_WhitePlayer); //South
-                flipInDirection(i_Square, new Point(k_Up, k_Right),   i_WhitePlayer); //South-West
-                flipInDirection(i_Square, new Point(k_Up, k_Stay),    i_WhitePlayer); //West
-
-                updateAvailableMoves();
-            }
-        }
-        */
-
         public bool IsValidMove(Point i_Move)
         {
             return m_AvailableMoves.Contains(i_Move);
@@ -215,5 +180,70 @@ namespace Ex02_Othelo
             Random random = new Random();
             return m_AvailableMoves[random.Next(m_AvailableMoves.Count)];
         }
+
+        #region Private Boolean Tests
+        private bool isEmptySquare(Point i_Square)
+        {
+            return m_GridBoard[i_Square.X, i_Square.Y] == DiscColor.None;
+        }
+
+        private bool isOutOfBounds(Point i_Square)
+        {
+            return i_Square.X < 0 || m_GridBoard.GetLength(0) <= i_Square.X ||
+                   i_Square.Y < 0 || m_GridBoard.GetLength(1) <= i_Square.Y;
+        }
+
+        public bool HasMoves()
+        {
+            return m_AvailableMoves.Count > 0;
+        }
+        #endregion
+
+        private Point getPointDelta(Delta i_Delta)
+        {
+            const int k_Up = -1, k_Left = -1, k_Down = 1, k_Right = 1, k_Stay = 0;
+
+            Point desiredDeltaPoint = new Point();
+            switch (i_Delta)
+            {
+                case Delta.Down:
+                    desiredDeltaPoint = new Point(k_Stay, k_Down);
+                    break;
+                case Delta.DownLeft:
+                    desiredDeltaPoint = new Point(k_Left, k_Down);
+                    break;
+                case Delta.DownRight:
+                    desiredDeltaPoint = new Point(k_Right, k_Down);
+                    break;
+                case Delta.Left:
+                    desiredDeltaPoint = new Point(k_Left, k_Stay);
+                    break;
+                case Delta.Right:
+                    desiredDeltaPoint = new Point(k_Right, k_Stay);
+                    break;
+                case Delta.Up:
+                    desiredDeltaPoint = new Point(k_Stay, k_Up);
+                    break;
+                case Delta.UpLeft:
+                    desiredDeltaPoint = new Point(k_Left, k_Up);
+                    break;
+                case Delta.UpRight:
+                    desiredDeltaPoint = new Point(k_Right, k_Up);
+                    break;
+            }
+
+            return desiredDeltaPoint;
+        }
+    }
+    enum Delta
+    {
+        UpLeft,
+        Left,
+        DownLeft,
+        Down,
+        DownRight,
+        Right,
+        UpRight,
+        Up
     }
 }
