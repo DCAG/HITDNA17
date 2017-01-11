@@ -8,25 +8,27 @@ namespace Ex02_Othelo
     public class GameManager
     {
         GameBoard m_GameBoard;
-        Player m_Player1, m_Player2;
+        Player m_FirstPlayer, m_Opponent;
         bool m_Quit;
         private const bool v_ComputerPlayer = true;
         private const string k_ComputerPlayerName = "Computer";
 
         public GameManager()
         {
-            m_Player1 = new Player(AskPlayerName(), GameBoard.White, !v_ComputerPlayer);
+            m_FirstPlayer = new Player(AskPlayerName(), GameBoard.White, !v_ComputerPlayer);
 
-            if (AskYesNoQuestion("Is 2nd player human? (computer is default)"))
+            if (AskYesNoQuestion("Is opponent player human? (computer is default)"))
             {
-                m_Player2 = new Player(AskPlayerName(),GameBoard.Black,!v_ComputerPlayer);
+                m_Opponent = new Player(AskPlayerName(),GameBoard.Black,!v_ComputerPlayer);
             }
             else
             {
-                m_Player2 = new Player(k_ComputerPlayerName, GameBoard.Black, v_ComputerPlayer);
+                m_Opponent = new Player(k_ComputerPlayerName, GameBoard.Black, v_ComputerPlayer);
             }
 
             m_GameBoard = new GameBoard(AskBoardSize());
+
+            m_Quit = false;
         }
 
         public void Start()
@@ -42,53 +44,98 @@ namespace Ex02_Othelo
         private void play()
         {
             PrintBoard(m_GameBoard.Board);
+            bool player1HasMoves = true;
+            bool player2HasMoves = true;
             do
             {
-                if (m_GameBoard.HasMoves(m_Player1.WhiteDisc))
-                {
-                    PlayTurn(m_Player1);
-                    if (m_Quit)
-                        break;
-                    PrintBoard(m_GameBoard.Board);
-                }
-                else
-                {
-                    PrintNoMoves(m_Player1);
-                }
-
-                if (m_GameBoard.HasMoves(m_Player2.WhiteDisc))
-                {
-                    PlayTurn(m_Player2);
-                    if (m_Quit)
-                        break;
-                    PrintBoard(m_GameBoard.Board);
-                }
-                else
-                {
-                    PrintNoMoves(m_Player2);
-                }
-            } while (m_GameBoard.HasMoves(m_Player1.WhiteDisc) || m_GameBoard.HasMoves(m_Player2.WhiteDisc));
+                player1HasMoves = PlayerTurn(m_FirstPlayer);
+                player2HasMoves = PlayerTurn(m_Opponent);
+            }
+            while (!m_Quit && (player1HasMoves || player2HasMoves));
             if (!m_Quit)
                 PrintHighscore();
+        }
+
+        private bool PlayerTurn(Player i_Player)
+        {
+            bool hasMoves = m_GameBoard.HasMoves();
+            if (hasMoves)
+            {
+                PlayTurn(i_Player);
+                if (!m_Quit)
+                {
+                    PrintBoard(m_GameBoard.Board);
+                }
+            }
+            else
+            {
+                PrintNoMoves(i_Player);
+            }
+
+            return hasMoves;
+        }
+
+        private void PlayTurn(Player i_Player)
+        {
+            string moveStr = string.Empty;
+            Point move = new Point(-1, -1);
+            if (i_Player.IsComputer)
+            {
+                move = m_GameBoard.GetRandomMove();
+            }
+            else
+            {
+                Console.Write("[{0}] It is {1}'s turn, choose a square or Q to exit:", i_Player.Symbol, i_Player.Name);
+                move = AskPlayerMoveOrQuit(out m_Quit);
+                while (!m_Quit && !m_GameBoard.IsValidMove(move))  //if illegal square was chosen try again //update board
+                {
+                    Console.WriteLine("Impossible move! try again...");
+                    move = AskPlayerMoveOrQuit(out m_Quit);
+                }
+            }
+
+            if (!m_Quit)
+            {
+                m_GameBoard.UpdateBoard(move);
+            }
         }
 
         private bool AskYesNoQuestion(string i_Question)
         {
             Console.Write("{0} [y/n]: ", i_Question);
             string answerStr = Console.ReadLine();
-            while (!System.Text.RegularExpressions.Regex.IsMatch(answerStr, "^(y|Y|n|N)$"))
+            while (!Regex.IsMatch(answerStr, "^(y|Y|n|N)$"))
             {
                 Console.Write("{0} [y/n]: ", i_Question);
                 answerStr = Console.ReadLine();
             }
-            return System.Text.RegularExpressions.Regex.IsMatch(answerStr, "^(y|Y)$");
+            return Regex.IsMatch(answerStr, "^(y|Y)$");
         }
 
         private void PrintHighscore()
         {
-            //m_GameBoard.GetNumOfCoins(Player1);
-            //m_GameBoard.GetNumOfCoins(Player2);
-            throw new NotImplementedException();
+            int player1Score = m_GameBoard.GetDiscsCounter(m_FirstPlayer.DiscColor);
+            int player2Score = m_GameBoard.GetDiscsCounter(m_Opponent.DiscColor);
+            string gameFinalResult;
+            if(player1Score == player2Score)
+            {
+                gameFinalResult = "Its a tie!";
+            }
+            else if (player1Score > player2Score)
+            {
+                gameFinalResult = string.Format("{0} is the winner", m_FirstPlayer.Name);
+            }
+            else //if (player1Score < player2Score)
+            {
+                gameFinalResult = string.Format("{0} is the winner", m_Opponent.Name);
+            }
+                
+            string resultsStr = @"
+{0} has {1} discs
+{2} has {3} discs
+{4}
+";
+            Console.WriteLine(resultsStr, m_FirstPlayer.Name, player1Score, m_Opponent.Name, player2Score, gameFinalResult);
         }
 
         private void PrintNoMoves(Player i_Player)
@@ -96,30 +143,9 @@ namespace Ex02_Othelo
             Console.WriteLine("{0} has no available moves", i_Player.Name);
         }
 
-        private void PlayTurn(Player i_Player)
-        {
-            string moveStr = string.Empty;
-            Point move = new Point(-1, -1);
-            do
-            {
-                if (i_Player.IsComputer)
-                {
-                    move = m_GameBoard.GetRandomMove(i_Player.WhiteDisc);
-                }
-                else
-                {
-                    Console.WriteLine("It is {0}'s turn, choose a square or Q to exit:", i_Player.Name);
-                    move = AskPlayerMoveOrQuit(out m_Quit);
-                }
-            }
-            while (!m_GameBoard.IsValidMove(move, i_Player.WhiteDisc)); //if illegal square was chosen try again //update board
-            m_GameBoard.UpdateBoard(move, i_Player.WhiteDisc);
-        }
-
         private Point AskPlayerMoveOrQuit(out bool o_Quit)
         {
             Regex regex = new Regex("^((?<Column>[A-Za-z]{1})(?<Row>[1-9]{1})|(?<Quit>Q|q))$");
-            Console.WriteLine("Enter coordinates of youer next move or Q to quit:\nFor coordinates enter [A-Z] letter (column) followed by [1-9] number (row) e.g. A5");
             Match match = regex.Match(Console.ReadLine());
             while (!match.Success)
             {
@@ -149,10 +175,10 @@ namespace Ex02_Othelo
 
         private void printBoardRow(bool?[,] board, int i)
         {
-            Console.Write("{0} | ", i); // row number
+            Console.Write("{0} | ", i + 1); // row number
             for (int j = 0; j < board.GetLength(1); j++)
             {
-                Console.Write("{0} | ", board[i, j] == null ? " " : board[i, j].GetValueOrDefault() ? "o" : "x");
+                Console.Write("{0} | ", board[i, j] == null ? ' ' : Player.GetSymbol(board[i, j].GetValueOrDefault()));
             }
             Console.WriteLine();
         }
