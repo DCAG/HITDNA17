@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -13,9 +12,9 @@ namespace Ex02_Othelo
 
         public static char GetSymbol(eDiscColor i_DiscColor)
         {
-            const char k_WhiteSymbol = 'o';
             const char k_BlackSymbol = 'x';
             const char k_EmptySymbol = ' ';
+            const char k_WhiteSymbol = 'o';
 
             return i_DiscColor == eDiscColor.None ? k_EmptySymbol : i_DiscColor == eDiscColor.White ? k_WhiteSymbol : k_BlackSymbol;
         }

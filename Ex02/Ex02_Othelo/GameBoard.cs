@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
 
 namespace Ex02_Othelo
 {
@@ -38,7 +36,7 @@ namespace Ex02_Othelo
 
         private List<Point> m_AvailableMoves = new List<Point>();
         private Dictionary<Point, List<Point>> m_RequiredFlips = new Dictionary<Point, List<Point>>();
-        private int[] m_DiscsCounter;
+        private Dictionary<eDiscColor, int> m_DiscsCounter;
         private eDiscColor m_Turn = eDiscColor.White;
 
         public eDiscColor ThisTurn
@@ -66,8 +64,6 @@ namespace Ex02_Othelo
 
         public GameBoard(int i_Size)
         {
-            const int k_NumOfColors = 2;
-
             if ((i_Size > 2) && (i_Size % 2 == 0))
             {
                 m_GridBoard = new eDiscColor[i_Size, i_Size];
@@ -79,12 +75,14 @@ namespace Ex02_Othelo
 
             m_AvailableMoves = new List<Point>();
             m_RequiredFlips  = new Dictionary<Point, List<Point>>();
-            m_DiscsCounter   = new int[k_NumOfColors];
+            m_DiscsCounter   = new Dictionary<eDiscColor, int>();
+            m_DiscsCounter[eDiscColor.Black] = 0;
+            m_DiscsCounter[eDiscColor.White] = 0;
         }
 
         public int GetDiscsCounter(eDiscColor i_DiscsColor)
         {
-            return m_DiscsCounter[(int)i_DiscsColor];
+            return m_DiscsCounter[i_DiscsColor];
         }
 
         private void updateAvailableMoves()
@@ -162,8 +160,8 @@ namespace Ex02_Othelo
             m_GridBoard[boardCenterPosition, boardCenterPosition] = eDiscColor.White; // base square
             m_GridBoard[boardCenterPosition, boardCenterPosition - 1] = eDiscColor.Black; // up
 
-            m_DiscsCounter[(int)eDiscColor.Black] = 2;
-            m_DiscsCounter[(int)eDiscColor.White] = 2;
+            m_DiscsCounter[eDiscColor.Black] = 2;
+            m_DiscsCounter[eDiscColor.White] = 2;
 
             m_Turn = i_FirstTurn;
             updateAvailableMoves();
@@ -172,12 +170,12 @@ namespace Ex02_Othelo
         public void UpdateBoard(Point i_Square)
         {
             m_GridBoard[i_Square.X, i_Square.Y] = m_Turn;
-            m_DiscsCounter[(int)ThisTurn]++;
+            m_DiscsCounter[ThisTurn]++;
             foreach (Point toFlip in m_RequiredFlips[i_Square])
             {
                 m_GridBoard[toFlip.X, toFlip.Y] = m_Turn;
-                m_DiscsCounter[(int)ThisTurn]++;
-                m_DiscsCounter[(int)GetOppositeDiscColor(ThisTurn)]--;
+                m_DiscsCounter[ThisTurn]++;
+                m_DiscsCounter[GetOppositeDiscColor(ThisTurn)]--;
             }
         }
 
