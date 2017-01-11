@@ -53,19 +53,19 @@ namespace Ex02_Othelo
         private void playRound()
         {
             printBoard();
-            bool firstPlayerHasMoves = true;
-            bool opponentPlayerHasMoves = true;
+            bool firstPlayerMovedInLastTurn = true;
+            bool opponentPlayerMovedInLastTurn = true;
 
             do
             {
-                firstPlayerHasMoves = tryPlayTurn(m_FirstPlayer);
-                if (m_Quit)
+                firstPlayerMovedInLastTurn = tryPlayTurn(m_FirstPlayer);
+                if (m_Quit || (!firstPlayerMovedInLastTurn && !opponentPlayerMovedInLastTurn))
                 {
                     break;
                 }
 
                 m_GameService.SwitchTurns();
-                opponentPlayerHasMoves = tryPlayTurn(m_Opponent);
+                opponentPlayerMovedInLastTurn = tryPlayTurn(m_Opponent);
                 if (m_Quit)
                 {
                     break;
@@ -73,7 +73,7 @@ namespace Ex02_Othelo
 
                 m_GameService.SwitchTurns();
             }
-            while (!m_Quit && (firstPlayerHasMoves || opponentPlayerHasMoves));
+            while (!m_Quit && (firstPlayerMovedInLastTurn || opponentPlayerMovedInLastTurn));
 
             if (!m_Quit)
             {
@@ -111,7 +111,7 @@ namespace Ex02_Othelo
             }
             else
             {
-                Console.Write("[{0}] It is {1}'s turn, choose a square or Q to exit:", GetSymbol(i_Player.Color), i_Player.Name);
+                Console.Write("It is {1}'s turn [{0}], choose a square or Q to exit (e.g. A5):", GetSymbol(i_Player.Color), i_Player.Name);
                 move = readPlayerMoveOrQuit();
 
                 while (!m_Quit && !m_GameService.IsValidMove(move))
@@ -195,24 +195,24 @@ namespace Ex02_Othelo
         #region Read Input From User Functions
         private Point readPlayerMoveOrQuit()
         {
-            Regex regex = new Regex("^((?<Column>[A-Za-z]{1})(?<Row>[1-9]{1})|(?<Quit>Q|q))$");
-            Match match = regex.Match(Console.ReadLine());
+            Regex moveOrQuitRegexPattern = new Regex("^((?<Column>[A-Za-z]{1})(?<Row>[1-9]{1})|(?<Quit>Q|q))$");
+            Match match = moveOrQuitRegexPattern.Match(Console.ReadLine());
 
             while (!match.Success)
             {
                 Console.WriteLine("Invalid input!");
-                match = regex.Match(Console.ReadLine());
+                match = moveOrQuitRegexPattern.Match(Console.ReadLine());
             }
 
-            Point result = new Point(-1, -1);
+            Point move = new Point(-1, -1);
 
             m_Quit = match.Groups["Quit"].Success;
             if (!m_Quit)
             {
-                result = new Point(int.Parse(match.Groups["Row"].Value) - 1, match.Groups["Column"].Value.ToUpper()[0] - 'A');
+                move = new Point(int.Parse(match.Groups["Row"].Value) - 1, match.Groups["Column"].Value.ToUpper()[0] - 'A');
             }
 
-            return result;
+            return move;
         }
 
         private bool askYesNoQuestion(string i_Question)

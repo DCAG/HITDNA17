@@ -155,10 +155,10 @@ namespace Ex02_Othelo
 
             int boardCenterPosition = m_Board.GetLength(0) / 2;
 
-            m_Board[boardCenterPosition - 1, boardCenterPosition - 1] = eDiscColor.White; // up,left
-            m_Board[boardCenterPosition - 1, boardCenterPosition] = eDiscColor.Black; // left
-            m_Board[boardCenterPosition, boardCenterPosition] = eDiscColor.White; // base square
-            m_Board[boardCenterPosition, boardCenterPosition - 1] = eDiscColor.Black; // up
+            m_Board[boardCenterPosition, boardCenterPosition] = eDiscColor.White; // Board Center Position
+            m_Board[boardCenterPosition - 1, boardCenterPosition] = eDiscColor.Black; // Left to Board Center Position
+            m_Board[boardCenterPosition - 1, boardCenterPosition - 1] = eDiscColor.White; // Up-left to Board Center Position
+            m_Board[boardCenterPosition, boardCenterPosition - 1] = eDiscColor.Black; // Up to Board Center Position
 
             m_DiscsCounter[eDiscColor.Black] = 2;
             m_DiscsCounter[eDiscColor.White] = 2;
