@@ -22,15 +22,15 @@ namespace Ex02_Othelo
         Up
     }
 
-    public class GameBoard
+    public class GameService
     {
-        private eDiscColor[,] m_GridBoard;
+        private eDiscColor[,] m_Board;
 
         public eDiscColor[,] Board
         {
             get
             {
-                return m_GridBoard;
+                return m_Board;
             }
         }
 
@@ -62,11 +62,11 @@ namespace Ex02_Othelo
             return result;
         }
 
-        public GameBoard(int i_Size)
+        public GameService(int i_Size)
         {
             if ((i_Size > 2) && (i_Size % 2 == 0))
             {
-                m_GridBoard = new eDiscColor[i_Size, i_Size];
+                m_Board = new eDiscColor[i_Size, i_Size];
             }
             else
             {
@@ -89,9 +89,9 @@ namespace Ex02_Othelo
         {
             m_AvailableMoves.Clear();
             m_RequiredFlips.Clear();
-            for (int i = 0; i < m_GridBoard.GetLength(0); i++)
+            for (int i = 0; i < m_Board.GetLength(0); i++)
             {
-                for (int j = 0; j < m_GridBoard.GetLength(1); j++)
+                for (int j = 0; j < m_Board.GetLength(1); j++)
                 {
                     testAndAddAvailableMoves(new Point(i, j));
                 }
@@ -103,14 +103,14 @@ namespace Ex02_Othelo
             if (isEmptySquare(i_Square))
             {
                 List<Point> toFlip = new List<Point>();
-                toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, getDirectionDeltaPoint(eDirection.Down)));
-                toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, getDirectionDeltaPoint(eDirection.DownLeft)));
-                toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, getDirectionDeltaPoint(eDirection.DownRight)));
-                toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, getDirectionDeltaPoint(eDirection.Left)));
-                toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, getDirectionDeltaPoint(eDirection.Right)));
-                toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, getDirectionDeltaPoint(eDirection.Up)));
-                toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, getDirectionDeltaPoint(eDirection.UpLeft)));
-                toFlip.AddRange(GetDiscsToFlipInDirection(i_Square, getDirectionDeltaPoint(eDirection.UpRight)));
+                toFlip.AddRange(getDiscsToFlipInSpecifiedDirection(i_Square, getDirectionDeltaPoint(eDirection.Down)));
+                toFlip.AddRange(getDiscsToFlipInSpecifiedDirection(i_Square, getDirectionDeltaPoint(eDirection.DownLeft)));
+                toFlip.AddRange(getDiscsToFlipInSpecifiedDirection(i_Square, getDirectionDeltaPoint(eDirection.DownRight)));
+                toFlip.AddRange(getDiscsToFlipInSpecifiedDirection(i_Square, getDirectionDeltaPoint(eDirection.Left)));
+                toFlip.AddRange(getDiscsToFlipInSpecifiedDirection(i_Square, getDirectionDeltaPoint(eDirection.Right)));
+                toFlip.AddRange(getDiscsToFlipInSpecifiedDirection(i_Square, getDirectionDeltaPoint(eDirection.Up)));
+                toFlip.AddRange(getDiscsToFlipInSpecifiedDirection(i_Square, getDirectionDeltaPoint(eDirection.UpLeft)));
+                toFlip.AddRange(getDiscsToFlipInSpecifiedDirection(i_Square, getDirectionDeltaPoint(eDirection.UpRight)));
 
                 if (toFlip.Count > 0)
                 {
@@ -120,45 +120,45 @@ namespace Ex02_Othelo
             }
         }
 
-        private List<Point> GetDiscsToFlipInDirection(Point i_Square, Point i_Delta)
+        private List<Point> getDiscsToFlipInSpecifiedDirection(Point i_Square, Point i_DirectionDelta)
         {
             List<Point> toFlip = new List<Point>();
 
             do
             {
-                i_Square.Add(i_Delta);
+                i_Square.Add(i_DirectionDelta);
 
                 if (isOutOfBounds(i_Square) || isEmptySquare(i_Square))
                 {
                     toFlip.Clear();
                     break;
                 }
-                else if(m_GridBoard[i_Square.X, i_Square.Y] == GetOppositeDiscColor(m_Turn))
+                else if(m_Board[i_Square.X, i_Square.Y] == GetOppositeDiscColor(m_Turn))
                 {
                     toFlip.Add(i_Square);
                 }
             }
-            while (m_GridBoard[i_Square.X, i_Square.Y] != m_Turn);
+            while (m_Board[i_Square.X, i_Square.Y] != m_Turn);
 
             return toFlip;
         }
 
         public void SetInitialBoard(eDiscColor i_FirstTurn)
         {
-            for (int i = 0; i < m_GridBoard.GetLength(0); i++)
+            for (int i = 0; i < m_Board.GetLength(0); i++)
             {
-                for (int j = 0; j < m_GridBoard.GetLength(1); j++)
+                for (int j = 0; j < m_Board.GetLength(1); j++)
                 {
-                    m_GridBoard[i, j] = eDiscColor.None;
+                    m_Board[i, j] = eDiscColor.None;
                 }
             }
 
-            int boardCenterPosition = m_GridBoard.GetLength(0) / 2;
+            int boardCenterPosition = m_Board.GetLength(0) / 2;
 
-            m_GridBoard[boardCenterPosition - 1, boardCenterPosition - 1] = eDiscColor.White; // up,left
-            m_GridBoard[boardCenterPosition - 1, boardCenterPosition] = eDiscColor.Black; // left
-            m_GridBoard[boardCenterPosition, boardCenterPosition] = eDiscColor.White; // base square
-            m_GridBoard[boardCenterPosition, boardCenterPosition - 1] = eDiscColor.Black; // up
+            m_Board[boardCenterPosition - 1, boardCenterPosition - 1] = eDiscColor.White; // up,left
+            m_Board[boardCenterPosition - 1, boardCenterPosition] = eDiscColor.Black; // left
+            m_Board[boardCenterPosition, boardCenterPosition] = eDiscColor.White; // base square
+            m_Board[boardCenterPosition, boardCenterPosition - 1] = eDiscColor.Black; // up
 
             m_DiscsCounter[eDiscColor.Black] = 2;
             m_DiscsCounter[eDiscColor.White] = 2;
@@ -169,11 +169,11 @@ namespace Ex02_Othelo
 
         public void UpdateBoard(Point i_Square)
         {
-            m_GridBoard[i_Square.X, i_Square.Y] = m_Turn;
+            m_Board[i_Square.X, i_Square.Y] = m_Turn;
             m_DiscsCounter[ThisTurn]++;
             foreach (Point toFlip in m_RequiredFlips[i_Square])
             {
-                m_GridBoard[toFlip.X, toFlip.Y] = m_Turn;
+                m_Board[toFlip.X, toFlip.Y] = m_Turn;
                 m_DiscsCounter[ThisTurn]++;
                 m_DiscsCounter[GetOppositeDiscColor(ThisTurn)]--;
             }
@@ -200,13 +200,13 @@ namespace Ex02_Othelo
         #region Private Boolean Tests
         private bool isEmptySquare(Point i_Square)
         {
-            return m_GridBoard[i_Square.X, i_Square.Y] == eDiscColor.None;
+            return m_Board[i_Square.X, i_Square.Y] == eDiscColor.None;
         }
 
         private bool isOutOfBounds(Point i_Square)
         {
-            return i_Square.X < 0 || m_GridBoard.GetLength(0) <= i_Square.X ||
-                   i_Square.Y < 0 || m_GridBoard.GetLength(1) <= i_Square.Y;
+            return i_Square.X < 0 || m_Board.GetLength(0) <= i_Square.X ||
+                   i_Square.Y < 0 || m_Board.GetLength(1) <= i_Square.Y;
         }
 
         public bool HasMoves()

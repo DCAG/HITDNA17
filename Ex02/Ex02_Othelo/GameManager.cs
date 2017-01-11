@@ -6,7 +6,7 @@ namespace Ex02_Othelo
 {
     public class GameManager
     { 
-        private GameBoard m_GameBoard;
+        private GameService m_GameService;
         private Player m_FirstPlayer, m_Opponent;
         private bool m_Quit;
 
@@ -35,7 +35,7 @@ namespace Ex02_Othelo
                 m_Opponent = new Player(k_ComputerPlayerName, eDiscColor.Black, v_ComputerPlayer);
             }
 
-            m_GameBoard = new GameBoard(readBoardSize());
+            m_GameService = new GameService(readBoardSize());
 
             m_Quit = false;
         }
@@ -44,7 +44,7 @@ namespace Ex02_Othelo
         {
             do
             {
-                m_GameBoard.SetInitialBoard(m_FirstPlayer.Color);
+                m_GameService.SetInitialBoard(m_FirstPlayer.Color);
                 playRound();
             }
             while (!m_Quit && askYesNoQuestion("Play another round?"));
@@ -64,14 +64,14 @@ namespace Ex02_Othelo
                     break;
                 }
 
-                m_GameBoard.SwitchTurns();
+                m_GameService.SwitchTurns();
                 opponentPlayerHasMoves = tryPlayTurn(m_Opponent);
                 if (m_Quit)
                 {
                     break;
                 }
 
-                m_GameBoard.SwitchTurns();
+                m_GameService.SwitchTurns();
             }
             while (!m_Quit && (firstPlayerHasMoves || opponentPlayerHasMoves));
 
@@ -83,14 +83,14 @@ namespace Ex02_Othelo
 
         private bool tryPlayTurn(Player i_Player)
         {
-            bool hasMoves = m_GameBoard.HasMoves();
+            bool hasMoves = m_GameService.HasMoves();
 
             if (hasMoves)
             {
                 Point move = getValidPlayerMove(i_Player);
                 if (!m_Quit)
                 {
-                    m_GameBoard.UpdateBoard(move);
+                    m_GameService.UpdateBoard(move);
                     printBoard();
                 }
             }
@@ -107,14 +107,14 @@ namespace Ex02_Othelo
             Point move;
             if (i_Player.IsComputer)
             {
-                move = m_GameBoard.GetRandomMove();
+                move = m_GameService.GetRandomMove();
             }
             else
             {
                 Console.Write("[{0}] It is {1}'s turn, choose a square or Q to exit:", GetSymbol(i_Player.Color), i_Player.Name);
                 move = readPlayerMoveOrQuit();
 
-                while (!m_Quit && !m_GameBoard.IsValidMove(move))
+                while (!m_Quit && !m_GameService.IsValidMove(move))
                 {
                     Console.WriteLine("Impossible move! try again...");
                     move = readPlayerMoveOrQuit();
@@ -127,8 +127,8 @@ namespace Ex02_Othelo
         #region Printing functions
         private void printHighscore()
         {
-            int firstPlayerScore = m_GameBoard.GetDiscsCounter(m_FirstPlayer.Color);
-            int opponentScore = m_GameBoard.GetDiscsCounter(m_Opponent.Color);
+            int firstPlayerScore = m_GameService.GetDiscsCounter(m_FirstPlayer.Color);
+            int opponentScore = m_GameService.GetDiscsCounter(m_Opponent.Color);
 
             StringBuilder gameFinalResult = new StringBuilder();
             gameFinalResult.AppendFormat("{0} has {1} discs", m_FirstPlayer.Name, firstPlayerScore);
@@ -151,7 +151,7 @@ namespace Ex02_Othelo
             Ex02.ConsoleUtils.Screen.Clear();
             printBoardColumnsHeader();
             printBoardLineSeperator();
-            for (int i = 0; i < m_GameBoard.Board.GetLength(0); i++)
+            for (int i = 0; i < m_GameService.Board.GetLength(0); i++)
             {
                 printBoardRow(i);
                 printBoardLineSeperator();
@@ -160,10 +160,10 @@ namespace Ex02_Othelo
 
         private void printBoardRow(int i_RowIndex)
         {
-            Console.Write("{0} | ", i_RowIndex + 1); // row number
-            for (int j = 0; j < m_GameBoard.Board.GetLength(1); j++)
+            Console.Write("{0} | ", i_RowIndex + 1);
+            for (int j = 0; j < m_GameService.Board.GetLength(1); j++)
             {
-                Console.Write("{0} | ", GetSymbol(m_GameBoard.Board[i_RowIndex, j]));
+                Console.Write("{0} | ", GetSymbol(m_GameService.Board[i_RowIndex, j]));
             }
 
             Console.WriteLine();
@@ -172,9 +172,9 @@ namespace Ex02_Othelo
         private void printBoardColumnsHeader()
         {
             Console.Write(" ");
-            for (int i = 0; i < m_GameBoard.Board.GetLength(1); i++)
+            for (int i = 0; i < m_GameService.Board.GetLength(1); i++)
             {
-                Console.Write("   {0}", (char)('A' + i)); // column letter
+                Console.Write("   {0}", (char)('A' + i));
             }
 
             Console.WriteLine();
@@ -183,7 +183,7 @@ namespace Ex02_Othelo
         private void printBoardLineSeperator()
         {
             Console.Write("  ");
-            for (int i = 0; i < (4 * m_GameBoard.Board.GetLength(0)) + 1; i++)
+            for (int i = 0; i < (4 * m_GameService.Board.GetLength(0)) + 1; i++)
             {
                 Console.Write('=');
             }
@@ -192,7 +192,7 @@ namespace Ex02_Othelo
         }
         #endregion
 
-        #region Questions Functions
+        #region Read Input From User Functions
         private Point readPlayerMoveOrQuit()
         {
             Regex regex = new Regex("^((?<Column>[A-Za-z]{1})(?<Row>[1-9]{1})|(?<Quit>Q|q))$");
