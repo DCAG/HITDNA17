@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ex02_Othelo
+﻿namespace Ex02_Othelo
 {
-    class Program
+    internal class Program
     {
         public static void Main()
         {
-            GameManager manager = new GameManager(); 
+            GameManager manager = new GameManager();
+
+            manager.Start();
         }
     }
 }

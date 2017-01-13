@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ex02_Othelo
+﻿namespace Ex02_Othelo
 {
-    struct Player
+    internal struct Player
     {
         private readonly bool r_IsComputer;
-        private readonly bool r_WhiteDisc;
-        private readonly string m_Name;
+        private readonly eDiscColor r_DiscColor;
+        private readonly string r_Name;
 
         public bool IsComputer
         {
@@ -18,11 +14,11 @@ namespace Ex02_Othelo
             }
         }
 
-        public bool WhiteDisc
+        public eDiscColor Color
         {
             get
             {
-                return r_WhiteDisc;
+                return r_DiscColor;
             }
         }
 
@@ -30,15 +26,15 @@ namespace Ex02_Othelo
         {
             get
             {
-                return m_Name;
+                return r_Name;
             }
         }
 
-        public Player(string i_Name, bool i_White, bool i_IsComputer)
+        public Player(string i_Name, eDiscColor i_DiscColor, bool i_IsComputer)
         {
             r_IsComputer = i_IsComputer;
-            r_WhiteDisc = i_White;
-            m_Name = i_Name;
+            r_DiscColor = i_DiscColor;
+            r_Name = i_Name;
         }
     }
 }
