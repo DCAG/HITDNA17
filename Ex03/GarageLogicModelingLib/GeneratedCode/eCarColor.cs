@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public enum eCarColor
+public enum eCarColor : int
 {
 	Black,
 	White,

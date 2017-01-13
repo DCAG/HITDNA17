@@ -9,36 +9,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class Vehicle
+public class Fuel : Engine
 {
-	private string m_Model
+	private eFuelType m_FuelType
 	{
 		get;
 		set;
 	}
 
-	private string m_LicenseNumber
+	public virtual eFuelType GetFuelType()
 	{
-		get;
-		set;
+		throw new System.NotImplementedException();
 	}
 
-	private List<Wheel> m_Wheels
+	public virtual float GetCurrentFuelAmount()
 	{
-		get;
-		set;
+		throw new System.NotImplementedException();
 	}
 
-	private Engine m_Engine
+	public virtual float GetMaxFuelAmount()
 	{
-		get;
-		set;
+		throw new System.NotImplementedException();
 	}
 
-	private float m_EnergyLeftPercentage
+	public virtual void Refuel(float i_FuelAmountToAdd, FuelType i_FuelType)
 	{
-		get;
-		set;
+		throw new System.NotImplementedException();
 	}
 
 }

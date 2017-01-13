@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public enum eFuelType
+public enum eFuelType : int
 {
 	Octan98,
 	Octan95,

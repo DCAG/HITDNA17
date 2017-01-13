@@ -9,10 +9,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public enum eMotorCycleLicenseType : int
+public class Electric : Engine
 {
-	A,
-	A1,
-	A2,
-	B,
+	public virtual float GetBatteryTimeLeft()
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual float GetMaxBatteryTime()
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual void RechargeBattery(float i_HoursToAdd)
+	{
+		throw new System.NotImplementedException();
+	}
+
 }
+

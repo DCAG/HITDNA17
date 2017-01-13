@@ -9,10 +9,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public enum eMotorCycleLicenseType : int
+public class FuelTruck : Truck
 {
-	A,
-	A1,
-	A2,
-	B,
+	public virtual void ElectricTruck()
+	{
+		throw new System.NotImplementedException();
+	}
+
 }
+

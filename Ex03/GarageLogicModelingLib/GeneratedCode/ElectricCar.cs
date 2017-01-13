@@ -9,10 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public enum eMotorCycleLicenseType : int
+public class ElectricCar : Car
 {
-	A,
-	A1,
-	A2,
-	B,
+	public ElectricCar()
+	{
+	}
+
 }
+

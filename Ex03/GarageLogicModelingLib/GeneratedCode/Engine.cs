@@ -9,10 +9,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public enum eMotorCycleLicenseType : int
+public class Engine
 {
-	A,
-	A1,
-	A2,
-	B,
+	private float m_CurrenttEnergyAmount
+	{
+		get;
+		set;
+	}
+
+	private float m_MaxEnergyAmount
+	{
+		get;
+		set;
+	}
+
 }
+

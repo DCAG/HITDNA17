@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public enum eVehicleTreatmentStatus
+public enum eVehicleTreatmentStatus : int
 {
 	Repair,
 	Fixed,
