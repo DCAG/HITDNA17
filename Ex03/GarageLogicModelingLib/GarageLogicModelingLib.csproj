@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B2B5413A-DF41-4EE0-8422-3D696FBFD136}</ProjectGuid>
+    <ProjectGuid>{9FD18DCA-30EC-42D7-BBD9-2E251EA456B4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GarageLogicModelingLib</RootNamespace>
@@ -43,20 +43,16 @@
     <Compile Include="GeneratedCode\Car.cs" />
     <Compile Include="GeneratedCode\eCarColor.cs" />
     <Compile Include="GeneratedCode\eFuelType.cs" />
-    <Compile Include="GeneratedCode\Electric.cs" />
     <Compile Include="GeneratedCode\ElectricCar.cs" />
     <Compile Include="GeneratedCode\ElectricEngine.cs" />
     <Compile Include="GeneratedCode\ElectricMotorCycle.cs" />
-    <Compile Include="GeneratedCode\ElectricVehicle.cs" />
     <Compile Include="GeneratedCode\eMotorCycleLicenseType.cs" />
     <Compile Include="GeneratedCode\Engine.cs" />
     <Compile Include="GeneratedCode\eVehicleTreatmentStatus.cs" />
-    <Compile Include="GeneratedCode\Fuel.cs" />
     <Compile Include="GeneratedCode\FuelCar.cs" />
     <Compile Include="GeneratedCode\FuelEngine.cs" />
     <Compile Include="GeneratedCode\FuelMotorCycle.cs" />
     <Compile Include="GeneratedCode\FuelTruck.cs" />
-    <Compile Include="GeneratedCode\FuelVehicle.cs" />
     <Compile Include="GeneratedCode\Garage.cs" />
     <Compile Include="GeneratedCode\MotorCycle.cs" />
     <Compile Include="GeneratedCode\Truck.cs" />
