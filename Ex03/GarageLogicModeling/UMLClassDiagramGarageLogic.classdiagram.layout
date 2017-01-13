@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="UMLClassDiagramGarageLogic">
+  <logicalClassDesignerModelMoniker Id="2bbfacac-9713-45af-a297-7808c0b60c86" />
+  <nestedChildShapes>
+    <classShape Id="0dd31134-812c-4c09-bf2f-8b5f5011c2e3" absoluteBounds="0.5, 1.875, 2.875, 1.6883043545484542" hideQualifiedName="false" increaseHeight="0.18800345897674561" customColor="181, 193, 223">
+      <classMoniker Id="c203f6f5-c455-4f2f-b4c5-20db5529391b" LastKnownName="Vehicle" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="fada83d6-cfbb-485b-8733-0fbd874b6770" absoluteBounds="0.51500000000000012, 2.3903356393178306, 2.8449999999999998, 0.84179684768120444" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="86324244-c723-4920-b1df-a489ef5763d2" absoluteBounds="0.51500000000000012, 3.2421324869990347, 2.8449999999999998, 0.22117186754941942" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e9c35c04-eefc-4cb3-9f87-03d44186f7a0" absoluteBounds="3.75, 2.25, 2.875, 1.3479918644825619" hideQualifiedName="false" increaseHeight="0.18800345897674561" customColor="181, 193, 223">
+      <classMoniker Id="a7e6234c-195d-4f5d-b801-e9b10acc2faf" LastKnownName="Car" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="eae6cdde-1611-4e70-9557-487c03a53769" absoluteBounds="3.7649999999999997, 2.7653356393178306, 2.8449999999999998, 0.52148435761531187" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="23d367fb-be9b-4b8b-b75f-64246846669a" absoluteBounds="3.765, 3.2968199969331424, 2.8449999999999998, 0.2011718675494194" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <generalizationConnector edgePoints="[(3.75 : 2.95955435454845); (3.375 : 2.95955435454845)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110">
+      <generalizationMoniker Id="ae9ce3fa-25e0-4688-b35e-68f9307f7d54" />
+      <relativeChildShapes />
+      <nodes>
+        <classShapeMoniker Id="e9c35c04-eefc-4cb3-9f87-03d44186f7a0" />
+        <classShapeMoniker Id="0dd31134-812c-4c09-bf2f-8b5f5011c2e3" />
+      </nodes>
+    </generalizationConnector>
+    <classShape Id="df531e7d-b9e5-4123-8e12-c5e63fd1fa40" absoluteBounds="3.625, 0.625, 2.875, 1.6683043545484546" hideQualifiedName="false" increaseHeight="0.18800345897674561" customColor="181, 193, 223">
+      <classMoniker Id="fe9b56aa-7b77-449b-806b-e82fb37fb227" LastKnownName="Wheel" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="56998d57-d566-4654-a0a1-78e6060cd2e7" absoluteBounds="3.64, 1.1403356393178306, 2.8449999999999998, 0.68164060264825832" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="7d7db178-1500-4615-a4e8-4427da42a6d5" absoluteBounds="3.64, 1.8319762419660888, 2.8449999999999998, 0.36132811258236575" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9b2cd0a4-1084-44ae-b1d1-85fc43c1b95e" absoluteBounds="0.5, 3.75, 2.875, 1.3479918644825615" hideQualifiedName="false" increaseHeight="0.18800345897674561" customColor="181, 193, 223">
+      <classMoniker Id="1859312e-57a5-4b1d-addb-4894a39a66df" LastKnownName="MotorCycle" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="a334905a-fcfc-440f-a162-89b4f7924078" absoluteBounds="0.515, 4.26533563931783, 2.8449999999999998, 0.52148435761531176" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="73724999-0e83-47d4-be98-640fc507a00a" absoluteBounds="0.515, 4.7968199969331424, 2.8449999999999998, 0.20117186754941963" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <generalizationConnector edgePoints="[(1.9375 : 3.75); (1.9375 : 3.56330435454845)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110">
+      <generalizationMoniker Id="1201d490-d903-4b63-8ab9-bc275f8e7115" />
+      <relativeChildShapes />
+      <nodes>
+        <classShapeMoniker Id="9b2cd0a4-1084-44ae-b1d1-85fc43c1b95e" />
+        <classShapeMoniker Id="0dd31134-812c-4c09-bf2f-8b5f5011c2e3" />
+      </nodes>
+    </generalizationConnector>
+    <enumerationShape Id="586199c3-214d-47c9-8742-802c3ca21a37" absoluteBounds="6.75, 0.5, 1.875, 1.5198003066579502" hideQualifiedName="false" increaseHeight="0.18800345897674564" customColor="161, 150, 103">
+      <enumerationMoniker Id="6e4b4981-9967-45ef-804b-a35bebcf40b8" LastKnownName="eMotorCycleLicenseType" />
+      <nestedChildShapes>
+        <LiteralElementListCompartment Id="a62e0bda-594f-4fea-b3c1-0105028f3e42" absoluteBounds="6.765, 1.0780034589767458, 1.8450000000000002, 0.84179684768120444" name="LiteralsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </enumerationShape>
+    <enumerationShape Id="f715646b-5525-476f-b613-1041d1c8134e" absoluteBounds="6.875, 2.125, 1.5, 1.5198003066579502" hideQualifiedName="false" increaseHeight="0.18800345897674564" customColor="161, 150, 103">
+      <enumerationMoniker Id="66b99240-1cff-4c3f-b6f6-5019719934b5" LastKnownName="eCarColor" />
+      <nestedChildShapes>
+        <LiteralElementListCompartment Id="7a3f95a7-85c4-47f9-aeef-4108147e50d8" absoluteBounds="6.89, 2.7030034589767458, 1.4700000000000002, 0.84179684768120444" name="LiteralsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </enumerationShape>
+    <classShape Id="8fbfefed-5915-451c-8041-4281da993bd4" absoluteBounds="3.75, 3.75, 2.25, 1.3479918644825615" hideQualifiedName="false" increaseHeight="0.18800345897674561" customColor="181, 193, 223">
+      <classMoniker Id="0c8ee6a1-6988-4162-959e-03e424cd6a44" LastKnownName="Truck" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="b7110e87-1077-4193-80cb-ebb401f36b8d" absoluteBounds="3.765, 4.26533563931783, 2.2199999999999998, 0.52148435761531176" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="331363e1-521c-4a75-a8c3-d438aaca474b" absoluteBounds="3.765, 4.7968199969331424, 2.2199999999999998, 0.20117186754941963" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="315c685d-5088-4d64-b62d-71478583c20c" absoluteBounds="6.125, 3.75, 3.75, 1.6683043545484546" hideQualifiedName="false" increaseHeight="0.18800345897674561" customColor="181, 193, 223">
+      <classMoniker Id="bd6a123e-61e2-43c8-b3fb-77334703e561" LastKnownName="FuelVehicle" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="ae384fcf-db55-4832-8eb0-f9c56f15dad9" absoluteBounds="6.14, 4.26533563931783, 3.7199999999999998, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="7caf0194-e0bb-4d3c-848a-a3cdf3da72de" absoluteBounds="6.14, 4.47650750686725, 3.7199999999999998, 0.84179684768120466" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <enumerationShape Id="ee4fc43c-02d4-486b-b00e-a42acebd2199" absoluteBounds="1.875, 0.5, 1.5, 1.5198003066579502" hideQualifiedName="false" increaseHeight="0.18800345897674564" customColor="161, 150, 103">
+      <enumerationMoniker Id="3abf60ee-c825-4214-b40b-205982d4670e" LastKnownName="eFuelType" />
+      <nestedChildShapes>
+        <LiteralElementListCompartment Id="7f55d26d-20ad-4110-8d00-4ebaa1cd594d" absoluteBounds="1.89, 1.0780034589767458, 1.4700000000000002, 0.84179684768120444" name="LiteralsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </enumerationShape>
+    <classShape Id="f942b8a8-02c1-4875-bca8-edda673ef879" absoluteBounds="0.5, 5.125, 2.875, 1.508148109515508" hideQualifiedName="false" increaseHeight="0.18800345897674561" customColor="181, 193, 223">
+      <classMoniker Id="2b07574b-0546-4564-ac83-6b75d5b6ad82" LastKnownName="ElectricVehicle" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="7a02bbaf-734d-41f9-bd7a-de259394219e" absoluteBounds="0.515, 5.64033563931783, 2.8449999999999998, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="4ca96e21-0d52-43b9-aacd-5965261f3277" absoluteBounds="0.515, 5.85150750686725, 2.8449999999999998, 0.6816406026482581" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fec9d7b9-182c-45e7-82fe-f725568006a5" absoluteBounds="3.625, 5.5, 3.375, 1.6683043545484546" hideQualifiedName="false" increaseHeight="0.18800345897674561" customColor="181, 193, 223">
+      <classMoniker Id="23bb8bff-8ea7-4d58-82da-0f03504cbd62" LastKnownName="VehicleTreatment" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="662ce6f1-4e02-4ab6-ac32-43dc46c91ec3" absoluteBounds="3.64, 6.01533563931783, 3.3449999999999998, 0.68164060264825832" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="718c99d6-81f3-4be9-8651-abb61bf6aee3" absoluteBounds="3.64, 6.706976241966089, 3.3449999999999998, 0.36132811258236575" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <enumerationShape Id="ea7c7ece-fbc6-4b2e-9dd5-7c57324566c3" absoluteBounds="7.125, 5.5, 2, 1.3596440616250032" hideQualifiedName="false" increaseHeight="0.18800345897674564" customColor="161, 150, 103">
+      <enumerationMoniker Id="bb993678-32f8-4944-b5b4-31643d71eb35" LastKnownName="eVehicleTreatmentStatus" />
+      <nestedChildShapes>
+        <LiteralElementListCompartment Id="ef718c26-3c0a-49a6-a43a-9dc42c1885ce" absoluteBounds="7.14, 6.0780034589767453, 1.9700000000000002, 0.68164060264825832" name="LiteralsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </enumerationShape>
+  </nestedChildShapes>
+</logicalClassDesignerDiagram>
