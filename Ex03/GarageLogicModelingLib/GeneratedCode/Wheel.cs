@@ -11,27 +11,17 @@ using System.Text;
 
 public class Wheel
 {
-	private string m_Manufacturer
-	{
-		get;
-		set;
-	}
+    private string m_Manufacturer;
+    private float m_AirPressure;
+    private float m_MaxAirPressure;
 
-	private float m_AirPressure
+	public void Inflation(float i_AirPressure)
 	{
-		get;
-		set;
-	}
-
-	private float m_MaxAirPressure
-	{
-		get;
-		private set;
-	}
-
-	public virtual float Inflation(float i_AirPressure)
-	{
-		throw new System.NotImplementedException();
+        m_AirPressure += i_AirPressure;
+        if(m_AirPressure > m_MaxAirPressure)
+        {
+            m_AirPressure = m_MaxAirPressure;
+        }
 	}
 
 }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
   dslVersion="1.0.0.0"
   Id="75121ec6-4a23-4c65-894c-630b260caf69"
   name="GarageLogicModeling" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -166,7 +166,7 @@
           <property
             Id="cd87da00-ef0e-44c9-bb76-f1a553832926"
             name="m_Model"
-            visibility="Private"
+            visibility="Protected"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -242,7 +242,7 @@
           <property
             Id="59b28d20-f4da-49a6-a1fa-1e05bdee3e04"
             name="m_LicenseNumber"
-            visibility="Private"
+            visibility="Protected"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -318,7 +318,7 @@
           <property
             Id="7a19eb00-0161-4861-8172-5ed46bf0316b"
             name="m_Wheels"
-            visibility="Private"
+            visibility="Protected"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -394,7 +394,7 @@
           <property
             Id="426a717e-fc22-4841-8a2a-0d9fd1c2c162"
             name="m_Engine"
-            visibility="Private"
+            visibility="Protected"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -470,7 +470,7 @@
           <property
             Id="f07b3a3e-5c77-4278-b114-fae863b18dba"
             name="m_EnergyLeftPercentage"
-            visibility="Private"
+            visibility="Protected"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -610,7 +610,7 @@
           <property
             Id="b2a3c2f0-a2b4-458c-b3ba-8cba3ae49256"
             name="m_Color"
-            visibility="Private"
+            visibility="Protected"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -680,7 +680,7 @@
           <property
             Id="f3a42f1e-041a-4e98-8b8e-e96883f15787"
             name="m_NumOfDoors"
-            visibility="Private"
+            visibility="Protected"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -1098,22 +1098,22 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="ffdcb425-ab06-44ae-946b-ed42d31f79fc"
-                  name="i_AirPressure"
-                  direction="In"
+                  Id="529bef61-5a03-4d30-85df-2b7baf716fe9"
+                  direction="Return"
                   isUnique="false">
                   <type_NamedElement>
                     <undefinedTypeMoniker
-                      Id="94b41e6d-d4a4-49cc-b8b2-7a1190b89892"
-                      LastKnownName="float"
+                      Id="28051993-4537-45ff-b314-2b6e02c4bc59"
+                      LastKnownName="void"
                       LastKnownLocation="GarageLogicModeling.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="529bef61-5a03-4d30-85df-2b7baf716fe9"
-                  direction="Return"
+                  Id="253e2870-de06-48f3-ac16-2b1e3bed8f81"
+                  name="i_AirPressure"
+                  direction="In"
                   isUnique="false">
                   <type_NamedElement>
                     <undefinedTypeMoniker
@@ -1212,7 +1212,7 @@
           <property
             Id="81b4efab-9de9-4b4c-b857-f527ef21240a"
             name="m_LicenseType"
-            visibility="Private"
+            visibility="Protected"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -1288,7 +1288,7 @@
           <property
             Id="18816600-78a1-4da2-923c-27b51ebff30a"
             name="m_EngineCapacity"
-            visibility="Private"
+            visibility="Protected"
             isLeaf="false"
             isStatic="false"
             isReadOnly="true"
@@ -1548,7 +1548,7 @@
           <property
             Id="2e4058da-77cf-4fe4-aaf7-678ea3ab5a2f"
             name="m_CarryDangerousChemicals"
-            visibility="Private"
+            visibility="Protected"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -1624,7 +1624,7 @@
           <property
             Id="16fc6aa0-909f-45b7-a041-2e29a09fe440"
             name="m_MaxCarryWeightAllowed"
-            visibility="Private"
+            visibility="Protected"
             isLeaf="false"
             isStatic="false"
             isReadOnly="true"
@@ -2127,7 +2127,20 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="fca4e16a-2221-4dec-b564-96b81330fb6a"
+                  Id="2ec2d1e8-5a34-47d2-8af4-d33624ea9d1b"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="28051993-4537-45ff-b314-2b6e02c4bc59"
+                      LastKnownName="void"
+                      LastKnownLocation="GarageLogicModeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="3a79602a-46e1-4965-9539-b53b86e95320"
                   name="i_FuelAmountToAdd"
                   direction="In"
                   isUnique="false">
@@ -2141,27 +2154,14 @@
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="1430f454-3564-4503-8802-b114942f43f3"
+                  Id="b353585f-24c7-45cb-a1a1-94eb464eb2e9"
                   name="i_FuelType"
                   direction="In"
                   isUnique="false">
                   <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="54152117-719f-4fe9-9d73-54c6ab070f8d"
-                      LastKnownName="FuelType"
-                      LastKnownLocation="GarageLogicModeling.uml" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-              <operationHasOwnedParameters>
-                <parameter
-                  Id="2ec2d1e8-5a34-47d2-8af4-d33624ea9d1b"
-                  direction="Return"
-                  isUnique="false">
-                  <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="28051993-4537-45ff-b314-2b6e02c4bc59"
-                      LastKnownName="void"
+                    <enumerationMoniker
+                      Id="00f97909-0fc4-409b-848d-bb94dd84d0bd"
+                      LastKnownName="eFuelType"
                       LastKnownLocation="GarageLogicModeling.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -3865,8 +3865,8 @@
         <ownedAttributesInternal>
           <property
             Id="c9090ca3-028c-4ff8-b821-dfda6e3dfdea"
-            name="m_CurrenttEnergyAmount"
-            visibility="Private"
+            name="m_CurrentEnergyAmount"
+            visibility="Protected"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -3942,7 +3942,7 @@
           <property
             Id="9cf7d7fb-653f-419c-a027-0384c5ed0845"
             name="m_MaxEnergyAmount"
-            visibility="Private"
+            visibility="Protected"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
