@@ -20,7 +20,7 @@ public class Wheel
         m_AirPressure += i_AirPressure;
         if(m_AirPressure > m_MaxAirPressure)
         {
-            m_AirPressure = m_MaxAirPressure;
+            m_AirPressure = m_MaxAirPressure; 
         }
 	}
 
