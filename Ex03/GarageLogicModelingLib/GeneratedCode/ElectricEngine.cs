@@ -13,17 +13,21 @@ public class ElectricEngine : Engine
 {
 	public virtual float GetBatteryTimeLeft()
 	{
-		throw new System.NotImplementedException();
+        return m_CurrentEnergyAmount;
 	}
 
 	public virtual float GetMaxBatteryTime()
 	{
-		throw new System.NotImplementedException();
+        return m_MaxEnergyAmount;
 	}
 
 	public virtual void RechargeBattery(float i_HoursToAdd)
 	{
-		throw new System.NotImplementedException();
+        m_CurrentEnergyAmount += i_HoursToAdd;
+        if(m_CurrentEnergyAmount > m_MaxEnergyAmount)
+        {
+            m_CurrentEnergyAmount = m_MaxEnergyAmount;
+        }
 	}
 
 }

@@ -11,30 +11,33 @@ using System.Text;
 
 public class FuelEngine : Engine
 {
-	private eFuelType m_FuelType
-	{
-		get;
-		set;
-	}
+    private eFuelType m_FuelType;
 
 	public virtual eFuelType GetFuelType()
 	{
-		throw new System.NotImplementedException();
+        return m_FuelType;
 	}
 
 	public virtual float GetCurrentFuelAmount()
 	{
-		throw new System.NotImplementedException();
+        return m_CurrentEnergyAmount;
 	}
 
 	public virtual float GetMaxFuelAmount()
 	{
-		throw new System.NotImplementedException();
+        return m_MaxEnergyAmount;
 	}
 
-	public virtual void Refuel(float i_FuelAmountToAdd, FuelType i_FuelType)
+	public virtual void Refuel(float i_FuelAmountToAdd, eFuelType i_FuelType)
 	{
-		throw new System.NotImplementedException();
+		if (i_FuelType == m_FuelType)
+        {
+            m_CurrentEnergyAmount += i_FuelAmountToAdd;
+            if(m_CurrentEnergyAmount > m_MaxEnergyAmount)
+            {
+                m_CurrentEnergyAmount = m_MaxEnergyAmount;
+            }
+        }
 	}
 
 }

@@ -34,26 +34,6 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="Car.cs" />
-    <Compile Include="eCarColor.cs" />
-    <Compile Include="eFuelType.cs" />
-    <Compile Include="ElectricCar.cs" />
-    <Compile Include="ElectricEngine.cs" />
-    <Compile Include="ElectricMotorCycle.cs" />
-    <Compile Include="eMotorCycleLicenseType.cs" />
-    <Compile Include="Engine.cs" />
-    <Compile Include="eVehicleTreatmentStatus.cs" />
-    <Compile Include="FuelCar.cs" />
-    <Compile Include="FuelEngine.cs" />
-    <Compile Include="FuelMotorCycle.cs" />
-    <Compile Include="FuelTruck.cs" />
-    <Compile Include="MotorCycle.cs" />
-    <Compile Include="Truck.cs" />
-    <Compile Include="Vehicle.cs" />
-    <Compile Include="VehicleTreatment.cs" />
-    <Compile Include="Wheel.cs" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
