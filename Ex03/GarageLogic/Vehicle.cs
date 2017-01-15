@@ -29,11 +29,15 @@ public class Vehicle
 		set;
 	}
 
-	private Engine m_Engine
-	{
-		get;
-		set;
-	}
+    private Engine m_Engine;
+
+    public Engine Engine
+    {
+        get
+        {
+            return m_Engine;
+        }
+    }
 
 	private float m_EnergyLeftPercentage
 	{

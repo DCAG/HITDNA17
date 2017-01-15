@@ -11,17 +11,19 @@ using System.Text;
 
 public class Garage
 {
-	public virtual void InsertCarForTreatment(string i_License)
+    private Vehicle m_Vehicle;
+
+	public virtual void InsertVehicleForTreatment(string i_License)
 	{
 		throw new System.NotImplementedException();
 	}
 
-	public virtual void GetCarLicenseList(i_eVehicleTreatmentStatus i_Status)
+	public virtual void GetVehicleLicenseList(eVehicleTreatmentStatus i_Status)
 	{
 		throw new System.NotImplementedException();
 	}
 
-	public virtual void ChangeCarStatus(string i_License, eVehicleTreatmentStatus i_ NewStatus)
+	public virtual void ChangeVehicleStatus(string i_License, eVehicleTreatmentStatus i_NewStatus)
 	{
 		throw new System.NotImplementedException();
 	}
@@ -41,20 +43,102 @@ public class Garage
 		throw new System.NotImplementedException();
 	}
 
-	public virtual void PrintCarDetails(string i_License)
+	public virtual void PrintVehicleDetails(string i_License)
 	{
 		throw new System.NotImplementedException();
 	}
 
 	public virtual void Start()
 	{
-		throw new System.NotImplementedException();
+        eGarageMainMenuItems selectedMenuOption = eGarageMainMenuItems.None;
+        bool exit = false;
+        do
+        {
+            PrintMenu();
+            selectedMenuOption = SelectMenuItem();
+            switch(selectedMenuOption)
+            {
+                case eGarageMainMenuItems.ListVehicles:
+                    foreach (object status in Enum.GetValues(typeof(eVehicleTreatmentStatus)))
+                    {
+                        Console.WriteLine("{0} - {1}", status, status.ToString());
+                    }
+                    Console.WriteLine("select status");
+                    string selectedStatus = Console.ReadLine();
+                    GetVehicleLicenseList((eVehicleTreatmentStatus)int.Parse(selectedStatus));
+                    break;
+                case eGarageMainMenuItems.NewVehicle:
+                    InsertVehicleForTreatment(Console.ReadLine());
+                    break;
+                case eGarageMainMenuItems.VehiclesOperationsSubMenu:
+                    StartVehicleServiceOperationsSubMenu();
+                    break;
+                default:
+                    exit = selectedMenuOption == eGarageMainMenuItems.Exit;
+                    break;
+            }
+
+        }
+        while (!exit);
 	}
 
 	public virtual void PrintMenu()
 	{
-		throw new System.NotImplementedException();
+        /*
+         * המערכת תספק את הפונקציונאליות הבאה למשתמש בה:
+1 . "להכניס" רכב חדש למוסך. אם מנסים להכניס רכב שכבר נמצא במוסך )עפ"י מספר רישוי(,
+המערכת תוציא הודעה מתאימה ותשתמש ברכב שכבר נמצא במוסך )ותעביר את מצב
+הרכב ל "בתיקון"( -
+2 . להציג את רשימת את מספרי הרישוי של הרכבים במוסך, עם אפשרות לסינון לפי המצב
+שלהם במוסך.
+3 . לשנות מצב של רכב במוסך )הנתונים הם מספר רישוי והמצב החדש(.
+4 . לנפח אוויר בגלגלים של רכב למקסימום )לפי מספר רישוי(
+5 . לתדלק רכב שמונע ע"י דלק )הנתונים הם מספר רישוי, סוג דלק למילוי, כמות למילוי(
+6 . להטעין רכב חשמלי )הנתונים הם מספר רישוי, כמות דקות להטענה(
+7 . להציג נתונים מלאים של רכב לפי מספר רישוי )מספר רישוי, שם דגם, שם בעלים, מצב
+במוסך, פירוט הגלגלים )לחץ אוויר ויצרן(, מצב דלק + סוג דלק / מצב מצבר, ושאר הפרטים
+הרלוונטיים לסוג הרכב הספציפי(
+         */
+        Console.WriteLine("{0} - Enter a new vehicle to service", eGarageMainMenuItems.NewVehicle);
+        Console.WriteLine("{0} - List vehicles in service", eGarageMainMenuItems.ListVehicles);
+        Console.WriteLine("{0} - Vehicle service operations sub menu", eGarageMainMenuItems.VehiclesOperationsSubMenu);
 	}
+
+    public void PrintVehicleServiceOperationsSubMenu()
+    {
+        Console.WriteLine("{0} - Show vehicle details", eVehiclesOperationsSubMenu.ShowDetails);
+        Console.WriteLine("{0} - Change vehicle status", eVehiclesOperationsSubMenu.ChangeStatus);
+        Console.WriteLine("{0} - Inflate vehicle wheels to maximum pressure", eVehiclesOperationsSubMenu.InflateWheelsToMax);
+
+        if(m_Vehicle.Engine.GetType() == typeof(FuelEngine))
+        {
+            Console.WriteLine("{0} - Fuel vehicle", eVehiclesOperationsSubMenu.IncreaseEnergySupply);
+        }
+        else if (m_Vehicle.Engine.GetType() == typeof(ElectricEngine))
+        {
+            Console.WriteLine("{0} - Charge vehicle battery", eVehiclesOperationsSubMenu.IncreaseEnergySupply);
+        }
+    }
+
+    enum eGarageMainMenuItems : byte
+    {
+        None = 0,
+        NewVehicle = 1,
+        ListVehicles = 2,
+        VehiclesOperationsSubMenu = 3,
+        Exit = 4
+    }
+
+    enum eVehiclesOperationsSubMenu : byte
+    {
+        None = 0,
+        ShowDetails = 1,
+        ChangeStatus = 2,
+        InflateWheelsToMax = 3,
+        IncreaseEnergySupply = 4,
+        SelectOtherVehicle = 5,
+        BackToPreviousMenu = 6
+    }
 
 }
 
