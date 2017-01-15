@@ -11,7 +11,17 @@ using System.Text;
 
 public class Engine
 {
-    protected float m_CurrentEnergyAmount;
-    protected float m_MaxEnergyAmount;
+	private float m_CurrenttEnergyAmount
+	{
+		get;
+		set;
+	}
+
+	private float m_MaxEnergyAmount
+	{
+		get;
+		set;
+	}
+
 }
 

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="2bbfacac-9713-45af-a297-7808c0b60c86" name="UMLClassDiagramGarageLogic" linkedPackageId="d6651457-7464-43e9-9124-92a9abed32e3" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="2bbfacac-9713-45af-a297-7808c0b60c86" name="UMLClassDiagramGarageLogic" linkedPackageId="d6651457-7464-43e9-9124-92a9abed32e3" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
   <appliedStereotypesInternal>
     <stereotypeInstance Id="f879afc7-ddcd-48ae-8c4f-a015337523db" name="namespace" profile="CSharpProfile">
       <elementDefinition Id="6e211d32-7724-4d49-a6d5-7327e9f94a35" />
@@ -114,7 +114,7 @@
         </appliedStereotypesInternal>
         <elementDefinition Id="0eb5af8d-4457-4f02-b448-4b940b7844f0" />
         <ownedAttributesInternal>
-          <property Id="b92e8c45-ecb9-409d-9200-fc84629b5971" name="m_Model" visibility="Protected" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="b92e8c45-ecb9-409d-9200-fc84629b5971" name="m_Model" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <appliedStereotypesInternal>
               <stereotypeInstance Id="4396cb8a-85dd-4e6b-a6cd-6d588efdd276" name="property" profile="CSharpProfile">
                 <elementDefinition Id="08f9d74d-8ec5-40de-bc2f-f425a7502213" />
@@ -169,7 +169,7 @@
               <referencedTypeMoniker Id="a059e086-bd4c-4dbf-b90f-1f3ea7315609" LastKnownName="string" />
             </type_NamedElement>
           </property>
-          <property Id="33eec210-7afa-442c-b054-b0ab72827b3e" name="m_LicenseNumber" visibility="Protected" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="33eec210-7afa-442c-b054-b0ab72827b3e" name="m_LicenseNumber" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <appliedStereotypesInternal>
               <stereotypeInstance Id="baceb947-f676-40e4-bfc1-f2098b92d2c1" name="property" profile="CSharpProfile">
                 <elementDefinition Id="756a65f7-4dc3-40b8-b1ac-193c462d5b0b" />
@@ -224,7 +224,7 @@
               <referencedTypeMoniker Id="a059e086-bd4c-4dbf-b90f-1f3ea7315609" LastKnownName="string" />
             </type_NamedElement>
           </property>
-          <property Id="dd606dea-4209-482d-83fe-3a98f75d3f20" name="m_Wheels" visibility="Protected" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="dd606dea-4209-482d-83fe-3a98f75d3f20" name="m_Wheels" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <appliedStereotypesInternal>
               <stereotypeInstance Id="31c1aed4-63af-45e7-96d2-a4a78516c67f" name="property" profile="CSharpProfile">
                 <elementDefinition Id="d0d35e70-9811-4e8e-bcac-d8bdd8627603" />
@@ -279,7 +279,7 @@
               <referencedTypeMoniker Id="c282d66d-ffa3-4b47-b560-414973253a9c" LastKnownName="List&lt;Wheel&gt;" />
             </type_NamedElement>
           </property>
-          <property Id="d2552cec-fa81-4d07-98ce-6555e52f58a4" name="m_Engine" visibility="Protected" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="d2552cec-fa81-4d07-98ce-6555e52f58a4" name="m_Engine" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <appliedStereotypesInternal>
               <stereotypeInstance Id="704ab4e0-886d-47bd-898a-cece99e5bec3" name="property" profile="CSharpProfile">
                 <elementDefinition Id="d7261e86-b72f-4b63-9a45-05013ec942ac" />
@@ -334,7 +334,7 @@
               <referencedTypeMoniker Id="04f20f7d-7e4b-48bb-a843-35038fd19b15" LastKnownName="Engine" />
             </type_NamedElement>
           </property>
-          <property Id="6f4e4f10-17bd-4d48-a695-c28f836ba831" name="m_EnergyLeftPercentage" visibility="Protected" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="6f4e4f10-17bd-4d48-a695-c28f836ba831" name="m_EnergyLeftPercentage" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <appliedStereotypesInternal>
               <stereotypeInstance Id="771dd223-e282-4c65-bdbc-65f708b0f8fb" name="property" profile="CSharpProfile">
                 <elementDefinition Id="8242fa1c-3b2d-44a7-a409-089df633e3d7" />
@@ -439,7 +439,7 @@
           </generalization>
         </generalsInternal>
         <ownedAttributesInternal>
-          <property Id="dee1a792-61fa-4a1c-b083-c088a6f445e1" name="m_Color" visibility="Protected" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="dee1a792-61fa-4a1c-b083-c088a6f445e1" name="m_Color" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <appliedStereotypesInternal>
               <stereotypeInstance Id="15432a93-f49b-4e96-abc0-f131349021e7" name="property" profile="CSharpProfile">
                 <elementDefinition Id="6cf7b7cc-c1a1-4cb5-bc9f-19146dec7b20" />
@@ -491,7 +491,7 @@
             </appliedStereotypesInternal>
             <elementDefinition Id="b2a3c2f0-a2b4-458c-b3ba-8cba3ae49256" />
           </property>
-          <property Id="4189c4a8-64b1-497c-9a25-c9bee02bca1c" name="m_NumOfDoors" visibility="Protected" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="4189c4a8-64b1-497c-9a25-c9bee02bca1c" name="m_NumOfDoors" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <appliedStereotypesInternal>
               <stereotypeInstance Id="aaba29a5-d8fa-434a-b592-48c8c0595607" name="property" profile="CSharpProfile">
                 <elementDefinition Id="b17963e3-cb7a-4263-a628-7474c57d557f" />
@@ -804,16 +804,16 @@
             <elementDefinition Id="f6057378-7114-4479-b916-942be7d0fc5a" />
             <ownedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="3cbcec8f-d2b2-4d10-9861-7102317232e7" direction="Return" isUnique="false">
-                  <elementDefinition Id="529bef61-5a03-4d30-85df-2b7baf716fe9" />
+                <parameter Id="5a74d820-fa80-4997-baa0-12ad4d9c2fd3" name="i_AirPressure" direction="In" isUnique="false">
+                  <elementDefinition Id="ffdcb425-ab06-44ae-946b-ed42d31f79fc" />
                   <type_NamedElement>
-                    <referencedTypeMoniker Id="f7d4fc72-8836-4184-8215-9bb305926f74" LastKnownName="void" />
+                    <referencedTypeMoniker Id="d3ecedef-3929-491c-85ce-2b54f8ed3b9d" LastKnownName="float" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="479dc9bd-a717-4751-913d-1a4ed22d7fd0" name="i_AirPressure" direction="In" isUnique="false">
-                  <elementDefinition Id="253e2870-de06-48f3-ac16-2b1e3bed8f81" />
+                <parameter Id="3cbcec8f-d2b2-4d10-9861-7102317232e7" direction="Return" isUnique="false">
+                  <elementDefinition Id="529bef61-5a03-4d30-85df-2b7baf716fe9" />
                   <type_NamedElement>
                     <referencedTypeMoniker Id="d3ecedef-3929-491c-85ce-2b54f8ed3b9d" LastKnownName="float" />
                   </type_NamedElement>
@@ -891,7 +891,7 @@
           </generalization>
         </generalsInternal>
         <ownedAttributesInternal>
-          <property Id="2fe89e83-d89c-4e04-9e81-c595ac012cc8" name="m_LicenseType" visibility="Protected" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="2fe89e83-d89c-4e04-9e81-c595ac012cc8" name="m_LicenseType" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <appliedStereotypesInternal>
               <stereotypeInstance Id="ccf4ffe3-0375-4dca-88cb-24c43e2c308b" name="property" profile="CSharpProfile">
                 <elementDefinition Id="f5f87edc-ccf9-40f1-b923-d8cffae35657" />
@@ -946,7 +946,7 @@
               <referencedTypeMoniker Id="c519583e-ef8a-4a47-a52f-ac769e601e60" LastKnownName="eMotorCycleLicenseType" />
             </type_NamedElement>
           </property>
-          <property Id="75f23075-0b4c-4a4d-a488-25cd6e54c6aa" name="m_EngineCapacity" visibility="Protected" isLeaf="false" isStatic="false" isReadOnly="true" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="75f23075-0b4c-4a4d-a488-25cd6e54c6aa" name="m_EngineCapacity" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="true" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <appliedStereotypesInternal>
               <stereotypeInstance Id="d08a6005-e823-4d1f-9195-d42c0047717c" name="property" profile="CSharpProfile">
                 <elementDefinition Id="1ccb9a66-2d50-4762-b3dc-357824392d89" />
@@ -1149,7 +1149,7 @@
           </generalization>
         </generalsInternal>
         <ownedAttributesInternal>
-          <property Id="f31d15d6-d266-4430-8ef6-e9e2d23fc188" name="m_CarryDangerousChemicals" visibility="Protected" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="f31d15d6-d266-4430-8ef6-e9e2d23fc188" name="m_CarryDangerousChemicals" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <appliedStereotypesInternal>
               <stereotypeInstance Id="df371f0e-184e-41e8-b747-e974ae96dde9" name="property" profile="CSharpProfile">
                 <elementDefinition Id="5359d0ee-2bf8-48e2-bcde-a61374c69325" />
@@ -1204,7 +1204,7 @@
               <referencedTypeMoniker Id="1f0dec78-a4f8-4319-ab15-805add5877a6" LastKnownName="bool" />
             </type_NamedElement>
           </property>
-          <property Id="b0a237b1-b7ec-4951-887b-fe2f5ec83068" name="m_MaxCarryWeightAllowed" visibility="Protected" isLeaf="false" isStatic="false" isReadOnly="true" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="b0a237b1-b7ec-4951-887b-fe2f5ec83068" name="m_MaxCarryWeightAllowed" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="true" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <appliedStereotypesInternal>
               <stereotypeInstance Id="b5e1c7f3-599a-4e32-982a-aae2c552b9cb" name="property" profile="CSharpProfile">
                 <elementDefinition Id="15e4c3c5-617f-406d-8f85-bba366e72f3e" />
@@ -1586,26 +1586,26 @@
             <elementDefinition Id="032bfef4-66f4-4798-bf3f-cb04a5e91cbf" />
             <ownedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="503704ba-1a9d-4c54-b273-2cb8a1a772b5" direction="Return" isUnique="false">
-                  <elementDefinition Id="2ec2d1e8-5a34-47d2-8af4-d33624ea9d1b" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="f7d4fc72-8836-4184-8215-9bb305926f74" LastKnownName="void" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="43d7dc47-702c-4f25-955c-43f19c817496" name="i_FuelAmountToAdd" direction="In" isUnique="false">
-                  <elementDefinition Id="3a79602a-46e1-4965-9539-b53b86e95320" />
+                <parameter Id="4a42eefd-0ec0-461f-89ba-7d98a4be8b26" name="i_FuelAmountToAdd" direction="In" isUnique="false">
+                  <elementDefinition Id="fca4e16a-2221-4dec-b564-96b81330fb6a" />
                   <type_NamedElement>
                     <referencedTypeMoniker Id="d3ecedef-3929-491c-85ce-2b54f8ed3b9d" LastKnownName="float" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="805b0e1f-86d1-42d6-b3f4-58200abd8c8b" name="i_FuelType" direction="In" isUnique="false">
-                  <elementDefinition Id="b353585f-24c7-45cb-a1a1-94eb464eb2e9" />
+                <parameter Id="51997ed1-b3de-4b76-a2b8-f8de307f51d8" name="i_FuelType" direction="In" isUnique="false">
+                  <elementDefinition Id="1430f454-3564-4503-8802-b114942f43f3" />
                   <type_NamedElement>
-                    <referencedTypeMoniker Id="a461b99f-c719-4d56-883c-5a365cd623a5" LastKnownName="eFuelType" />
+                    <referencedTypeMoniker Id="613fe62d-8bbf-4e40-bc25-09f0970faaa7" LastKnownName="FuelType" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="503704ba-1a9d-4c54-b273-2cb8a1a772b5" direction="Return" isUnique="false">
+                  <elementDefinition Id="2ec2d1e8-5a34-47d2-8af4-d33624ea9d1b" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="f7d4fc72-8836-4184-8215-9bb305926f74" LastKnownName="void" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -1666,6 +1666,11 @@
     <packageHasNamedElement>
       <referencedType Id="265e51d6-8889-41e9-a3ab-8a0eee3546c7" name="int" isAbstract="false" isLeaf="false" cachedFullName="int">
         <elementDefinition Id="d79b751d-8b3b-4829-ad1f-7722dd969ccc" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="613fe62d-8bbf-4e40-bc25-09f0970faaa7" name="FuelType" isAbstract="false" isLeaf="false" cachedFullName="FuelType">
+        <elementDefinition Id="54152117-719f-4fe9-9d73-54c6ab070f8d" />
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -2243,7 +2248,7 @@
         </appliedStereotypesInternal>
         <elementDefinition Id="3c106d1b-6a38-45b8-b31e-7511155958df" />
         <ownedAttributesInternal>
-          <property Id="ca6ec808-bf2e-4aef-9c88-2b34c4cad51b" name="m_CurrentEnergyAmount" visibility="Protected" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="ca6ec808-bf2e-4aef-9c88-2b34c4cad51b" name="m_CurrenttEnergyAmount" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <appliedStereotypesInternal>
               <stereotypeInstance Id="47bdcd56-fd44-4068-89a9-b9323c152706" name="property" profile="CSharpProfile">
                 <elementDefinition Id="18c7695e-50c0-4593-a1e5-1ce7dffd7375" />
@@ -2295,10 +2300,10 @@
             </appliedStereotypesInternal>
             <elementDefinition Id="c9090ca3-028c-4ff8-b821-dfda6e3dfdea" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="f269d086-d2b3-4f04-8942-312133092f1b" LastKnownName="float" />
+              <referencedTypeMoniker Id="4bd46307-6bed-4357-9e64-3a8b8834e6bb" LastKnownName="float" />
             </type_NamedElement>
           </property>
-          <property Id="5b514ec2-8f87-4441-b628-109f3f87cc0e" name="m_MaxEnergyAmount" visibility="Protected" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="5b514ec2-8f87-4441-b628-109f3f87cc0e" name="m_MaxEnergyAmount" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <appliedStereotypesInternal>
               <stereotypeInstance Id="67890afe-321e-44d4-b8e7-056e62e98c17" name="property" profile="CSharpProfile">
                 <elementDefinition Id="dba37ae2-4d46-4e4c-9d1c-ed08b4ba152a" />
@@ -2364,6 +2369,11 @@
     <packageHasNamedElement>
       <referencedType Id="04f20f7d-7e4b-48bb-a843-35038fd19b15" name="Engine" isAbstract="false" isLeaf="false" cachedFullName="GarageLogicModeling::Engine">
         <elementDefinition Id="3c106d1b-6a38-45b8-b31e-7511155958df" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="4bd46307-6bed-4357-9e64-3a8b8834e6bb" name="float" isAbstract="false" isLeaf="false" cachedFullName="float">
+        <elementDefinition Id="94b41e6d-d4a4-49cc-b8b2-7a1190b89892" />
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -2851,11 +2861,6 @@
         </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
-    <packageHasNamedElement>
-      <referencedType Id="f269d086-d2b3-4f04-8942-312133092f1b" name="float" isAbstract="false" isLeaf="false" cachedFullName="float">
-        <elementDefinition Id="94b41e6d-d4a4-49cc-b8b2-7a1190b89892" />
-      </referencedType>
-    </packageHasNamedElement>
   </packagedElements>
   <package Id="d6651457-7464-43e9-9124-92a9abed32e3" name="GarageLogicModeling">
     <elementDefinition Id="75121ec6-4a23-4c65-894c-630b260caf69" />
