@@ -32,17 +32,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GarageLogic\GarageLogic.csproj">
-      <Project>{75ddfcc6-7851-449f-861f-ac2162599eb2}</Project>
-      <Name>GarageLogic</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Garage.cs" />
+    <Compile Include="eGarageMainMenuItems.cs" />
+    <Compile Include="eSpecificVehiclesOperationsSubMenu.cs" />
+    <Compile Include="GarageManager.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GarageLogic\GarageLogic.csproj">
+      <Project>{75ddfcc6-7851-449f-861f-ac2162599eb2}</Project>
+      <Name>GarageLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
