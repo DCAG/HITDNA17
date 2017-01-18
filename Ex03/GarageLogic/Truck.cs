@@ -30,5 +30,13 @@
         m_CarryDangerousChemicals = i_CarryDangerousChemicals;
         m_MaxCarryWeightAllowed = i_MaxCarryWeightAllowed;
     }
+
+    public override string ToString()
+    {
+        return string.Format(@"{0}
+Dangerous Chemicals: {1}
+Engine Capacity    : {2}", base.ToString(), m_CarryDangerousChemicals, m_MaxCarryWeightAllowed);
+    }
+
 }
 

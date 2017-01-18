@@ -28,5 +28,13 @@
         m_Color = i_Color;
         m_DoorsCount = i_NumOfDoors;
     }
+
+    public override string ToString()
+    {
+        return string.Format(@"{0}
+Car Color  : {1}
+Doors Count: {2}", base.ToString(), m_Color, m_DoorsCount);
+    }
+
 }
 

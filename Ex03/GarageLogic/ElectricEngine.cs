@@ -30,5 +30,12 @@
         }
 	}
 
+    public override string ToString()
+    {
+        return string.Format(@"
+Battery Time Left: {0}
+Max Battery Time : {1}", BatteryTimeLeft, MaxBatteryTime);
+    }
+
 }
 

@@ -29,5 +29,13 @@
         m_EngineCapacity = i_EngineCapacity;
         m_LicenseType = i_LicenseType;
     }
+
+    public override string ToString()
+    {
+        return string.Format(@"{0}
+License Type   : {1}
+Engine Capacity: {2}", base.ToString(), m_LicenseType, m_EngineCapacity);
+    }
+
 }
 

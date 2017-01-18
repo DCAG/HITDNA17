@@ -43,5 +43,12 @@
         }
 	}
 
+    public override string ToString()
+    {
+        return string.Format(@"
+Fuel Amount       : {0}
+Fuel Tank Capacity: {1}
+Fuel Type         : {2}", CurrentFuelAmount, MaxEnergyAmount, FuelType);
+    }
 }
 
