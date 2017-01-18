@@ -27,7 +27,7 @@ public class GarageManager
         int index = m_Vehicles.IndexOf(new Vehicle(i_License));
         if(index >= 0)
         {
-            m_VehiclesInService.Add(m_Vehicles[index], new VehicleTreatment())
+            m_VehiclesInService.Add(m_Vehicles[index], new VehicleTreatment());
         }
         m_VehiclesInService[m_Vehicles[]] = new VehicleTreatment();
 
@@ -45,7 +45,7 @@ public class GarageManager
         }
 	}
 
-	public virtual void ChangeVehicleStatus(string i_LicenseNumber, eVehicleTreatmentStatus i_NewStatus)
+	public void ChangeVehicleStatus(string i_LicenseNumber, eVehicleTreatmentStatus i_NewStatus)
 	{
         Vehicle vehicle = new Vehicle(i_LicenseNumber);
         
@@ -57,27 +57,63 @@ public class GarageManager
         Console.WriteLine("Done!");
 	}
 
-	public virtual void InflateAirInWheelsToMax(string i_License)
+	public void InflateAirInWheelsToMax(string i_License)
 	{
 		
 	}
 
-	public virtual void Refuel(string i_License, eFuelType i_FuelType, float i_Amount)
+    private void printFuelType()
+    {
+        Console.WriteLine("{0} - {1}", (int)eFuelType.Octan95, eFuelType.Octan95);
+        Console.WriteLine("{0} - {1}", (int)eFuelType.Octan96, eFuelType.Octan96);
+        Console.WriteLine("{0} - {1}", (int)eFuelType.Octan98, eFuelType.Octan95);
+        Console.WriteLine("{0} - {1}", (int)eFuelType.Soler, eFuelType.Soler);
+    }
+
+    public void RefuelA()
+    {
+        try
+        {
+            Console.WriteLine("Enter license number:");
+            string licenseNumberStr = Console.ReadLine();
+            Console.WriteLine("Select Fuel Type:");
+            printFuelType();
+            string fuelTypeStr = Console.ReadLine();
+            Console.WriteLine("Enter fuel amount:");
+            string fuelAmountStr = Console.ReadLine();
+            Refuel(licenseNumberStr, (eFuelType)int.Parse(fuelTypeStr), float.Parse(fuelAmountStr));
+        }
+        catch(FormatException)
+        {
+            Console.WriteLine("Your input is not valid");
+        }
+        catch(ArgumentException)
+        {
+            Console.WriteLine("Wrong argument");
+        }
+        catch(ValueOutOfRangeException)
+        {
+            Console.WriteLine("Value was out of range");
+        }
+    }
+
+	public void Refuel(string i_License, eFuelType i_FuelType, float i_Amount)
+	{
+        
+
+    }
+
+	public void Recharge(string i_License, float i_MinutesToCharge)
 	{
 		
 	}
 
-	public virtual void Recharge(string i_License, float i_MinutesToCharge)
+	public void PrintVehicleDetails(string i_License)
 	{
 		
 	}
 
-	public virtual void PrintVehicleDetails(string i_License)
-	{
-		
-	}
-
-	public virtual void Start()
+	public void Start()
 	{
         eGarageMainMenuItems selectedMenuOption = eGarageMainMenuItems.None;
         bool exit = false;
@@ -111,7 +147,7 @@ public class GarageManager
         while (!exit);
 	}
 
-	public virtual void PrintMenu()
+	public void PrintMenu()
 	{
         Console.WriteLine("{0} - Enter a new vehicle to service", eGarageMainMenuItems.NewVehicle);
         Console.WriteLine("{0} - List vehicles in service", eGarageMainMenuItems.ListVehicles);
