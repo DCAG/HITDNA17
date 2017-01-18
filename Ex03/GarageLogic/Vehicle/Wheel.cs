@@ -1,7 +1,6 @@
 ﻿public class Wheel
 {
     private string m_Manufacturer;
-
     public string Manufacturer
     {
         get
@@ -11,7 +10,6 @@
     }
 
     private float m_AirPressure;
-
     public float AirPressure
     {
         get
@@ -20,9 +18,7 @@
         }
     }
 
-
     private float m_MaxAirPressure;
-
     public float MaxAirPressure
     {
         get

@@ -35,24 +35,27 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Car.cs" />
-    <Compile Include="eCarColor.cs" />
-    <Compile Include="eFuelType.cs" />
-    <Compile Include="ElectricCar.cs" />
-    <Compile Include="ElectricEngine.cs" />
-    <Compile Include="ElectricMotorCycle.cs" />
-    <Compile Include="eMotorCycleLicenseType.cs" />
-    <Compile Include="Engine.cs" />
+    <Compile Include="Owner.cs" />
+    <Compile Include="VehiclesRegistrationDB.cs" />
+    <Compile Include="Vehicle\Car.cs" />
+    <Compile Include="Vehicle\eCarColor.cs" />
+    <Compile Include="Engine\eFuelType.cs" />
+    <Compile Include="AssembledVehicles\ElectricCar.cs" />
+    <Compile Include="Engine\ElectricEngine.cs" />
+    <Compile Include="AssembledVehicles\ElectricMotorCycle.cs" />
+    <Compile Include="Vehicle\eMotorCycleLicenseType.cs" />
+    <Compile Include="Engine\Engine.cs" />
     <Compile Include="eVehicleTreatmentStatus.cs" />
-    <Compile Include="FuelCar.cs" />
-    <Compile Include="FuelEngine.cs" />
-    <Compile Include="FuelMotorCycle.cs" />
-    <Compile Include="FuelTruck.cs" />
-    <Compile Include="MotorCycle.cs" />
-    <Compile Include="Truck.cs" />
-    <Compile Include="Vehicle.cs" />
+    <Compile Include="AssembledVehicles\FuelCar.cs" />
+    <Compile Include="Engine\FuelEngine.cs" />
+    <Compile Include="AssembledVehicles\FuelMotorCycle.cs" />
+    <Compile Include="AssembledVehicles\FuelTruck.cs" />
+    <Compile Include="Vehicle\MotorCycle.cs" />
+    <Compile Include="Vehicle\Truck.cs" />
+    <Compile Include="ValueOutOfRangeException.cs" />
+    <Compile Include="Vehicle\Vehicle.cs" />
     <Compile Include="VehicleTreatment.cs" />
-    <Compile Include="Wheel.cs" />
+    <Compile Include="Vehicle\Wheel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -1,4 +1,4 @@
-﻿public enum eFuelType : int
+﻿public enum eFuelType
 {
 	Octan98,
 	Octan95,

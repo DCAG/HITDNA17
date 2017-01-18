@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class GarageManager
 {
     private List<Vehicle> m_Vehicles;
-    private List<VehicleTreatment> m_VehiclesInService;
+    private Dictionary<Vehicle, VehicleTreatment> m_VehiclesInService;
 
     public GarageManager()
     {
@@ -13,22 +13,8 @@ public class GarageManager
 
     private void CreateVehiclesToRoamTheRoads()
     {
-        const bool k_CarryDangerousChemicals = true;
-        m_Vehicles = new List<Vehicle>();
-        m_Vehicles.Add(new FuelCar(eCarColor.Red, 5, "0000014", "Honda 2017 Clarity Fuel Cell"/*, 88F*/));
-        m_Vehicles.Add(new FuelCar(eCarColor.Black, 3, "0000013", "Jaguar F-TYPE S"/*, 60F*/));
-        m_Vehicles.Add(new FuelCar(eCarColor.White, 5, "0000012", "Hyundai 2017 Elantra SE"/*, 45F*/));
-        m_Vehicles.Add(new FuelCar(eCarColor.Silver, 5, "0000011", "Skoda OCTAVIA"/*, 41F*/));
-        m_Vehicles.Add(new ElectricCar(eCarColor.Black,  5, "0000010", "BMW i3"/*, 95F*/));
-        m_Vehicles.Add(new ElectricCar(eCarColor.Silver, 3, "0000009", "COURB C-ZEN"/*, 91F*/));
-        m_Vehicles.Add(new ElectricCar(eCarColor.White,  5, "0000008", "Tesla Model X"/*, 30F*/));
-        m_Vehicles.Add(new FuelMotorCycle(eMotorCycleLicenseType.B, 15, "0000007", "Zero S ZF6.5"/*, 20F*/));
-        m_Vehicles.Add(new FuelMotorCycle(eMotorCycleLicenseType.A2, 20, "000006", "Lightning LS-218"/*, 60F*/));
-        m_Vehicles.Add(new FuelMotorCycle(eMotorCycleLicenseType.A2, 20, "000005", "Lightning LS-204"/*, 95F*/));
-        m_Vehicles.Add(new ElectricMotorCycle(eMotorCycleLicenseType.A, 10, "0000004", "Electra 5F"/*, 93F*/));
-        m_Vehicles.Add(new ElectricMotorCycle(eMotorCycleLicenseType.A2, 10, "0000003", "Fusion o3P"/*, 50F*/));
-        m_Vehicles.Add(new FuelTruck(!k_CarryDangerousChemicals, 30,  "0000002", "Iveco PowerStar 420 E5"/*, 52F*/));
-        m_Vehicles.Add(new FuelTruck(k_CarryDangerousChemicals, 35, "0000001", "Peterbilt 281 tanker"/*, 89F*/));
+        
+
         foreach(Vehicle v in m_Vehicles)
         {
             Console.WriteLine(v);
@@ -36,10 +22,14 @@ public class GarageManager
         Console.ReadLine();
     }
 
-	public virtual void InsertVehicleForTreatment(string i_License)
+	public void InsertVehicleForTreatment(string i_License)
 	{
-        //VehicleTreatment vehicleTreatment = VehicleTreatment.InsertVehicleToService();
-        //m_CarsInService
+        int index = m_Vehicles.IndexOf(new Vehicle(i_License));
+        if(index >= 0)
+        {
+            m_VehiclesInService.Add(m_Vehicles[index], new VehicleTreatment())
+        }
+        m_VehiclesInService[m_Vehicles[]] = new VehicleTreatment();
 
     }
 
@@ -57,6 +47,12 @@ public class GarageManager
 
 	public virtual void ChangeVehicleStatus(string i_LicenseNumber, eVehicleTreatmentStatus i_NewStatus)
 	{
+        Vehicle vehicle = new Vehicle(i_LicenseNumber);
+        
+        if (vehicle == null)
+        {
+            Console.WriteLine("Vehicle with License Number {0} was not found", i_LicenseNumber);
+        }
         Console.WriteLine("Changng treatment status on vehicle {0} from {1} to {2}",VehicleTreatment);
         Console.WriteLine("Done!");
 	}

@@ -1,7 +1,6 @@
 ﻿public class Truck : Vehicle
 {
     private bool m_CarryDangerousChemicals;
-
     public bool CarryDangerousChemicals
     {
         get
@@ -11,7 +10,6 @@
     }
 
     private float m_MaxCarryWeightAllowed;
-
     public float MaxCarryWeightAllowed
     {
         get

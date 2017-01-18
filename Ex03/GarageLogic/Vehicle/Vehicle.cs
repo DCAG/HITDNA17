@@ -5,9 +5,15 @@ using System.Text;
 public class Vehicle
 {
     private string m_Model;
+    public string Model
+    {
+        get
+        {
+            return m_Model;
+        }
+    }
 
     private string m_LicenseNumber;
-
     public string LicenseNumber
     {
         get
@@ -16,10 +22,7 @@ public class Vehicle
         }
     }
 
-    private List<Wheel> m_Wheels;
-
     protected Engine m_Engine;
-
     public Engine Engine
     {
         get
@@ -27,6 +30,8 @@ public class Vehicle
             return m_Engine;
         }
     }
+
+    private List<Wheel> m_Wheels;
 
     public float EnergyLeftPercentage
     {
@@ -45,6 +50,11 @@ public class Vehicle
         {
             m_Wheels.Add(new Wheel(i_MaxWheelPressure));
         }
+    }
+
+    public Vehicle(string i_LicenseNumber)
+    {
+        m_LicenseNumber = i_LicenseNumber;
     }
 
     public override bool Equals(object obj)

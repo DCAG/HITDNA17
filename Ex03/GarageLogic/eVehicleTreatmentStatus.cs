@@ -1,4 +1,4 @@
-﻿public enum eVehicleTreatmentStatus : int
+﻿public enum eVehicleTreatmentStatus
 {
 	Repair,
 	Fixed,

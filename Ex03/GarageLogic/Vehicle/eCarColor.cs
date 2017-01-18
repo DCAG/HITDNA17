@@ -1,4 +1,4 @@
-﻿public enum eCarColor : int
+﻿public enum eCarColor
 {
 	Black,
 	White,
