@@ -34,6 +34,32 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Owner.cs" />
+    <Compile Include="VehiclesRegistrationDB.cs" />
+    <Compile Include="Vehicle\Car.cs" />
+    <Compile Include="Vehicle\eCarColor.cs" />
+    <Compile Include="Engine\eFuelType.cs" />
+    <Compile Include="AssembledVehicles\ElectricCar.cs" />
+    <Compile Include="Engine\ElectricEngine.cs" />
+    <Compile Include="AssembledVehicles\ElectricMotorCycle.cs" />
+    <Compile Include="Vehicle\eMotorCycleLicenseType.cs" />
+    <Compile Include="Engine\Engine.cs" />
+    <Compile Include="eVehicleTreatmentStatus.cs" />
+    <Compile Include="AssembledVehicles\FuelCar.cs" />
+    <Compile Include="Engine\FuelEngine.cs" />
+    <Compile Include="AssembledVehicles\FuelMotorCycle.cs" />
+    <Compile Include="AssembledVehicles\FuelTruck.cs" />
+    <Compile Include="Vehicle\MotorCycle.cs" />
+    <Compile Include="Vehicle\Truck.cs" />
+    <Compile Include="ValueOutOfRangeException.cs" />
+    <Compile Include="Vehicle\Vehicle.cs" />
+    <Compile Include="VehicleTreatment.cs" />
+    <Compile Include="Vehicle\Wheel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

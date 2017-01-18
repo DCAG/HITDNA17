@@ -40,25 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GeneratedCode\Car.cs" />
-    <Compile Include="GeneratedCode\eCarColor.cs" />
-    <Compile Include="GeneratedCode\eFuelType.cs" />
-    <Compile Include="GeneratedCode\ElectricCar.cs" />
-    <Compile Include="GeneratedCode\ElectricEngine.cs" />
-    <Compile Include="GeneratedCode\ElectricMotorCycle.cs" />
-    <Compile Include="GeneratedCode\eMotorCycleLicenseType.cs" />
-    <Compile Include="GeneratedCode\Engine.cs" />
-    <Compile Include="GeneratedCode\eVehicleTreatmentStatus.cs" />
-    <Compile Include="GeneratedCode\FuelCar.cs" />
-    <Compile Include="GeneratedCode\FuelEngine.cs" />
-    <Compile Include="GeneratedCode\FuelMotorCycle.cs" />
-    <Compile Include="GeneratedCode\FuelTruck.cs" />
-    <Compile Include="GeneratedCode\Garage.cs" />
-    <Compile Include="GeneratedCode\MotorCycle.cs" />
-    <Compile Include="GeneratedCode\Truck.cs" />
-    <Compile Include="GeneratedCode\Vehicle.cs" />
-    <Compile Include="GeneratedCode\VehicleTreatment.cs" />
-    <Compile Include="GeneratedCode\Wheel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
