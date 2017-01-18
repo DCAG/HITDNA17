@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class GarageManager
 {
     private List<Vehicle> m_Vehicles;
+    private List<VehicleTreatment> m_VehiclesInService;
 
     public GarageManager()
     {
@@ -24,18 +25,16 @@ public class GarageManager
         m_Vehicles.Add(new FuelMotorCycle(eMotorCycleLicenseType.B, 15, "0000007", "Zero S ZF6.5"/*, 20F*/));
         m_Vehicles.Add(new FuelMotorCycle(eMotorCycleLicenseType.A2, 20, "000006", "Lightning LS-218"/*, 60F*/));
         m_Vehicles.Add(new FuelMotorCycle(eMotorCycleLicenseType.A2, 20, "000005", "Lightning LS-204"/*, 95F*/));
-        m_Vehicles.Add(new ElectricMotorCycle(eMotorCycleLicenseType.A, 10, "0000004", ""/*, 93F*/));
-        m_Vehicles.Add(new ElectricMotorCycle(eMotorCycleLicenseType.A2, 10, "0000003", ""/*, 50F*/));
+        m_Vehicles.Add(new ElectricMotorCycle(eMotorCycleLicenseType.A, 10, "0000004", "Electra 5F"/*, 93F*/));
+        m_Vehicles.Add(new ElectricMotorCycle(eMotorCycleLicenseType.A2, 10, "0000003", "Fusion o3P"/*, 50F*/));
         m_Vehicles.Add(new FuelTruck(!k_CarryDangerousChemicals, 30,  "0000002", "Iveco PowerStar 420 E5"/*, 52F*/));
-        m_Vehicles.Add(new FuelTruck(k_CarryDangerousChemicals, 35, "0000001", " Peterbilt 281 tanker"/*, 89F*/));
+        m_Vehicles.Add(new FuelTruck(k_CarryDangerousChemicals, 35, "0000001", "Peterbilt 281 tanker"/*, 89F*/));
         foreach(Vehicle v in m_Vehicles)
         {
             Console.WriteLine(v);
         }
         Console.ReadLine();
     }
-
-    private List<VehicleTreatment> m_VehiclesInService;
 
 	public virtual void InsertVehicleForTreatment(string i_License)
 	{
@@ -46,12 +45,20 @@ public class GarageManager
 
 	public virtual void GetVehicleLicenseList(eVehicleTreatmentStatus i_Status)
 	{
-		
+        Console.WriteLine("All vehicles in ststus {0}", i_Status);
+        foreach(VehicleTreatment treatment in m_VehiclesInService)
+        {
+            if(treatment.Status == i_Status)
+            {
+                Console.WriteLine(treatment.Vehicle.LicenseNumber);
+            }
+        }
 	}
 
-	public virtual void ChangeVehicleStatus(string i_License, eVehicleTreatmentStatus i_NewStatus)
+	public virtual void ChangeVehicleStatus(string i_LicenseNumber, eVehicleTreatmentStatus i_NewStatus)
 	{
-		
+        Console.WriteLine("Changng treatment status on vehicle {0} from {1} to {2}",VehicleTreatment);
+        Console.WriteLine("Done!");
 	}
 
 	public virtual void InflateAirInWheelsToMax(string i_License)

@@ -8,6 +8,14 @@ public class Vehicle
 
     private string m_LicenseNumber;
 
+    public string LicenseNumber
+    {
+        get
+        {
+            return m_LicenseNumber;
+        }
+    }
+
     private List<Wheel> m_Wheels;
 
     protected Engine m_Engine;
@@ -58,17 +66,16 @@ public class Vehicle
         str.AppendFormat(@"
 License Number: {0}
 Model         : {1}
-
-Wheels Details:
 ", m_LicenseNumber, m_Model);
 
+        str.AppendFormat(@"Energy Consumption Details: {0:P} full
+{1}", EnergyLeftPercentage, m_Engine);
+
+        str.AppendFormat("Wheels Details:{0}",Environment.NewLine);
         foreach (Wheel wheel in m_Wheels)
         {
-            str.AppendFormat("[{0}]{1}",wheel,Environment.NewLine);
+            str.AppendFormat("[{0}]{1}", wheel, Environment.NewLine);
         }
-
-        str.AppendFormat(@"Energy Consumption Details: {0}% full
-{1}", EnergyLeftPercentage, m_Engine);
 
         return str.ToString();
     }

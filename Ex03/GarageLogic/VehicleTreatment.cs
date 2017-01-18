@@ -6,6 +6,14 @@
 
     private eVehicleTreatmentStatus m_Status;
 
+    public eVehicleTreatmentStatus Status
+    {
+        get
+        {
+            return m_Status;
+        }
+    }
+
     private Vehicle m_Vehicle;
 
     public Vehicle Vehicle

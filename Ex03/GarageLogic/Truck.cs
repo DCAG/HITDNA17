@@ -35,7 +35,7 @@
     {
         return string.Format(@"{0}
 Dangerous Chemicals: {1}
-Engine Capacity    : {2}", base.ToString(), m_CarryDangerousChemicals, m_MaxCarryWeightAllowed);
+Max Weight Capacity: {2}", base.ToString(), m_CarryDangerousChemicals, m_MaxCarryWeightAllowed);
     }
 
 }
