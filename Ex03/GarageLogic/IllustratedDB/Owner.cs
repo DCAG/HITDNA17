@@ -1,6 +1,6 @@
 ﻿namespace GarageLogic
 {
-    internal class Owner
+    public struct Owner
     {
         private string m_Name;
         public string Name

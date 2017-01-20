@@ -2,7 +2,7 @@
 
 namespace GarageLogic
 {
-    class ValueOutOfRangeException : Exception
+    public class ValueOutOfRangeException : Exception
     {
         private float m_MinValue;
         public float MinValue
@@ -13,8 +13,6 @@ namespace GarageLogic
             }
         }
         private float m_MaxValue;
-        private int v;
-        private float m_MaxEnergyAmount;
 
         public float MaxValue
         {

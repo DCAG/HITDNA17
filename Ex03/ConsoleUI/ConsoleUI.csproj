@@ -34,7 +34,8 @@
   <ItemGroup>
     <Compile Include="eGarageMainMenuItems.cs" />
     <Compile Include="eSpecificVehiclesOperationsSubMenu.cs" />
-    <Compile Include="GarageManager.cs" />
+    <Compile Include="GarageUIManager.cs" />
+    <Compile Include="HelperClasses\ConsoleHelper.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -73,7 +73,7 @@ namespace GarageLogic
 
             if (toCompareTo != null)
             {
-                equals = m_LicenseNumber == toCompareTo.m_LicenseNumber;
+                equals = m_LicenseNumber.Equals(toCompareTo.m_LicenseNumber);
             }
 
             return equals;

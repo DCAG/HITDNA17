@@ -36,7 +36,8 @@
         {
             return string.Format(@"{0}
 License Type   : {1}
-Engine Capacity: {2}", base.ToString(), m_LicenseType, m_EngineCapacity);
+Engine Capacity: {2}
+", base.ToString(), m_LicenseType, m_EngineCapacity);
         }
 
     }

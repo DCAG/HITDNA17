@@ -5,9 +5,30 @@
         private const eVehicleServiceStatus k_DefaultStatus = eVehicleServiceStatus.Repair;
 
         private string m_OwnerName;
+        public string OwnerName
+        {
+            get
+            {
+                return m_OwnerName;
+            }
+            set
+            {
+                m_OwnerName = value;
+            }
+        }
 
         private string m_OwnerPhoneNumber;
-
+        public string OwnerPhoneNumber
+        {
+            get
+            {
+                return m_OwnerPhoneNumber;
+            }
+            set
+            {
+                m_OwnerPhoneNumber = value;
+            }
+        }
         private eVehicleServiceStatus m_Status;
 
         public eVehicleServiceStatus Status
@@ -32,11 +53,12 @@
             }
         }
 
-        public VehicleServiceTicket(string i_OwnerName, string i_OwnerPhoneNumber, eVehicleServiceStatus i_Status)
+        public VehicleServiceTicket(Vehicle i_Vehicle, string i_OwnerName, string i_OwnerPhoneNumber)
         {
+            m_Vehicle = i_Vehicle;
             m_OwnerName = i_OwnerName;
             m_OwnerPhoneNumber = i_OwnerPhoneNumber;
-            m_Status = i_Status;
+            m_Status = k_DefaultStatus;
         }
 
         public VehicleServiceTicket(Vehicle i_Vehicle)
@@ -45,18 +67,15 @@
             m_Status = k_DefaultStatus;
         }
 
-        public static VehicleServiceTicket InsertVehicleToService(string i_OwnerName, string i_OwnerPhoneNumber)
-        {
-            return new VehicleServiceTicket(i_OwnerName, i_OwnerPhoneNumber, eVehicleServiceStatus.Repair);
-        }
-
         public override string ToString()
         {
             return string.Format(@"
 Owner Name           : {0}
 Owner Phone Number   : {1}
 Garage Service Status: {2}
-", m_OwnerName, m_OwnerPhoneNumber, m_Status);
+Vehicle Details      :
+{3}
+", m_OwnerName, m_OwnerPhoneNumber, m_Status, m_Vehicle);
         }
 
         public override bool Equals(object obj)
@@ -66,7 +85,7 @@ Garage Service Status: {2}
 
             if (toCompareTo != null)
             {
-                equals = m_Vehicle == toCompareTo.m_Vehicle;
+                equals = m_Vehicle.Equals(toCompareTo.m_Vehicle);
             }
 
             return equals;

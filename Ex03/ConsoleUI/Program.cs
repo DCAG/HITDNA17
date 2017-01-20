@@ -8,8 +8,8 @@ namespace ConsoleUI
     {
         public static void Main()
         {
-            GarageManager garage = new GarageManager();
-            garage.Start();
+            GarageUIManager garage = new GarageUIManager();
+            garage.ShowMainMenu();
         }
     }
 }

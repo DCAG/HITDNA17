@@ -36,8 +36,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="GarageManager.cs" />
-    <Compile Include="Owner.cs" />
-    <Compile Include="VehiclesRegistrationDB.cs" />
+    <Compile Include="IllustratedDB\Owner.cs" />
+    <Compile Include="Exceptions\ValueExistingException.cs" />
+    <Compile Include="IllustratedDB\VehiclesRegistrationDB.cs" />
     <Compile Include="Vehicle\Car.cs" />
     <Compile Include="Vehicle\eCarColor.cs" />
     <Compile Include="Engine\eFuelType.cs" />
@@ -46,7 +47,7 @@
     <Compile Include="AssembledVehicles\ElectricMotorCycle.cs" />
     <Compile Include="Vehicle\eMotorCycleLicenseType.cs" />
     <Compile Include="Engine\Engine.cs" />
-    <Compile Include="eVehicleServiceStatus.cs" />
+    <Compile Include="ServiceTicket\eVehicleServiceStatus.cs" />
     <Compile Include="AssembledVehicles\FuelCar.cs" />
     <Compile Include="Engine\FuelEngine.cs" />
     <Compile Include="AssembledVehicles\FuelMotorCycle.cs" />
@@ -55,7 +56,7 @@
     <Compile Include="Vehicle\Truck.cs" />
     <Compile Include="Exceptions\ValueOutOfRangeException.cs" />
     <Compile Include="Vehicle\Vehicle.cs" />
-    <Compile Include="VehicleServiceTicket.cs" />
+    <Compile Include="ServiceTicket\VehicleServiceTicket.cs" />
     <Compile Include="Vehicle\Wheel.cs" />
   </ItemGroup>
   <ItemGroup>

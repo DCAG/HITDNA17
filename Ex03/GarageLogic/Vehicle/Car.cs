@@ -35,7 +35,8 @@
         {
             return string.Format(@"{0}
 Car Color  : {1}
-Doors Count: {2}", base.ToString(), m_Color, m_DoorsCount);
+Doors Count: {2}
+", base.ToString(), m_Color, m_DoorsCount);
         }
 
     }

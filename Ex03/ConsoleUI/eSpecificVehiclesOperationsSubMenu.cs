@@ -1,9 +1,9 @@
 ﻿namespace ConsoleUI
 {
-    public enum eSpecificVehiclesOperationsSubMenu
+    public enum eServiceVehicleMenuOptions
     {
         None = 0,
-        ShowDetails = 1,
+        PrintDetails = 1,
         ChangeStatus = 2,
         InflateWheelsToMax = 3,
         IncreaseEnergySupply = 4,

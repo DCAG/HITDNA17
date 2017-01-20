@@ -6,7 +6,23 @@ namespace GarageLogic
 {
     public class GarageManager
     {
-        List<VehicleServiceTicket> m_VehiclesInService;
+        private List<VehicleServiceTicket> m_VehiclesInService;
+
+        public GarageManager()
+        {
+            m_VehiclesInService = new List<VehicleServiceTicket>();
+        }
+
+        public void InsertVehicleForTreatment(VehicleServiceTicket i_ServiceTicket)
+        {
+            int index = m_VehiclesInService.IndexOf(i_ServiceTicket);
+            if(index > 0)
+            {
+                throw new ValueExistingException();
+            }
+
+            m_VehiclesInService.Add(i_ServiceTicket);
+        }
 
         private Dictionary<string, eVehicleServiceStatus> GetVehicleLicenseList()
         {
@@ -46,8 +62,14 @@ namespace GarageLogic
 
         public VehicleServiceTicket GetVehicleServiceTicket(string i_LicenseNumber)
         {
+            VehicleServiceTicket serviceTicket = null;
             int index = m_VehiclesInService.IndexOf(new VehicleServiceTicket(new Vehicle(i_LicenseNumber)));
-            return m_VehiclesInService[index];
+            if(index >= 0)
+            {
+                serviceTicket = m_VehiclesInService[index];
+            }
+
+            return serviceTicket;
         }
 
         public void InflateAirInWheelsToMax(VehicleServiceTicket i_ServiceTicket)
@@ -66,7 +88,7 @@ namespace GarageLogic
             }
             else
             {
-                throw new Exception("Refuel is not supported for an electirc vehicle");
+                throw new Exception("Refuel is not supported for this type of vehicle");
             }
         }
 
@@ -79,7 +101,7 @@ namespace GarageLogic
             }
             else
             {
-                throw new Exception("Recharge is not supported for an oil (fuel) vehicle");
+                throw new Exception("Recharge is not supported for this type of vehicle");
             }
         }
     }
