@@ -33,7 +33,14 @@ namespace GarageLogic
             }
         }
 
-        private List<Wheel> m_Wheels;
+        private Wheel[] m_Wheels;
+        public Wheel[] Wheels
+        {
+            get
+            {
+                return m_Wheels;
+            }
+        }
 
         public float EnergyLeftPercentage
         {
@@ -47,10 +54,10 @@ namespace GarageLogic
         {
             m_LicenseNumber = i_LicenseNumber;
             m_Model = i_Model;
-            m_Wheels = new List<Wheel>();
+            m_Wheels = new Wheel[i_NumOfWheels];
             for (int i = 0; i < i_NumOfWheels; i++)
             {
-                m_Wheels.Add(new Wheel(i_MaxWheelPressure));
+                m_Wheels[i] = new Wheel(i_MaxWheelPressure);
             }
         }
 

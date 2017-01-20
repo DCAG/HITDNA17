@@ -6,7 +6,7 @@ namespace ConsoleUI {
     public class GarageManager
     {
         private Dictionary<Vehicle, VehicleServiceTicket> m_VehiclesInService;
-
+        GarageLogic.GarageManager m_Manager = new GarageLogic.GarageManager();
         public GarageManager()
         {
             CreateVehiclesToRoamTheRoads();
@@ -34,23 +34,54 @@ namespace ConsoleUI {
             }
         }
 
-        public void GetVehicleLicenseList(eVehicleServiceStatus i_Status)
+        #region Print Vehicle Licenses
+        public void GetVehicleLicenseList()
         {
-            List<string> licenses = new List<string>();
-            Console.WriteLine("All vehicles in status {0}", i_Status);
-            foreach (KeyValuePair<Vehicle,VehicleServiceTicket> ticket in m_VehiclesInService)
+            try
             {
-                if (ticket.Value.Status == i_Status)
+                string selectionStr = Console.ReadLine();
+                int selection = int.Parse(selectionStr);
+                eVehicleServiceStatus? status = null;
+                if(selection == 0)
                 {
-                    licenses.Add(ticket.Key.LicenseNumber);
+                    status = (eVehicleServiceStatus)selection;
                 }
+                PrintVehicleLicenseList(status);
+            }
+            catch(FormatException)
+            {
+                Console.WriteLine("Error: Invalid Selection");
+            }
+            catch(InvalidCastException)
+            {
+                Console.WriteLine("Error: Invalid Selection");
             }
         }
 
-        public void ChangeVehicleServiceStatus(string i_LicenseNumber, eVehicleServiceStatus i_NewStatus)
+        private void PrintVehicleLicenseList(eVehicleServiceStatus? i_Status)
         {
-            int index = m_VehiclesInService.Keys.IndexOf(new Vehicle(i_LicenseNumber));
+            Console.WriteLine("License numbers with {0}",i_Status.HasValue?string.Format("status {0}",i_Status):"any status");
+            foreach (string license in m_Manager.GetVehicleLicenseList(i_Status))
+            {
+                Console.WriteLine(license);
+            }
+        }
+        #endregion
 
+        private void PrintEnum(Type i_EnumType)
+        {
+            foreach(var value in Enum.GetValues(i_EnumType))
+            {
+                Console.WriteLine("{0} - {1}", value, Enum.GetName(i_EnumType, value));
+            }
+        }
+
+        public void ChangeVehicleServiceStatus()
+        {
+            VehicleServiceTicket ticket = m_Manager.GetVehicleServiceTicket();
+            m_Manager.ChangeVehicleServiceStatus(ticket,);
+
+           /*
             if (index >= 0)
             {
                 Console.WriteLine("Changng treatment status on vehicle {0} from {1} to {2}", VehicleServiceTicket);
@@ -60,20 +91,13 @@ namespace ConsoleUI {
             {
                 Console.WriteLine("Vehicle with License Number {0} was not found", i_LicenseNumber);
             }
-            m_VehiclesInService[]
+            */
         }
 
-        public void InflateAirInWheelsToMax(string i_License)
+        public void InflateAirInWheelsToMax()
         {
-
-        }
-
-        private void printFuelType()
-        {
-            Console.WriteLine("{0} - {1}", (int)eFuelType.Octan95, eFuelType.Octan95);
-            Console.WriteLine("{0} - {1}", (int)eFuelType.Octan96, eFuelType.Octan96);
-            Console.WriteLine("{0} - {1}", (int)eFuelType.Octan98, eFuelType.Octan95);
-            Console.WriteLine("{0} - {1}", (int)eFuelType.Soler, eFuelType.Soler);
+            VehicleServiceTicket ticket = m_Manager.GetVehicleServiceTicket();
+            m_Manager.InflateAirInWheelsToMax(ticket);
         }
 
         public void RefuelA()
@@ -83,7 +107,7 @@ namespace ConsoleUI {
                 Console.WriteLine("Enter license number:");
                 string licenseNumberStr = Console.ReadLine();
                 Console.WriteLine("Select Fuel Type:");
-                printFuelType();
+                PrintEnum(typeof(eFuelType));
                 string fuelTypeStr = Console.ReadLine();
                 Console.WriteLine("Enter fuel amount:");
                 string fuelAmountStr = Console.ReadLine();
@@ -103,15 +127,16 @@ namespace ConsoleUI {
             }
         }
 
-        public void Refuel(string i_License, eFuelType i_FuelType, float i_Amount)
+        public void Refuel()
         {
-
-
+            VehicleServiceTicket ticket = m_Manager.GetVehicleServiceTicket();
+            m_Manager.Refuel(ticket,);
         }
 
-        public void Recharge(string i_License, float i_MinutesToCharge)
+        public void Recharge()
         {
-
+            VehicleServiceTicket ticket = m_Manager.GetVehicleServiceTicket();
+            m_Manager.Recharge(ticket,);
         }
 
         public void PrintVehicleDetails(string i_License)

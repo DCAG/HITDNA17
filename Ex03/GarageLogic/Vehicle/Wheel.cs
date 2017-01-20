@@ -53,7 +53,7 @@
             m_AirPressure = i_AirPressure;
         }
 
-        public void Inflation(float i_AirPressure)
+        public void Inflate(float i_AirPressure)
         {
             m_AirPressure += i_AirPressure;
             if (m_AirPressure > m_MaxAirPressure)

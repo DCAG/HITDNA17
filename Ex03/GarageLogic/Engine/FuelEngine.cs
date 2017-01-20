@@ -37,6 +37,11 @@
         {
             if (i_FuelType == m_FuelType)
             {
+                if(m_MaxEnergyAmount < m_CurrentEnergyAmount + i_FuelAmountToAdd)
+                {
+                    throw new ValueOutOfRangeException(0, m_MaxEnergyAmount - m_CurrentEnergyAmount);
+                }
+
                 m_CurrentEnergyAmount += i_FuelAmountToAdd;
                 if (m_CurrentEnergyAmount > m_MaxEnergyAmount)
                 {

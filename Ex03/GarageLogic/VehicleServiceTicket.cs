@@ -16,6 +16,10 @@
             {
                 return m_Status;
             }
+            set
+            {
+                m_Status = value;
+            }
         }
 
         private Vehicle m_Vehicle;

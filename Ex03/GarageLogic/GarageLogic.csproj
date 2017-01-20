@@ -35,6 +35,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GarageManager.cs" />
     <Compile Include="Owner.cs" />
     <Compile Include="VehiclesRegistrationDB.cs" />
     <Compile Include="Vehicle\Car.cs" />

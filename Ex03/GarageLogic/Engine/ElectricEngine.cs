@@ -25,6 +25,11 @@
 
         public void RechargeBattery(float i_HoursToAdd)
         {
+            if (m_MaxEnergyAmount < m_CurrentEnergyAmount + i_HoursToAdd)
+            {
+                throw new ValueOutOfRangeException(0, m_MaxEnergyAmount - m_CurrentEnergyAmount);
+            }
+
             m_CurrentEnergyAmount += i_HoursToAdd;
             if (m_CurrentEnergyAmount > m_MaxEnergyAmount)
             {
