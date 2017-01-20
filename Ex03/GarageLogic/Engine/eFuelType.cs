@@ -1,7 +1,10 @@
-﻿public enum eFuelType
+﻿namespace GarageLogic
 {
-	Octan98,
-	Octan95,
-	Octan96,
-	Soler,
+    public enum eFuelType
+    {
+        Octan98,
+        Octan95,
+        Octan96,
+        Soler,
+    }
 }

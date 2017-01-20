@@ -1,34 +1,37 @@
-﻿public class Engine
+﻿namespace GarageLogic
 {
-    protected float m_CurrentEnergyAmount;
-
-    public float CurrentEnergyAmount
+    public class Engine
     {
-        get
+        protected float m_CurrentEnergyAmount;
+
+        public float CurrentEnergyAmount
         {
-            return m_CurrentEnergyAmount;
+            get
+            {
+                return m_CurrentEnergyAmount;
+            }
         }
-    }
 
-    protected float m_MaxEnergyAmount;
+        protected float m_MaxEnergyAmount;
 
-    public float MaxEnergyAmount
-    {
-        get
+        public float MaxEnergyAmount
         {
-            return m_MaxEnergyAmount;
+            get
+            {
+                return m_MaxEnergyAmount;
+            }
         }
-    }
 
-    protected Engine(float i_MaxEnergyAmount)
-    {
-        m_MaxEnergyAmount = i_MaxEnergyAmount;
-        m_CurrentEnergyAmount = i_MaxEnergyAmount;
-    }
+        protected Engine(float i_MaxEnergyAmount)
+        {
+            m_MaxEnergyAmount = i_MaxEnergyAmount;
+            m_CurrentEnergyAmount = i_MaxEnergyAmount;
+        }
 
-    protected Engine(float i_MaxEnergyAmount, float i_CurrentEnergyAmount)
-    {
-        m_MaxEnergyAmount = i_MaxEnergyAmount;
-        m_CurrentEnergyAmount = i_CurrentEnergyAmount;
+        protected Engine(float i_MaxEnergyAmount, float i_CurrentEnergyAmount)
+        {
+            m_MaxEnergyAmount = i_MaxEnergyAmount;
+            m_CurrentEnergyAmount = i_CurrentEnergyAmount;
+        }
     }
 }

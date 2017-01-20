@@ -1,8 +1,11 @@
-﻿public enum eGarageMainMenuItems : byte
+﻿namespace ConsoleUI
 {
-    None = 0,
-    NewVehicle = 1,
-    ListVehicles = 2,
-    ServiceSpecificVehicle = 3,
-    Exit = 4
+    public enum eGarageMainMenuItems
+    {
+        None = 0,
+        NewVehicle = 1,
+        ListVehicles = 2,
+        ServiceSpecificVehicle = 3,
+        Exit = 4
+    }
 }

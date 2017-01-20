@@ -1,41 +1,43 @@
-﻿public class ElectricEngine : Engine
+﻿namespace GarageLogic
 {
-    public ElectricEngine(float i_MaxBatteryTime) : base(i_MaxBatteryTime)
+    public class ElectricEngine : Engine
     {
-
-    }
-
-    public float BatteryTimeLeft
-	{
-        get
+        public ElectricEngine(float i_MaxBatteryTime) : base(i_MaxBatteryTime)
         {
-            return m_CurrentEnergyAmount;
-        }
-	}
 
-	public float MaxBatteryTime
-	{
-        get
+        }
+
+        public float BatteryTimeLeft
         {
-            return m_MaxEnergyAmount;
+            get
+            {
+                return m_CurrentEnergyAmount;
+            }
         }
-	}
 
-	public void RechargeBattery(float i_HoursToAdd)
-	{
-        m_CurrentEnergyAmount += i_HoursToAdd;
-        if(m_CurrentEnergyAmount > m_MaxEnergyAmount)
+        public float MaxBatteryTime
         {
-            m_CurrentEnergyAmount = m_MaxEnergyAmount;
+            get
+            {
+                return m_MaxEnergyAmount;
+            }
         }
-	}
 
-    public override string ToString()
-    {
-        return string.Format(@"
+        public void RechargeBattery(float i_HoursToAdd)
+        {
+            m_CurrentEnergyAmount += i_HoursToAdd;
+            if (m_CurrentEnergyAmount > m_MaxEnergyAmount)
+            {
+                m_CurrentEnergyAmount = m_MaxEnergyAmount;
+            }
+        }
+
+        public override string ToString()
+        {
+            return string.Format(@"
 Battery Time Left: {0}
 Max Battery Time : {1}", BatteryTimeLeft, MaxBatteryTime);
+        }
+
     }
-
 }
-

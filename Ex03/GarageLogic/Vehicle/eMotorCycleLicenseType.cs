@@ -1,7 +1,10 @@
-﻿public enum eMotorCycleLicenseType
+﻿namespace GarageLogic
 {
-	A,
-	A1,
-	A2,
-	B,
+    public enum eMotorCycleLicenseType
+    {
+        A,
+        A1,
+        A2,
+        B,
+    }
 }

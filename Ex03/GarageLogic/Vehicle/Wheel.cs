@@ -1,50 +1,70 @@
-﻿public class Wheel
+﻿namespace GarageLogic
 {
-    private string m_Manufacturer;
-    public string Manufacturer
+    public class Wheel
     {
-        get
+        private const string k_DefaultManufacturer = "Generic";
+        private string m_Manufacturer;
+        public string Manufacturer
         {
-            return m_Manufacturer;
+            get
+            {
+                return m_Manufacturer;
+            }
+            set
+            {
+                m_Manufacturer = value;
+            }
         }
-    }
 
-    private float m_AirPressure;
-    public float AirPressure
-    {
-        get
+        private float m_AirPressure;
+        public float AirPressure
         {
-            return m_AirPressure;
+            get
+            {
+                return m_AirPressure;
+            }
         }
-    }
 
-    private float m_MaxAirPressure;
-    public float MaxAirPressure
-    {
-        get
+        private float m_MaxAirPressure;
+        public float MaxAirPressure
         {
-            return m_AirPressure;
+            get
+            {
+                return m_AirPressure;
+            }
         }
-    }
 
-    public Wheel(float i_MaxAirPressure)
-    {
-        m_MaxAirPressure = i_MaxAirPressure;
-        m_Manufacturer = "Generic";
-    }
-
-    public void Inflation(float i_AirPressure)
-	{
-        m_AirPressure += i_AirPressure;
-        if(m_AirPressure > m_MaxAirPressure)
+        public Wheel(float i_MaxAirPressure)
         {
-            m_AirPressure = m_MaxAirPressure;
+            m_MaxAirPressure = i_MaxAirPressure;
+            m_Manufacturer = k_DefaultManufacturer;
         }
-	}
 
-    public override string ToString()
-    {
-        return string.Format("Air Pressure: {0:N2}/{1} , Manufacturer: {2}", m_AirPressure, m_MaxAirPressure, m_Manufacturer);
+        public Wheel(float i_MaxAirPressure, string i_Manufacturer)
+        {
+            m_MaxAirPressure = i_MaxAirPressure;
+            m_Manufacturer = i_Manufacturer;
+        }
+
+        public Wheel(float i_MaxAirPressure, string i_Manufacturer, float i_AirPressure)
+        {
+            m_MaxAirPressure = i_MaxAirPressure;
+            m_Manufacturer = i_Manufacturer;
+            m_AirPressure = i_AirPressure;
+        }
+
+        public void Inflation(float i_AirPressure)
+        {
+            m_AirPressure += i_AirPressure;
+            if (m_AirPressure > m_MaxAirPressure)
+            {
+                m_AirPressure = m_MaxAirPressure;
+            }
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Air Pressure: {0:N2}/{1} , Manufacturer: {2}", m_AirPressure, m_MaxAirPressure, m_Manufacturer);
+        }
     }
 }
-

@@ -1,7 +1,10 @@
-﻿public enum eCarColor
+﻿namespace GarageLogic
 {
-	Black,
-	White,
-	Red,
-	Silver,
+    public enum eCarColor
+    {
+        Black,
+        White,
+        Red,
+        Silver,
+    }
 }

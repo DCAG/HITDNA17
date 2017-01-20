@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GarageLogic
 {
-    class VehiclesRegistrationDB
+    public class VehiclesRegistrationDB
     {
         private static List<Vehicle> m_Vehicles;
         public static List<Vehicle> Vehicles
@@ -19,7 +19,7 @@ namespace GarageLogic
         public static Dictionary<string, Owner> Owners
         {
             get
-                {
+            {
                 return m_Owners;
             }
         }
