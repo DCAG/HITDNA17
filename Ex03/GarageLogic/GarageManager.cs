@@ -16,7 +16,7 @@ namespace GarageLogic
         public void InsertVehicleForTreatment(VehicleServiceTicket i_ServiceTicket)
         {
             int index = m_VehiclesInService.IndexOf(i_ServiceTicket);
-            if(index > 0)
+            if(index >= 0)
             {
                 throw new ValueExistingException();
             }

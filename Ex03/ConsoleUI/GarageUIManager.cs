@@ -52,7 +52,7 @@ namespace ConsoleUI
                 {
                     m_Manager.InsertVehicleForTreatment(serviceTicket);
                 }
-                catch(ValueOutOfRangeException)
+                catch(ValueExistingException)
                 {
                     Console.WriteLine("Vehicle is already in the garage");
                 }
