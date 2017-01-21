@@ -3,7 +3,7 @@
     public class ElectricCar : Car
     {
         const int k_NumOfWheels = 4;
-        const float k_MaxWheelPressure = 32;
+        const float k_MaxWheelPressure = 32F;
         const float k_MaxBatteryTime = 2.7F;
 
         public ElectricCar(eCarColor i_Color, byte i_NumOfDoors, string i_LicenseNumber,

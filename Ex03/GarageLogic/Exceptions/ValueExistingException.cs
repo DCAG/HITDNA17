@@ -3,7 +3,6 @@ using System.Runtime.Serialization;
 
 namespace GarageLogic
 {
-    [Serializable]
     internal class ValueExistingException : Exception
     {
         public ValueExistingException()

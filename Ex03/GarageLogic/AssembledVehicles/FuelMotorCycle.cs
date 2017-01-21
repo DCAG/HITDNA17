@@ -3,7 +3,7 @@
     public class FuelMotorCycle : MotorCycle
     {
         const int k_NumOfWheels = 2;
-        const float k_MaxWheelPressure = 31;
+        const float k_MaxWheelPressure = 31F;
         const eFuelType k_FuelType = eFuelType.Octan98;
         const float k_FuelTankCapacity = 6.2F;
 

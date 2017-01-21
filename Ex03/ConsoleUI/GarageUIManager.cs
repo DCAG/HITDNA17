@@ -29,7 +29,7 @@ namespace ConsoleUI
                 Console.WriteLine("{0,14}  {1}", vehicle.LicenseNumber, vehicle.GetType());
             }
         }
-        private void insertVehicleForTreatment()
+        private void insertVehicleToService()
         {
             Console.WriteLine("This is a list of all vehicles that exist in the DB");
             Console.WriteLine();
@@ -142,20 +142,25 @@ other key to print all the license numbers:");
         {
             try
             {
-                Console.WriteLine("Select Fuel Type:");
+                Console.WriteLine("Here is a list of fuel types:");
                 ConsoleHelper.PrintEnum(typeof(eFuelType));
+                Console.Write("Enter selected fuel type:");
                 string fuelTypeStr = Console.ReadLine();
-                Console.WriteLine("Enter fuel amount (Liters):");
+                Console.Write("Enter fuel amount (Liters):");
                 string fuelAmountStr = Console.ReadLine();
                 m_Manager.Refuel(i_ServiceTicket, (eFuelType)int.Parse(fuelTypeStr), float.Parse(fuelAmountStr));
             }
-            catch (ArgumentException)
+            catch(FormatException)
             {
-                Console.WriteLine("Wrong argument");
+                Console.WriteLine("Invalid input");
             }
-            catch (ValueOutOfRangeException)
+            catch (ArgumentException ex)
             {
-                Console.WriteLine("Value was out of range");
+                Console.WriteLine(ex.Message);
+            }
+            catch (ValueOutOfRangeException ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -163,9 +168,13 @@ other key to print all the license numbers:");
         {
             try
             {
-                Console.WriteLine("Enter fuel amount (Liters):");
-                string rechargeAmountStr = Console.ReadLine();
-                m_Manager.Recharge(i_ServiceTicket, float.Parse(rechargeAmountStr));
+                Console.Write("Enter number of minutes to charge (Liters):");
+                string rechargeMinutesStr = Console.ReadLine();
+                m_Manager.Recharge(i_ServiceTicket, float.Parse(rechargeMinutesStr));
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input");
             }
             catch (ArgumentException)
             {
@@ -220,7 +229,7 @@ other key to print all the license numbers:");
                         getVehicleLicenseList();
                         break;
                     case (int)eGarageMainMenuItems.NewVehicle:
-                        insertVehicleForTreatment();
+                        insertVehicleToService();
                         break;
                     case (int)eGarageMainMenuItems.ServiceSpecificVehicle:
                         serviceSpecificVehicle();
@@ -274,6 +283,7 @@ other key to print all the license numbers:");
                         if (otherVehicle != null)
                         {
                             i_ServiceTicket = otherVehicle;
+                            Console.WriteLine("Focus shifted to vehicle [{0}]",i_ServiceTicket.Vehicle.LicenseNumber);
                         }
 
                         break;

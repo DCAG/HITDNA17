@@ -55,9 +55,10 @@ namespace GarageLogic
             m_LicenseNumber = i_LicenseNumber;
             m_Model = i_Model;
             m_Wheels = new Wheel[i_NumOfWheels];
+            Random random = new Random();
             for (int i = 0; i < i_NumOfWheels; i++)
             {
-                m_Wheels[i] = new Wheel(i_MaxWheelPressure);
+                m_Wheels[i] = new Wheel(i_MaxWheelPressure, (float)(i_MaxWheelPressure*random.NextDouble()));
             }
         }
 

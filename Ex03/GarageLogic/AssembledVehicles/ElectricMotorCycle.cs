@@ -3,7 +3,7 @@
     public class ElectricMotorCycle : MotorCycle
     {
         const int k_NumOfWheels = 2;
-        const float k_MaxWheelPressure = 32;
+        const float k_MaxWheelPressure = 32F;
         const float k_MaxBatteryTime = 2.7F;
 
         public ElectricMotorCycle(eMotorCycleLicenseType i_LicenseType, int i_EngineCapacity,

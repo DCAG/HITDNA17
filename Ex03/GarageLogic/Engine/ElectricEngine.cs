@@ -40,8 +40,8 @@
         public override string ToString()
         {
             return string.Format(@"
-Battery Time Left: {0}
-Max Battery Time : {1}
+Battery Time Left: {0:N2}H
+Max Battery Time : {1:N2}H
 ", BatteryTimeLeft, MaxBatteryTime);
         }
 

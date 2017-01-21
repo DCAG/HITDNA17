@@ -32,8 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="eGarageMainMenuItems.cs" />
-    <Compile Include="eSpecificVehiclesOperationsSubMenu.cs" />
+    <Compile Include="MenuOptions\eGarageMainMenuItems.cs" />
+    <Compile Include="MenuOptions\eSpecificVehiclesOperationsSubMenu.cs" />
     <Compile Include="GarageUIManager.cs" />
     <Compile Include="HelperClasses\ConsoleHelper.cs" />
     <Compile Include="Program.cs" />

@@ -1,4 +1,6 @@
-﻿namespace GarageLogic
+﻿using System;
+
+namespace GarageLogic
 {
     public class FuelEngine : Engine
     {
@@ -48,13 +50,17 @@
                     m_CurrentEnergyAmount = m_MaxEnergyAmount;
                 }
             }
+            else
+            {
+                throw new ArgumentException("Wrong fuel type");
+            }
         }
 
         public override string ToString()
         {
             return string.Format(@"
-Fuel Amount       : {0}
-Fuel Tank Capacity: {1}
+Fuel Amount       : {0:N2} L
+Fuel Tank Capacity: {1:N2} L
 Fuel Type         : {2}
 ", CurrentFuelAmount, MaxEnergyAmount, FuelType);
         }

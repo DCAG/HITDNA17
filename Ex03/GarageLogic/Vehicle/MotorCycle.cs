@@ -23,10 +23,8 @@
         }
 
         public MotorCycle(eMotorCycleLicenseType i_LicenseType, int i_EngineCapacity,
-            string i_LicenseNumber, string i_Model, int i_NumOfWheels,
-            float i_MaxWheelPressure /*, i_EnergyLeftPercentage*/)
-            : base(i_LicenseNumber, i_Model, i_NumOfWheels,
-                i_MaxWheelPressure /*, i_EnergyLeftPercentage*/)
+            string i_LicenseNumber, string i_Model, int i_NumOfWheels, float i_MaxWheelPressure)
+            : base(i_LicenseNumber, i_Model, i_NumOfWheels, i_MaxWheelPressure)
         {
             m_EngineCapacity = i_EngineCapacity;
             m_LicenseType = i_LicenseType;
@@ -36,7 +34,7 @@
         {
             return string.Format(@"{0}
 License Type   : {1}
-Engine Capacity: {2}
+Engine Capacity: {2} cc
 ", base.ToString(), m_LicenseType, m_EngineCapacity);
         }
 

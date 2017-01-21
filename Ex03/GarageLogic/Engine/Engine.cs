@@ -1,4 +1,6 @@
-﻿namespace GarageLogic
+﻿using System;
+
+namespace GarageLogic
 {
     public class Engine
     {
@@ -25,7 +27,8 @@
         protected Engine(float i_MaxEnergyAmount)
         {
             m_MaxEnergyAmount = i_MaxEnergyAmount;
-            m_CurrentEnergyAmount = i_MaxEnergyAmount;
+            Random random = new Random();
+            m_CurrentEnergyAmount = (float)(m_MaxEnergyAmount*random.NextDouble());
         }
 
         protected Engine(float i_MaxEnergyAmount, float i_CurrentEnergyAmount)

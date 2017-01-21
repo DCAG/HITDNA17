@@ -30,13 +30,20 @@
         {
             get
             {
-                return m_AirPressure;
+                return m_MaxAirPressure;
             }
         }
 
         public Wheel(float i_MaxAirPressure)
         {
             m_MaxAirPressure = i_MaxAirPressure;
+            m_Manufacturer = k_DefaultManufacturer;
+        }
+
+        public Wheel(float i_MaxAirPressure, float i_AirPressure)
+        {
+            m_MaxAirPressure = i_MaxAirPressure;
+            m_AirPressure = i_AirPressure;
             m_Manufacturer = k_DefaultManufacturer;
         }
 
@@ -64,7 +71,7 @@
 
         public override string ToString()
         {
-            return string.Format("Air Pressure: {0:N2}/{1} , Manufacturer: {2}", m_AirPressure, m_MaxAirPressure, m_Manufacturer);
+            return string.Format("Air Pressure: {0:N2}PSI /{1:N2}PSI , Manufacturer: {2}", m_AirPressure, m_MaxAirPressure, m_Manufacturer);
         }
     }
 }
