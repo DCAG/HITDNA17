@@ -7,6 +7,7 @@ namespace GarageLogic
     public class Vehicle
     {
         private string m_Model;
+
         public string Model
         {
             get
@@ -16,6 +17,7 @@ namespace GarageLogic
         }
 
         private string m_LicenseNumber;
+
         public string LicenseNumber
         {
             get
@@ -25,6 +27,7 @@ namespace GarageLogic
         }
 
         protected Engine m_Engine;
+
         public Engine Engine
         {
             get
@@ -34,6 +37,7 @@ namespace GarageLogic
         }
 
         private Wheel[] m_Wheels;
+
         public Wheel[] Wheels
         {
             get
@@ -58,7 +62,7 @@ namespace GarageLogic
             Random random = new Random();
             for (int i = 0; i < i_NumOfWheels; i++)
             {
-                m_Wheels[i] = new Wheel(i_MaxWheelPressure, (float)(i_MaxWheelPressure*random.NextDouble()));
+                m_Wheels[i] = new Wheel(i_MaxWheelPressure, (float)(i_MaxWheelPressure * random.NextDouble()));
             }
         }
 
@@ -83,15 +87,10 @@ namespace GarageLogic
         public override string ToString()
         {
             StringBuilder str = new StringBuilder();
-            str.AppendFormat(@"
-License Number: {0}
-Model         : {1}
-", m_LicenseNumber, m_Model);
-
-            str.AppendFormat(@"Energy Consumption Details: {0:P} full
-{1}", EnergyLeftPercentage, m_Engine);
-
-            str.AppendFormat("Wheels Details:{0}", Environment.NewLine);
+            str.AppendFormat("License Number            : {0}{1}", m_LicenseNumber, Environment.NewLine);
+            str.AppendFormat("Model                     : {0}{1}", m_Model, Environment.NewLine);
+            str.AppendFormat("Energy Consumption Details: {0:P} full{1}{2}{1}", EnergyLeftPercentage, Environment.NewLine, m_Engine);
+            str.AppendFormat("Wheels Details            : {0}", Environment.NewLine);
             foreach (Wheel wheel in m_Wheels)
             {
                 str.AppendFormat("[{0}]{1}", wheel, Environment.NewLine);

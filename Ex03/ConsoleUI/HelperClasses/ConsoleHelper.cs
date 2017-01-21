@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ConsoleUI.HelperClasses
 {
-    class ConsoleHelper
+    public class ConsoleHelper
     {
         public static void PrintEnum(Type i_EnumType)
         {

@@ -8,7 +8,7 @@
         {
             get
             {
-                return LicenseType;
+                return m_LicenseType;
             }
         }
 
@@ -22,8 +22,8 @@
             }
         }
 
-        public MotorCycle(eMotorCycleLicenseType i_LicenseType, int i_EngineCapacity,
-            string i_LicenseNumber, string i_Model, int i_NumOfWheels, float i_MaxWheelPressure)
+        public MotorCycle(
+            eMotorCycleLicenseType i_LicenseType, int i_EngineCapacity, string i_LicenseNumber, string i_Model, int i_NumOfWheels, float i_MaxWheelPressure)
             : base(i_LicenseNumber, i_Model, i_NumOfWheels, i_MaxWheelPressure)
         {
             m_EngineCapacity = i_EngineCapacity;
@@ -32,11 +32,12 @@
 
         public override string ToString()
         {
-            return string.Format(@"{0}
+            string toStringStr = @"{0}
 License Type   : {1}
 Engine Capacity: {2} cc
-", base.ToString(), m_LicenseType, m_EngineCapacity);
-        }
+";
 
+            return string.Format(toStringStr, base.ToString(), m_LicenseType, m_EngineCapacity);
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace GarageLogic
 
         public FuelEngine(eFuelType i_FuelType, float i_FuelTankCapacity) : base(i_FuelTankCapacity)
         {
-            m_FuelType = i_FuelType;
+            this.m_FuelType = i_FuelType;
         }
 
         public eFuelType FuelType
@@ -45,10 +45,6 @@ namespace GarageLogic
                 }
 
                 m_CurrentEnergyAmount += i_FuelAmountToAdd;
-                if (m_CurrentEnergyAmount > m_MaxEnergyAmount)
-                {
-                    m_CurrentEnergyAmount = m_MaxEnergyAmount;
-                }
             }
             else
             {
@@ -58,11 +54,12 @@ namespace GarageLogic
 
         public override string ToString()
         {
-            return string.Format(@"
+            string toStringStr = @"
 Fuel Amount       : {0:N2} L
 Fuel Tank Capacity: {1:N2} L
 Fuel Type         : {2}
-", CurrentFuelAmount, MaxEnergyAmount, FuelType);
+";
+            return string.Format(toStringStr, CurrentFuelAmount, MaxEnergyAmount, FuelType);
         }
     }
 }

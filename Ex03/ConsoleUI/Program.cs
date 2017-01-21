@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ConsoleUI
 {
-    class Program
+    public class Program
     {
         public static void Main()
         {

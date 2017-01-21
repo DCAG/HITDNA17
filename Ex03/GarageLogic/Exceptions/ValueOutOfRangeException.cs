@@ -5,13 +5,15 @@ namespace GarageLogic
     public class ValueOutOfRangeException : Exception
     {
         private float m_MinValue;
+
         public float MinValue
         {
             get
             {
-                return MinValue;
+                return m_MinValue;
             }
         }
+
         private float m_MaxValue;
 
         public float MaxValue

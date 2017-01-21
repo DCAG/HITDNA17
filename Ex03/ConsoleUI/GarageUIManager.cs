@@ -26,18 +26,16 @@ namespace ConsoleUI
             Console.WriteLine("--------------  ------------");
             foreach (Vehicle vehicle in VehiclesRegistrationDB.Vehicles)
             {
-                Console.WriteLine("{0,14}  {1}", vehicle.LicenseNumber, vehicle.GetType());
+                Console.WriteLine("{0,14}  {1}", vehicle.LicenseNumber, vehicle.GetType().Name);
             }
         }
+
         private void insertVehicleToService()
         {
-            Console.WriteLine("This is a list of all vehicles that exist in the DB");
-            Console.WriteLine();
+            Console.WriteLine("This is a list of all vehicles that exist in the DB{0}", Environment.NewLine);
             printAllVehiclesInDB();
-            Console.WriteLine();
-            Console.WriteLine("Select a vehicle to insert to the garage.");
+            Console.WriteLine("{0}Select a vehicle to insert to the garage.", Environment.NewLine);
             Console.Write("Enter a vehicle license number: ");
-            
             string userInputLicenseNumber = Console.ReadLine();
             Vehicle vehicleToAddToService = VehiclesRegistrationDB.FindVehicle(userInputLicenseNumber);
             if (vehicleToAddToService != null)
@@ -49,7 +47,15 @@ namespace ConsoleUI
                     serviceTicket.OwnerName = ownerToAddToService.Value.Name;
                     serviceTicket.OwnerPhoneNumber = ownerToAddToService.Value.PhoneNumber;
                 }
-                m_Manager.InsertVehicleForTreatment(serviceTicket);
+
+                try
+                {
+                    m_Manager.InsertVehicleForTreatment(serviceTicket);
+                }
+                catch(ValueOutOfRangeException)
+                {
+                    Console.WriteLine("Vehicle is already in the garage");
+                }
             }
             else
             {
@@ -68,7 +74,7 @@ other key to print all the license numbers:");
             int selection;
             if (int.TryParse(selectionStr, out selection))
             {
-                switch(selection)
+                switch (selection)
                 {
                     case (int)eVehicleServiceStatus.Fixed:
                     case (int)eVehicleServiceStatus.Paid:
@@ -86,7 +92,7 @@ other key to print all the license numbers:");
 
         private void printVehicleLicenseList(eVehicleServiceStatus? i_Status)
         {
-            Console.WriteLine("License numbers with {0}",i_Status.HasValue?string.Format("status: {0}",i_Status):"any status");
+            Console.WriteLine("License numbers with {0}", i_Status.HasValue ? string.Format("status: {0}", i_Status) : "any status");
             foreach (string license in m_Manager.GetVehicleLicenseList(i_Status))
             {
                 Console.WriteLine(license);
@@ -112,10 +118,11 @@ other key to print all the license numbers:");
                     default:
                         throw new InvalidCastException();
                 }
+
                 m_Manager.ChangeVehicleServiceStatus(i_ServiceTicket, newStatus);
                 Console.WriteLine("Service status of vehicle [{0}] is now set to: {1}", i_ServiceTicket.Vehicle.LicenseNumber, i_ServiceTicket.Status);
             }
-            catch(InvalidCastException)
+            catch (InvalidCastException)
             {
                 Console.WriteLine("Invalid option");
             }
@@ -124,6 +131,7 @@ other key to print all the license numbers:");
         private void inflateAirInWheelsToMax(VehicleServiceTicket i_ServiceTicket)
         {
             m_Manager.InflateAirInWheelsToMax(i_ServiceTicket);
+            Console.WriteLine("Vehicle wheels were inflated.");
         }
 
         private void increaseVehicleEnergySupply(VehicleServiceTicket i_ServiceTicket)
@@ -132,7 +140,7 @@ other key to print all the license numbers:");
             {
                 recharge(i_ServiceTicket);
             }
-            else if(i_ServiceTicket.Vehicle.Engine is FuelEngine)
+            else if (i_ServiceTicket.Vehicle.Engine is FuelEngine)
             {
                 refuel(i_ServiceTicket);
             }
@@ -149,8 +157,9 @@ other key to print all the license numbers:");
                 Console.Write("Enter fuel amount (Liters):");
                 string fuelAmountStr = Console.ReadLine();
                 m_Manager.Refuel(i_ServiceTicket, (eFuelType)int.Parse(fuelTypeStr), float.Parse(fuelAmountStr));
+                Console.WriteLine("Vehicle was refueled.");
             }
-            catch(FormatException)
+            catch (FormatException)
             {
                 Console.WriteLine("Invalid input");
             }
@@ -160,7 +169,7 @@ other key to print all the license numbers:");
             }
             catch (ValueOutOfRangeException ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("Refuel amount must be between [{0}, {1}] L", ex.MinValue, ex.MaxValue);
             }
         }
 
@@ -168,21 +177,23 @@ other key to print all the license numbers:");
         {
             try
             {
-                Console.Write("Enter number of minutes to charge (Liters):");
+                Console.Write("Enter number of minutes to charge:");
                 string rechargeMinutesStr = Console.ReadLine();
                 m_Manager.Recharge(i_ServiceTicket, float.Parse(rechargeMinutesStr));
+                Console.WriteLine("Vehicle was recharged.");
             }
             catch (FormatException)
             {
                 Console.WriteLine("Invalid input");
             }
-            catch (ArgumentException)
+            catch (ArgumentException ex)
             {
-                Console.WriteLine("Wrong argument");
+                Console.WriteLine(ex.Message);
             }
-            catch (ValueOutOfRangeException)
+            catch (ValueOutOfRangeException ex)
             {
-                Console.WriteLine("Value was out of range");
+                const int k_minutesInHour = 60;
+                Console.WriteLine("Charge time must be between [{0}, {1}] minutes", ex.MinValue, ex.MaxValue * k_minutesInHour);
             }
         }
 
@@ -208,9 +219,9 @@ other key to print all the license numbers:");
         private void serviceSpecificVehicle()
         {
             VehicleServiceTicket serviceTicket = getVehicleServiceTicket();
-            if(serviceTicket != null)
+            if (serviceTicket != null)
             {
-                ShowVehicleServiceMenu(serviceTicket);
+                showVehicleServiceMenu(serviceTicket);
             }
         }
 
@@ -220,8 +231,8 @@ other key to print all the license numbers:");
             bool exit = false;
             do
             {
-                Console.WriteLine("{0}# Garage Manager #",Environment.NewLine);
-                PrintMenuOptions();
+                Console.WriteLine("{0}# Garage Manager #", Environment.NewLine);
+                printMenuOptions();
                 selectedMenuOption = ConsoleHelper.ReadIntInput();
                 switch (selectedMenuOption)
                 {
@@ -242,12 +253,11 @@ other key to print all the license numbers:");
                         Console.WriteLine("Invalid input");
                         break;
                 }
-
             }
             while (!exit);
         }
 
-        private void PrintMenuOptions()
+        private void printMenuOptions()
         {
             Console.WriteLine("{0} - Enter a new vehicle to service", (int)eGarageMainMenuItems.NewVehicle);
             Console.WriteLine("{0} - List vehicles in service", (int)eGarageMainMenuItems.ListVehicles);
@@ -255,14 +265,14 @@ other key to print all the license numbers:");
             Console.WriteLine("{0} - Exit", (int)eGarageMainMenuItems.Exit);
         }
 
-        private void ShowVehicleServiceMenu(VehicleServiceTicket i_ServiceTicket)
+        private void showVehicleServiceMenu(VehicleServiceTicket i_ServiceTicket)
         {
             int selectedMenuOption = (int)eServiceVehicleMenuOptions.None;
             bool back = false;
             do
             {
                 Console.WriteLine("{0}# Garage Manager # > Service Vehicle [License Number: {1}]", Environment.NewLine, i_ServiceTicket.Vehicle.LicenseNumber);
-                PrintServiceVehicleMenuOptions(i_ServiceTicket.Vehicle.Engine);
+                printServiceVehicleMenuOptions(i_ServiceTicket.Vehicle.Engine);
                 selectedMenuOption = ConsoleHelper.ReadIntInput();
                 switch (selectedMenuOption)
                 {
@@ -283,7 +293,7 @@ other key to print all the license numbers:");
                         if (otherVehicle != null)
                         {
                             i_ServiceTicket = otherVehicle;
-                            Console.WriteLine("Focus shifted to vehicle [{0}]",i_ServiceTicket.Vehicle.LicenseNumber);
+                            Console.WriteLine("Focus shifted to vehicle [{0}]", i_ServiceTicket.Vehicle.LicenseNumber);
                         }
 
                         break;
@@ -298,7 +308,7 @@ other key to print all the license numbers:");
             while (!back);
         }
 
-        private void PrintServiceVehicleMenuOptions(Engine i_Engine)
+        private void printServiceVehicleMenuOptions(Engine i_Engine)
         {
             Console.WriteLine("{0} - Show vehicle details", (int)eServiceVehicleMenuOptions.PrintDetails);
             Console.WriteLine("{0} - Change vehicle status", (int)eServiceVehicleMenuOptions.ChangeStatus);
@@ -311,10 +321,10 @@ other key to print all the license numbers:");
             {
                 Console.WriteLine("{0} - Refuel vehicle", (int)eServiceVehicleMenuOptions.IncreaseEnergySupply);
             }
+
             Console.WriteLine();
             Console.WriteLine("{0} - Select other vehicle", (int)eServiceVehicleMenuOptions.SelectOtherVehicle);
             Console.WriteLine("{0} - Back", (int)eServiceVehicleMenuOptions.BackToPreviousMenu);
         }
     }
 }
- 

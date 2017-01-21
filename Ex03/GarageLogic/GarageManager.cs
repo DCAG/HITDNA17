@@ -31,13 +31,15 @@ namespace GarageLogic
             {
                 licenseAndStatusPairs[ticket.Vehicle.LicenseNumber] = ticket.Status;
             }
+
             return licenseAndStatusPairs;
         }
 
         public List<string> GetVehicleLicenseList(eVehicleServiceStatus? i_Status)
         {
             List<string> licenses;
-            if (i_Status.HasValue) {
+            if (i_Status.HasValue)
+            {
                 licenses = new List<string>();
 
                 foreach (KeyValuePair<string, eVehicleServiceStatus> licenseStatuspair in GetVehicleLicenseList())
@@ -52,6 +54,7 @@ namespace GarageLogic
             {
                 licenses = new List<string>(GetVehicleLicenseList().Keys);
             }
+
             return licenses;
         }
 

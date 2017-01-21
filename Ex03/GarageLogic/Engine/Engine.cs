@@ -28,7 +28,7 @@ namespace GarageLogic
         {
             m_MaxEnergyAmount = i_MaxEnergyAmount;
             Random random = new Random();
-            m_CurrentEnergyAmount = (float)(m_MaxEnergyAmount*random.NextDouble());
+            m_CurrentEnergyAmount = (float)(m_MaxEnergyAmount * random.NextDouble());
         }
 
         protected Engine(float i_MaxEnergyAmount, float i_CurrentEnergyAmount)

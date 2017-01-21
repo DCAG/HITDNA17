@@ -22,8 +22,8 @@
             }
         }
 
-        public Car(eCarColor i_Color, byte i_NumOfDoors, string i_LicenseNumber,
-            string i_Model, int i_NumOfWheels, float i_MaxWheelPressure)
+        public Car(
+            eCarColor i_Color, byte i_NumOfDoors, string i_LicenseNumber, string i_Model, int i_NumOfWheels, float i_MaxWheelPressure)
             : base(i_LicenseNumber, i_Model, i_NumOfWheels, i_MaxWheelPressure)
         {
             m_Color = i_Color;
@@ -32,11 +32,12 @@
 
         public override string ToString()
         {
-            return string.Format(@"{0}
+            string toStringStr = @"{0}
 Car Color  : {1}
 Doors Count: {2}
-", base.ToString(), m_Color, m_DoorsCount);
-        }
+";
 
+            return string.Format(toStringStr, base.ToString(), m_Color, m_DoorsCount);
+        }
     }
 }

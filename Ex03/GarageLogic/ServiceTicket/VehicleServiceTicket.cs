@@ -5,12 +5,14 @@
         private const eVehicleServiceStatus k_DefaultStatus = eVehicleServiceStatus.Repair;
 
         private string m_OwnerName;
+
         public string OwnerName
         {
             get
             {
                 return m_OwnerName;
             }
+
             set
             {
                 m_OwnerName = value;
@@ -18,17 +20,20 @@
         }
 
         private string m_OwnerPhoneNumber;
+
         public string OwnerPhoneNumber
         {
             get
             {
                 return m_OwnerPhoneNumber;
             }
+
             set
             {
                 m_OwnerPhoneNumber = value;
             }
         }
+
         private eVehicleServiceStatus m_Status;
 
         public eVehicleServiceStatus Status
@@ -37,6 +42,7 @@
             {
                 return m_Status;
             }
+
             set
             {
                 m_Status = value;
@@ -69,13 +75,17 @@
 
         public override string ToString()
         {
-            return string.Format(@"
+            string toStringStr = @"
 Owner Name           : {0}
 Owner Phone Number   : {1}
 Garage Service Status: {2}
-Vehicle Details      :
-{3}
-", m_OwnerName, m_OwnerPhoneNumber, m_Status, m_Vehicle);
+===
+Vehicle Details - {3}
+
+{4}
+";
+
+            return string.Format(toStringStr, m_OwnerName, m_OwnerPhoneNumber, m_Status, m_Vehicle.GetType().Name, m_Vehicle);
         }
 
         public override bool Equals(object obj)

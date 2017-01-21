@@ -3,13 +3,16 @@
     public class Wheel
     {
         private const string k_DefaultManufacturer = "Generic";
+
         private string m_Manufacturer;
+
         public string Manufacturer
         {
             get
             {
                 return m_Manufacturer;
             }
+
             set
             {
                 m_Manufacturer = value;
@@ -17,6 +20,7 @@
         }
 
         private float m_AirPressure;
+
         public float AirPressure
         {
             get
@@ -26,6 +30,7 @@
         }
 
         private float m_MaxAirPressure;
+
         public float MaxAirPressure
         {
             get
@@ -71,7 +76,7 @@
 
         public override string ToString()
         {
-            return string.Format("Air Pressure: {0:N2}PSI /{1:N2}PSI , Manufacturer: {2}", m_AirPressure, m_MaxAirPressure, m_Manufacturer);
+            return string.Format("Air Pressure: {0,5:N2} PSI / {1,5:N2} PSI , Manufacturer: {2}", m_AirPressure, m_MaxAirPressure, m_Manufacturer);
         }
     }
 }

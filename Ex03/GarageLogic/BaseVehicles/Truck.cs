@@ -3,6 +3,7 @@
     public class Truck : Vehicle
     {
         private bool m_CarryDangerousChemicals;
+
         public bool CarryDangerousChemicals
         {
             get
@@ -12,6 +13,7 @@
         }
 
         private float m_MaxCarryWeightAllowed;
+
         public float MaxCarryWeightAllowed
         {
             get
@@ -20,8 +22,8 @@
             }
         }
 
-        public Truck(bool i_CarryDangerousChemicals, float i_MaxCarryWeightAllowed,
-            string i_LicenseNumber, string i_Model, int i_NumOfWheels, float i_MaxWheelPressure)
+        public Truck(
+            bool i_CarryDangerousChemicals, float i_MaxCarryWeightAllowed, string i_LicenseNumber, string i_Model, int i_NumOfWheels, float i_MaxWheelPressure)
             : base(i_LicenseNumber, i_Model, i_NumOfWheels, i_MaxWheelPressure)
         {
             m_CarryDangerousChemicals = i_CarryDangerousChemicals;
@@ -30,11 +32,12 @@
 
         public override string ToString()
         {
-            return string.Format(@"{0}
+            string toStringStr = @"{0}
 Dangerous Chemicals: {1}
 Max Weight Capacity: {2:N2} lb
-", base.ToString(), m_CarryDangerousChemicals?"Yes":"No", m_MaxCarryWeightAllowed);
-        }
+";
 
+            return string.Format(toStringStr, base.ToString(), m_CarryDangerousChemicals ? "Yes" : "No", m_MaxCarryWeightAllowed);
+        }
     }
 }

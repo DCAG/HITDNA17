@@ -3,6 +3,7 @@
     public struct Owner
     {
         private string m_Name;
+
         public string Name
         {
             get
@@ -12,6 +13,7 @@
         }
 
         private string m_PhoneNumber;
+
         public string PhoneNumber
         {
             get
