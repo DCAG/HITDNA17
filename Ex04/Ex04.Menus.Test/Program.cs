@@ -8,8 +8,11 @@ namespace Ex04.Menus.Test
     {
         public static void Main()
         {
-            Interfaces.MainMenu interfacesMenu = new Interfaces.MainMenu();
-            Delegates.MainMenu delegatesMenu = new Delegates.MainMenu();
+            Interfaces.MainMenu m_InterfacesMainMenu = new Interfaces.MainMenu();
+            Delegates.MainMenu m_DelegatesMainMenu = new Delegates.MainMenu();
+
+            m_InterfacesMainMenu.Show();
+            m_DelegatesMainMenu.Show();
         }
     }
 }
