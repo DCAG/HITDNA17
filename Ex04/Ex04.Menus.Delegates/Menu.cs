@@ -9,14 +9,6 @@ namespace Ex04.Menus.Delegates
         private const string k_CloseMenuStr = "Back";
         private readonly List<MenuItem> r_MenuItems;
 
-        public string Title
-        {
-            get
-            {
-                return m_Name;
-            }
-        }
-
         protected virtual string CloseMenuStr
         {
             get
@@ -25,9 +17,14 @@ namespace Ex04.Menus.Delegates
             }
         }
 
-        public Menu(string i_Title):base(i_Title)
+        public Menu(string i_Title) : base(i_Title)
         {
             r_MenuItems = new List<MenuItem>();
+        }
+
+        public override void Invoke()
+        {
+            Show();
         }
 
         public virtual void Show()
@@ -41,15 +38,10 @@ namespace Ex04.Menus.Delegates
                 selectedItem = readUserSelection();
                 closeMenu = selectedItem == null;
 
-                if(!closeMenu)
+                if (!closeMenu)
                 {
                     Console.Clear();
                     selectedItem.Invoke();
-                    if (!(selectedItem is Menu))
-                    {
-                        Console.Write("Press any key to continue...");
-                        Console.ReadLine();
-                    }
                 }
             }
             while (!closeMenu);
@@ -98,19 +90,26 @@ namespace Ex04.Menus.Delegates
         private void printCurrentMenuLevel()
         {
             Console.WriteLine(Title);
-            Console.WriteLine(new string('-',Title.Length));
-            for (int i=0; i < r_MenuItems.Count; i++)
+            Console.WriteLine(new string('-', Title.Length));
+            for (int i = 0; i < r_MenuItems.Count; i++)
             {
-                Console.WriteLine("{0} - {1}", i + 1, r_MenuItems[i].Name);
+                Console.WriteLine("{0} - {1}", i + 1, r_MenuItems[i].Title);
             }
             Console.WriteLine();
             Console.WriteLine("0 - {0}", CloseMenuStr);
             Console.WriteLine();
         }
 
-        public void Remove(IMenuItemAction i_MenuItem)
+        public void Add(MenuItem i_MenuItem)
+        {
+            r_MenuItems.Add(i_MenuItem);
+        }
+
+        /*
+        public void Remove(MenuItem i_MenuItem)
         {
             //??????m_MenuItems.Remove(MenuItem)
         }
+        */
     }
 }

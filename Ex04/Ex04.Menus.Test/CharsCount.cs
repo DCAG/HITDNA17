@@ -7,9 +7,14 @@ namespace Ex04.Menus.Test
     {
         public void Invoke()
         {
+            CountLetters();
+        }
+
+        private void CountLetters()
+        {
             Console.WriteLine("Write a sentence:");
             string sentence = Console.ReadLine();
-            
+
             int lettersCounter = 0;
             for (int i = 0; i < sentence.Length; i++)
             {
@@ -20,6 +25,8 @@ namespace Ex04.Menus.Test
             }
 
             Console.WriteLine("There are {0} letters in this sentence", lettersCounter);
+            Console.Write("Press any key to continue...");
+            Console.ReadLine();
         }
     }
 }

@@ -47,15 +47,10 @@ namespace Ex04.Menus.Interfaces
                 selectedItem = readUserSelection();
                 closeMenu = selectedItem == null;
 
-                if(!closeMenu)
+                if (!closeMenu)
                 {
                     Console.Clear();
                     selectedItem.MenuItemAction.Invoke();
-                    if (!(selectedItem.MenuItemAction is Menu))
-                    {
-                        Console.Write("Press any key to continue...");
-                        Console.ReadLine();
-                    }
                 }
             }
             while (!closeMenu);
@@ -104,8 +99,8 @@ namespace Ex04.Menus.Interfaces
         private void printCurrentMenuLevel()
         {
             Console.WriteLine(Title);
-            Console.WriteLine(new string('-',Title.Length));
-            for (int i=0; i < r_MenuItems.Count; i++)
+            Console.WriteLine(new string('-', Title.Length));
+            for (int i = 0; i < r_MenuItems.Count; i++)
             {
                 Console.WriteLine("{0} - {1}", i + 1, r_MenuItems[i].Name);
             }
@@ -116,13 +111,15 @@ namespace Ex04.Menus.Interfaces
 
         public void Add(IMenuItemAction i_MenuItem, string i_MenuItemName)
         {
-            r_MenuItems.Add(new MenuItem(i_MenuItem,i_MenuItemName));
+            r_MenuItems.Add(new MenuItem(i_MenuItem, i_MenuItemName));
         }
 
+        /*
         public void Remove(IMenuItemAction i_MenuItem)
         {
             //??????m_MenuItems.Remove(MenuItem)
         }
+        */
 
         private class MenuItem
         {

@@ -1,14 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ex04.Menus.Delegates
+﻿namespace Ex04.Menus.Delegates
 {
-    public class MainMenu
+    public class MainMenu : Menu
     {
-        public void Show()
+        private const string k_CloseMenuStr = "Exit";
+        public MainMenu(string i_Title) : base(i_Title)
         {
-            throw new NotImplementedException();
+        }
+
+        protected override string CloseMenuStr
+        {
+            get
+            {
+                return k_CloseMenuStr;
+            }
         }
     }
 }

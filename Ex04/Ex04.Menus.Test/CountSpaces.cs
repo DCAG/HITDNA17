@@ -7,6 +7,11 @@ namespace Ex04.Menus.Test
     {
         public void Invoke()
         {
+            countSpaces();
+        }
+
+        private void countSpaces()
+        {
             Console.WriteLine("Write a sentence:");
             string sentence = Console.ReadLine();
 
@@ -20,6 +25,8 @@ namespace Ex04.Menus.Test
             }
 
             Console.WriteLine("There are {0} spaces in this sentence", spacesCounter);
+            Console.Write("Press any key to continue...");
+            Console.ReadLine();
         }
     }
 }

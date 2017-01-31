@@ -7,7 +7,14 @@ namespace Ex04.Menus.Test
     {
         public void Invoke()
         {
-            Console.WriteLine(DateTime.Now.Date.ToString());
+            showDate();
+        }
+
+        private void showDate()
+        {
+            Console.WriteLine(DateTime.Now.ToShortDateString());
+            Console.Write("Press any key to continue...");
+            Console.ReadLine();
         }
     }
 }
