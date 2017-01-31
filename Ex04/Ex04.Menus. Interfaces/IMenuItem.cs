@@ -1,6 +1,6 @@
 ﻿namespace Ex04.Menus.Interfaces
 {
-    public interface MenuItem
+    public interface IMenuItemAction
     {
         void Invoke();
     }
