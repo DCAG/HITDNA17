@@ -7,7 +7,7 @@ namespace Ex04.Menus.Interfaces
     {
         private const string k_CloseMenuStr = "Back";
         private string m_Title;
-        private readonly List<MenuItem> m_MenuItems;
+        private readonly List<MenuItem> r_MenuItems;
 
         public string Title
         {
@@ -28,7 +28,7 @@ namespace Ex04.Menus.Interfaces
         public Menu(string i_Title)
         {
             m_Title = i_Title;
-            m_MenuItems = new List<MenuItem>();
+            r_MenuItems = new List<MenuItem>();
         }
 
         void IMenuItemAction.Invoke()
@@ -85,7 +85,7 @@ namespace Ex04.Menus.Interfaces
                 int selecedItemNum = int.Parse(selectedItemStr);
                 if (selecedItemNum != 0)
                 { 
-                    selectedItem = m_MenuItems[selecedItemNum - 1];
+                    selectedItem = r_MenuItems[selecedItemNum - 1];
                 }
                 result = true;
             }
@@ -105,9 +105,9 @@ namespace Ex04.Menus.Interfaces
         {
             Console.WriteLine(Title);
             Console.WriteLine(new string('-',Title.Length));
-            for (int i=0; i < m_MenuItems.Count; i++)
+            for (int i=0; i < r_MenuItems.Count; i++)
             {
-                Console.WriteLine("{0} - {1}", i + 1, m_MenuItems[i].Name);
+                Console.WriteLine("{0} - {1}", i + 1, r_MenuItems[i].Name);
             }
             Console.WriteLine();
             Console.WriteLine("0 - {0}", CloseMenuStr);
@@ -116,7 +116,7 @@ namespace Ex04.Menus.Interfaces
 
         public void Add(IMenuItemAction i_MenuItem, string i_MenuItemName)
         {
-            m_MenuItems.Add(new MenuItem(i_MenuItem,i_MenuItemName));
+            r_MenuItems.Add(new MenuItem(i_MenuItem,i_MenuItemName));
         }
 
         public void Remove(IMenuItemAction i_MenuItem)
