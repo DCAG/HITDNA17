@@ -114,13 +114,6 @@ namespace Ex04.Menus.Interfaces
             r_MenuItems.Add(new MenuItem(i_MenuItem, i_MenuItemName));
         }
 
-        /*
-        public void Remove(IMenuItemAction i_MenuItem)
-        {
-            //??????m_MenuItems.Remove(MenuItem)
-        }
-        */
-
         private class MenuItem
         {
             private string m_Name;

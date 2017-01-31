@@ -104,12 +104,5 @@ namespace Ex04.Menus.Delegates
         {
             r_MenuItems.Add(i_MenuItem);
         }
-
-        /*
-        public void Remove(MenuItem i_MenuItem)
-        {
-            //??????m_MenuItems.Remove(MenuItem)
-        }
-        */
     }
 }
