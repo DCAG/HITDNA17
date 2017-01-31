@@ -127,7 +127,7 @@ namespace Ex04.Menus.Interfaces
         private class MenuItem
         {
             private string m_Name;
-            private readonly IMenuItemAction m_Item;
+            private readonly IMenuItemAction r_Item;
 
             public string Name
             {
@@ -141,13 +141,13 @@ namespace Ex04.Menus.Interfaces
             {
                 get
                 {
-                    return m_Item;
+                    return r_Item;
                 }
             }
 
             public MenuItem(IMenuItemAction i_Item, string i_Name)
             {
-                m_Item = i_Item;
+                r_Item = i_Item;
                 m_Name = i_Name;
             }
         }
