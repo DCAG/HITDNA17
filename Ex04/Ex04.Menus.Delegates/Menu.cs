@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 
 namespace Ex04.Menus.Delegates
-{
-    
+{  
     public class Menu : MenuItem
     {
         private const string k_CloseMenuStr = "Back";
@@ -22,7 +21,7 @@ namespace Ex04.Menus.Delegates
             r_MenuItems = new List<MenuItem>();
         }
 
-        public override void Invoke()
+        public override void OnMenuItemSelected()
         {
             Show();
         }
@@ -41,7 +40,7 @@ namespace Ex04.Menus.Delegates
                 if (!closeMenu)
                 {
                     Console.Clear();
-                    selectedItem.Invoke();
+                    selectedItem.OnMenuItemSelected();
                 }
             }
             while (!closeMenu);
@@ -73,15 +72,16 @@ namespace Ex04.Menus.Delegates
                 { 
                     selectedItem = r_MenuItems[selecedItemNum - 1];
                 }
+
                 result = true;
             }
             catch (FormatException)
             {
-                Console.WriteLine("Invalid input.");
+                Console.WriteLine("Invalid input - Input was not a number.");
             }
             catch (ArgumentOutOfRangeException)
             {
-                Console.WriteLine("Invalid input.");
+                Console.WriteLine("Invalid input - Menu item does not exist.");
             }
 
             return result;
@@ -95,6 +95,7 @@ namespace Ex04.Menus.Delegates
             {
                 Console.WriteLine("{0} - {1}", i + 1, r_MenuItems[i].Title);
             }
+
             Console.WriteLine();
             Console.WriteLine("0 - {0}", CloseMenuStr);
             Console.WriteLine();

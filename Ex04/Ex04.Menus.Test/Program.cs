@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Ex04.Menus.Test
 {
-    class Program
+    public class Program
     {
         public static void Main()
         {
@@ -44,52 +42,27 @@ namespace Ex04.Menus.Test
             Delegates.MenuItem showDateMenuItem = new Delegates.MenuItem("Show Date");
             showDateTimeMenu.Add(showTimeMenuItem);
             showDateTimeMenu.Add(showDateMenuItem);
-            showTimeMenuItem.MenuItemAction += showTime;
-            showDateMenuItem.MenuItemAction += showDate;
+            showTimeMenuItem.MenuItemSelected += showTime;
+            showDateMenuItem.MenuItemSelected += showDate;
 
             Delegates.Menu versionAndActionsMenu = new Delegates.Menu("Version and Actions");
             delegatesMainMenu.Add(versionAndActionsMenu);
 
             Delegates.MenuItem showVersionMenuItem = new Delegates.MenuItem("Show Version");
             versionAndActionsMenu.Add(showVersionMenuItem);
-            showVersionMenuItem.MenuItemAction += showVersion;
+            showVersionMenuItem.MenuItemSelected += showVersion;
 
             Delegates.Menu actionsMenu = new Delegates.Menu("Actions");
             versionAndActionsMenu.Add(actionsMenu);
             Delegates.MenuItem charsCountMenuItem = new Delegates.MenuItem("Chars Count");
             actionsMenu.Add(charsCountMenuItem);
-            charsCountMenuItem.MenuItemAction += countLetters;
+            charsCountMenuItem.MenuItemSelected += countLetters; // The name of the menu item was requested to be "Chars Count" although it was also requested to invoke a function that counts the number of *letters* in the user input. 
             Delegates.MenuItem countSpacesMenuItem = new Delegates.MenuItem("Count Spaces");
             actionsMenu.Add(countSpacesMenuItem);
-            countSpacesMenuItem.MenuItemAction += countSpaces;
+            countSpacesMenuItem.MenuItemSelected += countSpaces;
 
             delegatesMainMenu.Show();
         }
-
-        /*
-
-        private static void showDelegatesMainMenu()
-        {
-            Delegates.MainMenu delegatesMainMenu = new Delegates.MainMenu("Delegates Main Menu");
-            Delegates.Menu showDateTime = new Delegates.Menu("Show Date/Time");
-            Delegates.Menu versionAndActions = new Delegates.Menu("Version And Actions");
-            Delegates.Menu actions = new Delegates.Menu("Actions");
-
-            showDateTime.Items["Show Time"] += showTime;
-            showDateTime.Items["Show Date"] += showDate;
-            delegatesMainMenu.Items["Show Date/Time"] += showDateTime.Show;
-            
-            versionAndActions.Items["Show Version"] += showVersion;
-            
-            actions.Items["Chars Count"] += countLetters;
-            actions.Items["Count Spaces"] += countSpaces;
-            versionAndActions.Items["Actions"] += actions.Show;
-
-            delegatesMainMenu.Items["Version and Actions"] += versionAndActions.Show;
-
-            delegatesMainMenu.Show();
-        }
-        */
 
         private static void countLetters()
         {

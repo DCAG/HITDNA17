@@ -6,8 +6,8 @@ namespace Ex04.Menus.Interfaces
     public class Menu : IMenuItemAction
     {
         private const string k_CloseMenuStr = "Back";
-        private string m_Title;
         private readonly List<MenuItem> r_MenuItems;
+        private string m_Title;
 
         public string Title
         {
@@ -82,15 +82,16 @@ namespace Ex04.Menus.Interfaces
                 { 
                     selectedItem = r_MenuItems[selecedItemNum - 1];
                 }
+
                 result = true;
             }
             catch (FormatException)
             {
-                Console.WriteLine("Invalid input.");
+                Console.WriteLine("Invalid input - Input was not a number.");
             }
             catch (ArgumentOutOfRangeException)
             {
-                Console.WriteLine("Invalid input.");
+                Console.WriteLine("Invalid input - Menu item does not exist.");
             }
 
             return result;
@@ -104,6 +105,7 @@ namespace Ex04.Menus.Interfaces
             {
                 Console.WriteLine("{0} - {1}", i + 1, r_MenuItems[i].Name);
             }
+
             Console.WriteLine();
             Console.WriteLine("0 - {0}", CloseMenuStr);
             Console.WriteLine();
@@ -116,8 +118,8 @@ namespace Ex04.Menus.Interfaces
 
         private class MenuItem
         {
-            private string m_Name;
             private readonly IMenuItemAction r_Item;
+            private string m_Name;
 
             public string Name
             {

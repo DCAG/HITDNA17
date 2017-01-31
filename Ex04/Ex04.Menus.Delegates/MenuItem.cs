@@ -4,11 +4,14 @@ using System.Text;
 
 namespace Ex04.Menus.Delegates
 {
-    public delegate void MenuItemSelectionEventHandler();
+    public delegate void MenuItemSelectionNotificationDelegate();
+
     public class MenuItem
     {
-        public event MenuItemSelectionEventHandler MenuItemAction;
+        public event MenuItemSelectionNotificationDelegate MenuItemSelected;
+
         private string m_title;
+
         public string Title
         {
             get
@@ -22,11 +25,11 @@ namespace Ex04.Menus.Delegates
             m_title = i_title;
         }
 
-        public virtual void Invoke()
+        public virtual void OnMenuItemSelected()
         {
-            if (MenuItemAction != null)
+            if (MenuItemSelected != null)
             {
-                MenuItemAction.Invoke();
+                MenuItemSelected.Invoke();
             }
         }
     }
