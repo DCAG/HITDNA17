@@ -28,56 +28,59 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.ButtonBoardSize = new System.Windows.Forms.Button();
+            this.buttonVsPlayer = new System.Windows.Forms.Button();
+            this.buttonVsComputer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // ButtonBoardSize
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(238, 95);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.ButtonBoardSize.Location = new System.Drawing.Point(12, 12);
+            this.ButtonBoardSize.Name = "ButtonBoardSize";
+            this.ButtonBoardSize.Size = new System.Drawing.Size(505, 95);
+            this.ButtonBoardSize.TabIndex = 0;
+            this.ButtonBoardSize.Text = "Board Size: {0}x{0} (click to increase)";
+            this.ButtonBoardSize.UseVisualStyleBackColor = true;
+            this.ButtonBoardSize.Click += new System.EventHandler(this.ButtonBoardSize_Click);
             // 
-            // button2
+            // buttonVsPlayer
             // 
-            this.button2.Location = new System.Drawing.Point(198, 130);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(238, 95);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.buttonVsPlayer.Location = new System.Drawing.Point(279, 130);
+            this.buttonVsPlayer.Name = "buttonVsPlayer";
+            this.buttonVsPlayer.Size = new System.Drawing.Size(238, 95);
+            this.buttonVsPlayer.TabIndex = 1;
+            this.buttonVsPlayer.Text = "Play against another player";
+            this.buttonVsPlayer.UseVisualStyleBackColor = true;
+            this.buttonVsPlayer.Click += new System.EventHandler(this.buttonVsPlayer_Click);
             // 
-            // button3
+            // buttonVsComputer
             // 
-            this.button3.Location = new System.Drawing.Point(34, 130);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(238, 95);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.buttonVsComputer.Location = new System.Drawing.Point(12, 130);
+            this.buttonVsComputer.Name = "buttonVsComputer";
+            this.buttonVsComputer.Size = new System.Drawing.Size(238, 95);
+            this.buttonVsComputer.TabIndex = 2;
+            this.buttonVsComputer.Text = "Play against the computer";
+            this.buttonVsComputer.UseVisualStyleBackColor = true;
+            this.buttonVsComputer.Click += new System.EventHandler(this.buttonVsComputer_Click);
             // 
             // GameSettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(517, 445);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(530, 241);
+            this.Controls.Add(this.buttonVsComputer);
+            this.Controls.Add(this.buttonVsPlayer);
+            this.Controls.Add(this.ButtonBoardSize);
             this.Name = "GameSettingsForm";
-            this.Text = "GameSettingsForm";
+            this.Text = "Othello - Game Settings";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button ButtonBoardSize;
+        private System.Windows.Forms.Button buttonVsComputer;
+        private System.Windows.Forms.Button buttonVsPlayer;
     }
 }

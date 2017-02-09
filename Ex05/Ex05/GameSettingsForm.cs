@@ -14,5 +14,20 @@ namespace Ex05
         {
             InitializeComponent();
         }
+
+        private void buttonVsPlayer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonVsComputer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ButtonBoardSize_Click(object sender, EventArgs e)
+        {
+            ButtonBoardSize.te
+        }
     }
 }
