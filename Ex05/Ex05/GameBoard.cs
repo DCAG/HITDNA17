@@ -8,13 +8,13 @@ using System.Windows.Forms;
 
 namespace Ex05
 {
-    public partial class Form1 : Form
+    public partial class GameBoard : Form
     {
         const int k_BoardSize = 6;
         const int k_SquareSize = 50;
         readonly Image r_CoinRed = Image.FromFile(@"images\CoinRed.png");
         readonly Image r_CoinYellow = Image.FromFile(@"images\CoinYellow.png");
-        public Form1()
+        public GameBoard()
         {
             InitializeComponent();
             for (int i = 0; i < m_Grid.GetLength(0); i++)

@@ -40,11 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="GameBoard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="GameBoard.Designer.cs">
+      <DependentUpon>GameBoard.cs</DependentUpon>
     </Compile>
     <Compile Include="GameSettingsForm.cs">
       <SubType>Form</SubType>
@@ -54,8 +54,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="GameBoard.resx">
+      <DependentUpon>GameBoard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GameSettingsForm.resx">
       <DependentUpon>GameSettingsForm.cs</DependentUpon>
@@ -86,6 +86,12 @@
     <Content Include="images\CoinYellow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ex02_Othelo\Ex02_Othelo.csproj">
+      <Project>{975afc86-3a54-4a7c-8f73-d486138ef4c4}</Project>
+      <Name>Ex02_Othelo</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

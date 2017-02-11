@@ -14,7 +14,14 @@ namespace Ex05
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            Ex02_Othelo.GameService gameService;
+
+            DialogResult result = (new GameSettingsForm(gameService)).ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                (new GameBoard()).ShowDialog();
+            }
         }
     }
 }

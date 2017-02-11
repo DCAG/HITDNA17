@@ -35,9 +35,10 @@
             // 
             // ButtonBoardSize
             // 
-            this.ButtonBoardSize.Location = new System.Drawing.Point(12, 12);
+            this.ButtonBoardSize.Location = new System.Drawing.Point(7, 7);
+            this.ButtonBoardSize.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ButtonBoardSize.Name = "ButtonBoardSize";
-            this.ButtonBoardSize.Size = new System.Drawing.Size(505, 95);
+            this.ButtonBoardSize.Size = new System.Drawing.Size(275, 51);
             this.ButtonBoardSize.TabIndex = 0;
             this.ButtonBoardSize.Text = "Board Size: {0}x{0} (click to increase)";
             this.ButtonBoardSize.UseVisualStyleBackColor = true;
@@ -45,9 +46,10 @@
             // 
             // buttonVsPlayer
             // 
-            this.buttonVsPlayer.Location = new System.Drawing.Point(279, 130);
+            this.buttonVsPlayer.Location = new System.Drawing.Point(152, 70);
+            this.buttonVsPlayer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonVsPlayer.Name = "buttonVsPlayer";
-            this.buttonVsPlayer.Size = new System.Drawing.Size(238, 95);
+            this.buttonVsPlayer.Size = new System.Drawing.Size(130, 51);
             this.buttonVsPlayer.TabIndex = 1;
             this.buttonVsPlayer.Text = "Play against another player";
             this.buttonVsPlayer.UseVisualStyleBackColor = true;
@@ -55,9 +57,10 @@
             // 
             // buttonVsComputer
             // 
-            this.buttonVsComputer.Location = new System.Drawing.Point(12, 130);
+            this.buttonVsComputer.Location = new System.Drawing.Point(7, 70);
+            this.buttonVsComputer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonVsComputer.Name = "buttonVsComputer";
-            this.buttonVsComputer.Size = new System.Drawing.Size(238, 95);
+            this.buttonVsComputer.Size = new System.Drawing.Size(130, 51);
             this.buttonVsComputer.TabIndex = 2;
             this.buttonVsComputer.Text = "Play against the computer";
             this.buttonVsComputer.UseVisualStyleBackColor = true;
@@ -65,12 +68,14 @@
             // 
             // GameSettingsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(530, 241);
+            this.ClientSize = new System.Drawing.Size(289, 131);
             this.Controls.Add(this.buttonVsComputer);
             this.Controls.Add(this.buttonVsPlayer);
             this.Controls.Add(this.ButtonBoardSize);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "GameSettingsForm";
             this.Text = "Othello - Game Settings";
             this.ResumeLayout(false);
