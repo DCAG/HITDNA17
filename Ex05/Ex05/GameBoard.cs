@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ex02_Othelo;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +15,9 @@ namespace Ex05
         const int k_SquareSize = 50;
         readonly Image r_CoinRed = Image.FromFile(@"images\CoinRed.png");
         readonly Image r_CoinYellow = Image.FromFile(@"images\CoinYellow.png");
-        public GameBoard()
+        PictureBox[,] m_Grid = new PictureBox[k_BoardSize, k_BoardSize];
+        private GameService m_GameService;
+        public GameBoard(GameService i_GameService)
         {
             InitializeComponent();
             for (int i = 0; i < m_Grid.GetLength(0); i++)
@@ -32,10 +35,27 @@ namespace Ex05
                     Controls.Add(m_Grid[i, j]);
                 }
             }
+
             ClientSize = new Size(m_Grid.GetLength(0) * k_SquareSize + 3 * 2, m_Grid.GetLength(1) * k_SquareSize + 3 * 2);
+            m_GameService = i_GameService;
+            m_GameService.OnFlip += Coin_Flipped;
         }
 
-        PictureBox[,] m_Grid = new PictureBox[k_BoardSize, k_BoardSize];
+        private void Coin_Flipped(int i_X, int i_Y, eDiscColor i_DiscColor)
+        {
+            switch(i_DiscColor)
+            {
+                case eDiscColor.Black:
+                    m_Grid[i_X, i_Y].Image = r_CoinRed;
+                    break;
+                case eDiscColor.White:
+                    m_Grid[i_X, i_Y].Image = r_CoinYellow;
+                    break;
+                default:
+                    m_Grid[i_X, i_Y].Image = null;
+                    break;
+            }
+        }
         
     }
 }

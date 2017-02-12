@@ -3,27 +3,10 @@ using System.Collections.Generic;
 
 namespace Ex02_Othelo
 {
-    public enum eDiscColor
-    {
-        None = -1,
-        Black = 0,
-        White = 1,
-    }
-
-    internal enum eDirection
-    {
-        UpLeft,
-        Left,
-        DownLeft,
-        Down,
-        DownRight,
-        Right,
-        UpRight,
-        Up
-    }
-
+    public delegate void FlipACoinDelegate(int i_X, int i_Y, eDiscColor i_DiscColor);
     public class GameService
     {
+        private static readonly Random sr_Random = new Random();
         private eDiscColor[,] m_Board;
 
         public eDiscColor[,] Board
@@ -34,12 +17,16 @@ namespace Ex02_Othelo
             }
         }
 
-        private List<Point> m_AvailableMoves = new List<Point>();
-        private Dictionary<Point, List<Point>> m_RequiredFlips = new Dictionary<Point, List<Point>>();
-        private Dictionary<eDiscColor, int> m_DiscsCounter;
-        private eDiscColor m_Turn = eDiscColor.White;
+        public event FlipACoinDelegate OnFlip;
 
-        public eDiscColor ThisTurn
+        private readonly List<Point> m_AvailableMoves = new List<Point>();
+        private Dictionary<Point, List<Point>> m_RequiredFlips = new Dictionary<Point, List<Point>>();
+
+        private Player m_FirstPlayer;
+        private Player m_SecondPlayer;
+        private Player m_Turn; // = m_WhitePlayer;
+
+        public Player ThisTurn
         {
             get
             {
@@ -47,19 +34,9 @@ namespace Ex02_Othelo
             }
         }
 
-        public static eDiscColor GetOppositeDiscColor(eDiscColor i_DiscColor)
+        public Player GetOppositeDiscColor(Player i_Player)
         {
-            eDiscColor result = eDiscColor.None;
-            if (i_DiscColor == eDiscColor.White)
-            {
-                result = eDiscColor.Black;
-            }
-            else if (i_DiscColor == eDiscColor.Black)
-            {
-                result = eDiscColor.White;
-            }
-
-            return result;
+            return i_Player != m_FirstPlayer ? m_FirstPlayer : m_SecondPlayer;
         }
 
         public GameService(int i_Size)
@@ -75,14 +52,8 @@ namespace Ex02_Othelo
 
             m_AvailableMoves = new List<Point>();
             m_RequiredFlips  = new Dictionary<Point, List<Point>>();
-            m_DiscsCounter   = new Dictionary<eDiscColor, int>();
-            m_DiscsCounter[eDiscColor.Black] = 0;
-            m_DiscsCounter[eDiscColor.White] = 0;
-        }
-
-        public int GetDiscsCounter(eDiscColor i_DiscsColor)
-        {
-            return m_DiscsCounter[i_DiscsColor];
+            m_FirstPlayer = new Player ( i_DiscColor: eDiscColor.Black );          
+            m_SecondPlayer = new Player();
         }
 
         private void updateAvailableMoves()
@@ -133,12 +104,12 @@ namespace Ex02_Othelo
                     toFlip.Clear();
                     break;
                 }
-                else if(m_Board[i_Square.X, i_Square.Y] == GetOppositeDiscColor(m_Turn))
+                else if(m_Board[i_Square.X, i_Square.Y] == GetOppositeDiscColor(m_Turn).Color)
                 {
                     toFlip.Add(i_Square);
                 }
             }
-            while (m_Board[i_Square.X, i_Square.Y] != m_Turn);
+            while (m_Board[i_Square.X, i_Square.Y] != m_Turn.Color);
 
             return toFlip;
         }
@@ -160,22 +131,32 @@ namespace Ex02_Othelo
             m_Board[boardCenterPosition - 1, boardCenterPosition - 1] = eDiscColor.White; // Up-left to Board Center Position
             m_Board[boardCenterPosition, boardCenterPosition - 1] = eDiscColor.Black; // Up to Board Center Position
 
-            m_DiscsCounter[eDiscColor.Black] = 2;
-            m_DiscsCounter[eDiscColor.White] = 2;
+            m_FirstPlayer.DiscsCounter = 2;
+            m_SecondPlayer.DiscsCounter = 2;
 
-            m_Turn = i_FirstTurn;
+            m_Turn = m_FirstPlayer;
             updateAvailableMoves();
         }
 
         public void UpdateBoard(Point i_Square)
         {
-            m_Board[i_Square.X, i_Square.Y] = m_Turn;
-            m_DiscsCounter[ThisTurn]++;
+            m_Board[i_Square.X, i_Square.Y] = m_Turn.Color;
+            if (OnFlip != null)
+            {
+                OnFlip.Invoke(i_Square.X, i_Square.Y, m_Turn.Color);
+            }
+
+            m_Turn.DiscsCounter++;
             foreach (Point toFlip in m_RequiredFlips[i_Square])
             {
-                m_Board[toFlip.X, toFlip.Y] = m_Turn;
-                m_DiscsCounter[ThisTurn]++;
-                m_DiscsCounter[GetOppositeDiscColor(ThisTurn)]--;
+                m_Board[toFlip.X, toFlip.Y] = m_Turn.Color;
+                if (OnFlip != null)
+                {
+                    OnFlip.Invoke(toFlip.X, toFlip.Y, m_Turn.Color);
+                }
+
+                m_Turn.DiscsCounter++;
+                GetOppositeDiscColor(ThisTurn).DiscsCounter--;
             }
         }
 
@@ -191,10 +172,8 @@ namespace Ex02_Othelo
         }
 
         public Point GetRandomMove()
-        {
-            Random random = new Random();
-
-            return m_AvailableMoves[random.Next(m_AvailableMoves.Count)];
+        {          
+            return m_AvailableMoves[sr_Random.Next(m_AvailableMoves.Count)];
         }
 
         #region Private Boolean Tests

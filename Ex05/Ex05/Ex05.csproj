@@ -46,6 +46,7 @@
     <Compile Include="GameBoard.Designer.cs">
       <DependentUpon>GameBoard.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameManager.cs" />
     <Compile Include="GameSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
