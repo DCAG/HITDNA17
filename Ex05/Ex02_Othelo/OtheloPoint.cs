@@ -1,6 +1,6 @@
 ﻿namespace Ex02_Othelo
 {
-    public struct Point
+    public struct OtheloPoint
     {
         private int m_X;
         private int m_Y;
@@ -31,13 +31,13 @@
             }
         }
 
-        public Point(int i_X, int i_Y)
+        public OtheloPoint(int i_X, int i_Y)
         {
             m_X = i_X;
             m_Y = i_Y;
         }
 
-        public void Add(Point i_Addition)
+        public void Add(OtheloPoint i_Addition)
         {
             m_X += i_Addition.m_X;
             m_Y += i_Addition.m_Y;

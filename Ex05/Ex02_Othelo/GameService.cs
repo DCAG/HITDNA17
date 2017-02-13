@@ -19,8 +19,8 @@ namespace Ex02_Othelo
 
         public event FlipACoinDelegate OnFlip;
 
-        private readonly List<Point> m_AvailableMoves = new List<Point>();
-        private Dictionary<Point, List<Point>> m_RequiredFlips = new Dictionary<Point, List<Point>>();
+        private readonly List<OtheloPoint> m_AvailableMoves = new List<OtheloPoint>();
+        private Dictionary<OtheloPoint, List<OtheloPoint>> m_RequiredFlips = new Dictionary<OtheloPoint, List<OtheloPoint>>();
 
         private Player m_FirstPlayer;
         private Player m_SecondPlayer;
@@ -50,8 +50,8 @@ namespace Ex02_Othelo
                 throw new Exception("Illegal GameBoard size");
             }
 
-            m_AvailableMoves = new List<Point>();
-            m_RequiredFlips  = new Dictionary<Point, List<Point>>();
+            m_AvailableMoves = new List<OtheloPoint>();
+            m_RequiredFlips  = new Dictionary<OtheloPoint, List<OtheloPoint>>();
             m_FirstPlayer = new Player ( i_DiscColor: eDiscColor.Black );          
             m_SecondPlayer = new Player();
         }
@@ -64,16 +64,16 @@ namespace Ex02_Othelo
             {
                 for (int j = 0; j < m_Board.GetLength(1); j++)
                 {
-                    testAndAddAvailableMoves(new Point(i, j));
+                    testAndAddAvailableMoves(new OtheloPoint(i, j));
                 }
             }
         }
 
-        private void testAndAddAvailableMoves(Point i_Square)
+        private void testAndAddAvailableMoves(OtheloPoint i_Square)
         {
             if (isEmptySquare(i_Square))
             {
-                List<Point> toFlip = new List<Point>();
+                List<OtheloPoint> toFlip = new List<OtheloPoint>();
                 toFlip.AddRange(getDiscsToFlipInSpecifiedDirection(i_Square, getDirectionDeltaPoint(eDirection.Down)));
                 toFlip.AddRange(getDiscsToFlipInSpecifiedDirection(i_Square, getDirectionDeltaPoint(eDirection.DownLeft)));
                 toFlip.AddRange(getDiscsToFlipInSpecifiedDirection(i_Square, getDirectionDeltaPoint(eDirection.DownRight)));
@@ -91,9 +91,9 @@ namespace Ex02_Othelo
             }
         }
 
-        private List<Point> getDiscsToFlipInSpecifiedDirection(Point i_Square, Point i_DirectionDelta)
+        private List<OtheloPoint> getDiscsToFlipInSpecifiedDirection(OtheloPoint i_Square, OtheloPoint i_DirectionDelta)
         {
-            List<Point> toFlip = new List<Point>();
+            List<OtheloPoint> toFlip = new List<OtheloPoint>();
 
             do
             {
@@ -138,7 +138,7 @@ namespace Ex02_Othelo
             updateAvailableMoves();
         }
 
-        public void UpdateBoard(Point i_Square)
+        public void UpdateBoard(OtheloPoint i_Square)
         {
             m_Board[i_Square.X, i_Square.Y] = m_Turn.Color;
             if (OnFlip != null)
@@ -147,7 +147,7 @@ namespace Ex02_Othelo
             }
 
             m_Turn.DiscsCounter++;
-            foreach (Point toFlip in m_RequiredFlips[i_Square])
+            foreach (OtheloPoint toFlip in m_RequiredFlips[i_Square])
             {
                 m_Board[toFlip.X, toFlip.Y] = m_Turn.Color;
                 if (OnFlip != null)
@@ -166,23 +166,23 @@ namespace Ex02_Othelo
             updateAvailableMoves();
         }
 
-        public bool IsValidMove(Point i_Move)
+        public bool IsValidMove(OtheloPoint i_Move)
         {
             return m_AvailableMoves.Contains(i_Move);
         }
 
-        public Point GetRandomMove()
+        public OtheloPoint GetRandomMove()
         {          
             return m_AvailableMoves[sr_Random.Next(m_AvailableMoves.Count)];
         }
 
         #region Private Boolean Tests
-        private bool isEmptySquare(Point i_Square)
+        private bool isEmptySquare(OtheloPoint i_Square)
         {
             return m_Board[i_Square.X, i_Square.Y] == eDiscColor.None;
         }
 
-        private bool isOutOfBounds(Point i_Square)
+        private bool isOutOfBounds(OtheloPoint i_Square)
         {
             return i_Square.X < 0 || m_Board.GetLength(0) <= i_Square.X ||
                    i_Square.Y < 0 || m_Board.GetLength(1) <= i_Square.Y;
@@ -194,36 +194,36 @@ namespace Ex02_Othelo
         }
         #endregion
 
-        private Point getDirectionDeltaPoint(eDirection i_Direction)
+        private OtheloPoint getDirectionDeltaPoint(eDirection i_Direction)
         {
             const int k_Up = -1, k_Left = -1, k_Down = 1, k_Right = 1, k_Stay = 0;
-            Point desiredDeltaPoint = new Point();
+            OtheloPoint desiredDeltaPoint = new OtheloPoint();
 
             switch (i_Direction)
             {
                 case eDirection.Down:
-                    desiredDeltaPoint = new Point(k_Stay, k_Down);
+                    desiredDeltaPoint = new OtheloPoint(k_Stay, k_Down);
                     break;
                 case eDirection.DownLeft:
-                    desiredDeltaPoint = new Point(k_Left, k_Down);
+                    desiredDeltaPoint = new OtheloPoint(k_Left, k_Down);
                     break;
                 case eDirection.DownRight:
-                    desiredDeltaPoint = new Point(k_Right, k_Down);
+                    desiredDeltaPoint = new OtheloPoint(k_Right, k_Down);
                     break;
                 case eDirection.Left:
-                    desiredDeltaPoint = new Point(k_Left, k_Stay);
+                    desiredDeltaPoint = new OtheloPoint(k_Left, k_Stay);
                     break;
                 case eDirection.Right:
-                    desiredDeltaPoint = new Point(k_Right, k_Stay);
+                    desiredDeltaPoint = new OtheloPoint(k_Right, k_Stay);
                     break;
                 case eDirection.Up:
-                    desiredDeltaPoint = new Point(k_Stay, k_Up);
+                    desiredDeltaPoint = new OtheloPoint(k_Stay, k_Up);
                     break;
                 case eDirection.UpLeft:
-                    desiredDeltaPoint = new Point(k_Left, k_Up);
+                    desiredDeltaPoint = new OtheloPoint(k_Left, k_Up);
                     break;
                 case eDirection.UpRight:
-                    desiredDeltaPoint = new Point(k_Right, k_Up);
+                    desiredDeltaPoint = new OtheloPoint(k_Right, k_Up);
                     break;
             }
 

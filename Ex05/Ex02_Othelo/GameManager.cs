@@ -87,7 +87,7 @@ namespace Ex02_Othelo
 
             if (hasMoves)
             {
-                Point move = getValidPlayerMove(i_Player);
+                OtheloPoint move = getValidPlayerMove(i_Player);
                 if (!m_Quit)
                 {
                     m_GameService.UpdateBoard(move);
@@ -102,9 +102,9 @@ namespace Ex02_Othelo
             return hasMoves;
         }
 
-        private Point getValidPlayerMove(Player i_Player)
+        private OtheloPoint getValidPlayerMove(Player i_Player)
         {
-            Point move;
+            OtheloPoint move;
             if (i_Player.IsComputer)
             {
                 move = m_GameService.GetRandomMove();
@@ -193,7 +193,7 @@ namespace Ex02_Othelo
         #endregion
 
         #region Read Input From User Functions
-        private Point readPlayerMoveOrQuit()
+        private OtheloPoint readPlayerMoveOrQuit()
         {
             Regex moveOrQuitRegexPattern = new Regex("^((?<Column>[A-Za-z]{1})(?<Row>[1-9]{1})|(?<Quit>Q|q))$");
             Match match = moveOrQuitRegexPattern.Match(Console.ReadLine());
@@ -204,12 +204,12 @@ namespace Ex02_Othelo
                 match = moveOrQuitRegexPattern.Match(Console.ReadLine());
             }
 
-            Point move = new Point(-1, -1);
+            OtheloPoint move = new OtheloPoint(-1, -1);
 
             m_Quit = match.Groups["Quit"].Success;
             if (!m_Quit)
             {
-                move = new Point(int.Parse(match.Groups["Row"].Value) - 1, match.Groups["Column"].Value.ToUpper()[0] - 'A');
+                move = new OtheloPoint(int.Parse(match.Groups["Row"].Value) - 1, match.Groups["Column"].Value.ToUpper()[0] - 'A');
             }
 
             return move;

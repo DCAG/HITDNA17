@@ -32,6 +32,8 @@ namespace Ex05
                     m_Grid[i, j].BorderStyle = BorderStyle.FixedSingle;
                     m_Grid[i, j].Image = r_CoinRed;
                     m_Grid[i, j].SizeMode = PictureBoxSizeMode.StretchImage;
+                    m_Grid[i, j].Click += GameBoard_Click;
+                    m_Grid[i, j].Name = string.Format("{0},{1}", i, j);
                     Controls.Add(m_Grid[i, j]);
                 }
             }
@@ -39,6 +41,11 @@ namespace Ex05
             ClientSize = new Size(m_Grid.GetLength(0) * k_SquareSize + 3 * 2, m_Grid.GetLength(1) * k_SquareSize + 3 * 2);
             m_GameService = i_GameService;
             m_GameService.OnFlip += Coin_Flipped;
+        }
+
+        private void GameBoard_Click(object sender, EventArgs e)
+        {
+            (sender as PictureBox).Name.Split(',');
         }
 
         private void Coin_Flipped(int i_X, int i_Y, eDiscColor i_DiscColor)
