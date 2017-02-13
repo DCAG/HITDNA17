@@ -45,7 +45,32 @@ namespace Ex05
 
         private void GameBoard_Click(object sender, EventArgs e)
         {
-            (sender as PictureBox).Name.Split(',');
+            string[] xAndy = (sender as PictureBox).Name.Split(',');
+            int x = int.Parse(xAndy[0]);
+            int y = int.Parse(xAndy[1]);
+            OtheloPoint move = new OtheloPoint(x, y);
+            if (m_GameService.IsValidMove(move))
+            {
+                m_GameService.UpdateBoard(move);
+                m_GameService.SwitchTurns();
+                if(!m_GameService.HasMoves())
+                {
+                    m_GameService.SwitchTurns();
+                    if (!m_GameService.HasMoves())
+                    {
+                        throw new Exception("No more moves");
+                    }
+                    else if (m_GameService.ThisTurn.IsComputer)
+                    {
+                        move = m_GameService.GetRandomMove();
+                        if (m_GameService.IsValidMove(move))
+                        {
+                            m_GameService.UpdateBoard(move);
+                            m_GameService.SwitchTurns();
+                        }
+                    }
+                }
+            }
         }
 
         private void Coin_Flipped(int i_X, int i_Y, eDiscColor i_DiscColor)

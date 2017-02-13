@@ -52,7 +52,7 @@ namespace Ex02_Othelo
 
             m_AvailableMoves = new List<OtheloPoint>();
             m_RequiredFlips  = new Dictionary<OtheloPoint, List<OtheloPoint>>();
-            m_FirstPlayer = new Player ( i_DiscColor: eDiscColor.Black );          
+            m_FirstPlayer = new Player( i_DiscColor: eDiscColor.Black );          
             m_SecondPlayer = new Player();
         }
 
