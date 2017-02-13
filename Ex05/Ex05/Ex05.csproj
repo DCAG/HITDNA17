@@ -81,6 +81,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\CoinPurple.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="images\CoinRed.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

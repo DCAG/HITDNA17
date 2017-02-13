@@ -30,12 +30,16 @@
         {
             this.SuspendLayout();
             // 
-            // Form1
+            // GameBoard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(612, 469);
-            this.Name = "Form1";
+            this.ClientSize = new System.Drawing.Size(334, 254);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "GameBoard";
             this.Text = "Form1";
             this.ResumeLayout(false);
 

@@ -7,7 +7,7 @@ namespace Ex02_Othelo
     public enum eDiscColor
     {
         None = -1,
-        Black = 0,
-        White = 1,
+        FirstColor = 0,
+        SecondColor = 1,
     }
 }

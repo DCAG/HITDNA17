@@ -42,7 +42,7 @@
             this.ButtonBoardSize.TabIndex = 0;
             this.ButtonBoardSize.Text = "Board Size: {0}x{0} (click to increase)";
             this.ButtonBoardSize.UseVisualStyleBackColor = true;
-            this.ButtonBoardSize.Click += new System.EventHandler(this.ButtonBoardSize_Click);
+            this.ButtonBoardSize.Click += new System.EventHandler(this.buttonBoardSize_Click);
             // 
             // buttonVsPlayer
             // 

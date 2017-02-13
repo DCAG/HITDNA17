@@ -15,37 +15,48 @@ namespace Ex05
         const int k_MaxBoardSize = 12;
         const int k_BoardSizeIncreaseDelta = 2;
 
-        int m_BoardSize = k_MinBoardSize;
-        readonly string r_ButtonBoardSizeText = "Board Size: {0}x{0} (click to increase)";
-        bool m_PlayerVsComputer = false;
-        private GameService gameService;
+        private int m_BoardSize = k_MinBoardSize;
+        private readonly string r_ButtonBoardSizeText = "Board Size: {0}x{0} (click to increase)";
+        private bool m_PlayerVsComputer = false;
+
+        public int BoardSize
+        {
+            get
+            {
+                return m_BoardSize;
+            }
+        }
+
+        public bool IsComputerOpponent
+        {
+            get
+            {
+                return m_PlayerVsComputer;
+            }
+        }
 
         public GameSettingsForm()
         {
             InitializeComponent();
-            this.MinimizeBox = false;
-            this.MaximizeBox = false;
+            MinimizeBox = false;
+            MaximizeBox = false;
             ButtonBoardSize.Text = string.Format(r_ButtonBoardSizeText, k_MinBoardSize);
-        }
-
-        public GameSettingsForm(GameService i_GameService)
-        {
-            gameService = i_GameService;
         }
 
         private void buttonVsPlayer_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void buttonVsComputer_Click(object sender, EventArgs e)
         {
             m_PlayerVsComputer = true;
             DialogResult = DialogResult.OK;
-            gameService.
+            Close();
         }
 
-        private void ButtonBoardSize_Click(object sender, EventArgs e)
+        private void buttonBoardSize_Click(object sender, EventArgs e)
         {
             m_BoardSize += k_BoardSizeIncreaseDelta;
             if (m_BoardSize > k_MaxBoardSize)

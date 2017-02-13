@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{975AFC86-3A54-4A7C-8F73-D486138EF4C4}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ex02_Othelo</RootNamespace>
     <AssemblyName>Ex02_Othelo</AssemblyName>
@@ -31,11 +31,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="eDirection.cs" />
     <Compile Include="eDiscColor.cs" />
     <Compile Include="GameService.cs" />
-    <Compile Include="GameManager.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="OtheloPoint.cs" />
   </ItemGroup>

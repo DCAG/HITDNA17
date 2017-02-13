@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ex02_Othelo;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -14,7 +15,12 @@ namespace Ex05
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            (new GameManager()).StartGame();
+            GameSettingsForm gameSettingsForm = new GameSettingsForm();
+            if (gameSettingsForm.ShowDialog() == DialogResult.OK)
+            {
+                GameService gameService = new GameService(gameSettingsForm.BoardSize, "Red", "Yellow", gameSettingsForm.IsComputerOpponent);
+                (new GameBoard(gameService)).ShowDialog();
+            }
         }
     }
 }

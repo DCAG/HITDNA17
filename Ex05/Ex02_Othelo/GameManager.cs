@@ -16,7 +16,7 @@ namespace Ex02_Othelo
             const char k_EmptySymbol = ' ';
             const char k_WhiteSymbol = 'o';
 
-            return i_DiscColor == eDiscColor.None ? k_EmptySymbol : i_DiscColor == eDiscColor.White ? k_WhiteSymbol : k_BlackSymbol;
+            return i_DiscColor == eDiscColor.None ? k_EmptySymbol : i_DiscColor == eDiscColor.SecondColor ? k_WhiteSymbol : k_BlackSymbol;
         }
 
         public GameManager()
@@ -24,15 +24,15 @@ namespace Ex02_Othelo
             const bool v_ComputerPlayer = true;
             const string k_ComputerPlayerName = "Computer";
 
-            m_FirstPlayer = new Player(readPlayerName(), eDiscColor.White, !v_ComputerPlayer);
+            m_FirstPlayer = new Player(readPlayerName(), eDiscColor.SecondColor, !v_ComputerPlayer);
 
             if (askYesNoQuestion("Is your opponent human? (Enter 'n' to play against the computer)"))
             {
-                m_Opponent = new Player(readPlayerName(), eDiscColor.Black, !v_ComputerPlayer);
+                m_Opponent = new Player(readPlayerName(), eDiscColor.FirstColor, !v_ComputerPlayer);
             }
             else
             {
-                m_Opponent = new Player(k_ComputerPlayerName, eDiscColor.Black, v_ComputerPlayer);
+                m_Opponent = new Player(k_ComputerPlayerName, eDiscColor.FirstColor, v_ComputerPlayer);
             }
 
             m_GameService = new GameService(readBoardSize());
