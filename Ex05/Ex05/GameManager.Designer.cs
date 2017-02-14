@@ -1,6 +1,6 @@
 ﻿namespace Ex05
 {
-    partial class GameBoard
+    internal partial class GameManager
     {
         /// <summary>
         /// Required designer variable.
@@ -17,6 +17,7 @@
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
@@ -30,17 +31,17 @@
         {
             this.SuspendLayout();
             // 
-            // GameBoard
+            // GameManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 254);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "GameBoard";
-            this.Text = "Form1";
+            this.Name = "GameManager";
+            this.Text = "Othello Game Manager";
             this.ResumeLayout(false);
 
         }
@@ -48,4 +49,3 @@
         #endregion
     }
 }
-

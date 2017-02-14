@@ -3,10 +3,13 @@ using System.Collections.Generic;
 
 namespace Ex02_Othelo
 {
-    public delegate void FlipACoinDelegate(int i_X, int i_Y, eDiscColor i_DiscColor);
+    public delegate void TurnOverACoinDelegate(int i_X, int i_Y, eDiscColor i_DiscColor);
+
     public class GameService
     {
         private static readonly Random sr_Random = new Random();
+        private readonly List<OthelloPoint> r_AvailableMoves = new List<OthelloPoint>();
+        private readonly Dictionary<OthelloPoint, List<OthelloPoint>> r_RequiredFlips = new Dictionary<OthelloPoint, List<OthelloPoint>>();
         private eDiscColor[,] m_Board;
 
         public eDiscColor[,] Board
@@ -17,23 +20,19 @@ namespace Ex02_Othelo
             }
         }
 
-        public event FlipACoinDelegate OnFlip;
+        public event TurnOverACoinDelegate TurningOverACoin;
 
-        private readonly List<OthelloPoint> m_AvailableMoves = new List<OthelloPoint>();
-        private Dictionary<OthelloPoint, List<OthelloPoint>> m_RequiredFlips = new Dictionary<OthelloPoint, List<OthelloPoint>>();
+        private Player m_ThisTurn;
 
-        private Player m_FirstPlayer;
-        private Player m_SecondPlayer;
-        private Player m_Turn; // = m_WhitePlayer;
-        private int m_NumberOfPlayedRounds;
-        private bool m_GameStarted = false;
         public IPlayer ThisTurn
         {
             get
             {
-                return m_Turn;
+                return m_ThisTurn;
             }
         }
+
+        private Player m_FirstPlayer;
 
         public IPlayer FirstPlayer
         {
@@ -43,6 +42,8 @@ namespace Ex02_Othelo
             }
         }
 
+        private Player m_SecondPlayer;
+
         public IPlayer SecondPlayer
         {
             get
@@ -51,21 +52,7 @@ namespace Ex02_Othelo
             }
         }
 
-        private bool m_ComputerOpponent = false;
-        public bool ComputerOpponent
-        {
-            get
-            {
-                return m_ComputerOpponent;
-            }
-            set
-            {
-                if(!m_GameStarted)
-                {
-                    m_ComputerOpponent = value;
-                }
-            }
-        }
+        private int m_NumberOfPlayedRounds;
 
         public int NumberOfPlayedRounds
         {
@@ -83,8 +70,8 @@ namespace Ex02_Othelo
         public GameService(int i_BoardSize, string i_FirstPlayerName, string i_SecondPlayerName, bool i_IsComputerOpponent)
         {
             const bool v_FirstPlayerIsComputer = false;
-            m_AvailableMoves = new List<OthelloPoint>();
-            m_RequiredFlips = new Dictionary<OthelloPoint, List<OthelloPoint>>();
+            r_AvailableMoves = new List<OthelloPoint>();
+            r_RequiredFlips = new Dictionary<OthelloPoint, List<OthelloPoint>>();
 
             if ((i_BoardSize > 2) && (i_BoardSize % 2 == 0))
             {
@@ -102,8 +89,8 @@ namespace Ex02_Othelo
 
         private void updateAvailableMoves()
         {
-            m_AvailableMoves.Clear();
-            m_RequiredFlips.Clear();
+            r_AvailableMoves.Clear();
+            r_RequiredFlips.Clear();
             for (int i = 0; i < m_Board.GetLength(0); i++)
             {
                 for (int j = 0; j < m_Board.GetLength(1); j++)
@@ -129,8 +116,8 @@ namespace Ex02_Othelo
 
                 if (toFlip.Count > 0)
                 {
-                    m_AvailableMoves.Add(i_Square);
-                    m_RequiredFlips[i_Square] = toFlip;
+                    r_AvailableMoves.Add(i_Square);
+                    r_RequiredFlips[i_Square] = toFlip;
                 }
             }
         }
@@ -142,18 +129,17 @@ namespace Ex02_Othelo
             do
             {
                 i_Square.Add(i_DirectionDelta);
-
                 if (isOutOfBounds(i_Square) || isEmptySquare(i_Square))
                 {
                     toFlip.Clear();
                     break;
                 }
-                else if(m_Board[i_Square.X, i_Square.Y] == getOpponent(m_Turn).Color)
+                else if(m_Board[i_Square.X, i_Square.Y] == getOpponent(m_ThisTurn).Color)
                 {
                     toFlip.Add(i_Square);
                 }
             }
-            while (m_Board[i_Square.X, i_Square.Y] != m_Turn.Color);
+            while (m_Board[i_Square.X, i_Square.Y] != m_ThisTurn.Color);
 
             return toFlip;
         }
@@ -164,21 +150,18 @@ namespace Ex02_Othelo
             {
                 for (int j = 0; j < m_Board.GetLength(1); j++)
                 {
-                    //m_Board[i, j] = eDiscColor.None;
-                    invokeOnFlip(i, j, eDiscColor.None);
+                    OnTurningOverACoin(i, j, eDiscColor.None);
                 }
             }
 
             int boardCenterPosition = m_Board.GetLength(0) / 2;
-
-            invokeOnFlip(boardCenterPosition, boardCenterPosition, eDiscColor.SecondColor); // Board Center Position
-            invokeOnFlip(boardCenterPosition - 1, boardCenterPosition, eDiscColor.FirstColor); // Left to Board Center Position
-            invokeOnFlip(boardCenterPosition - 1, boardCenterPosition - 1, eDiscColor.SecondColor); // Up-left to Board Center Position
-            invokeOnFlip(boardCenterPosition, boardCenterPosition - 1, eDiscColor.FirstColor); // Up to Board Center Position
-
+            OnTurningOverACoin(boardCenterPosition, boardCenterPosition, eDiscColor.SecondColor); // Board Center Position
+            OnTurningOverACoin(boardCenterPosition - 1, boardCenterPosition, eDiscColor.FirstColor); // Left to Board Center Position
+            OnTurningOverACoin(boardCenterPosition - 1, boardCenterPosition - 1, eDiscColor.SecondColor); // Up-left to Board Center Position
+            OnTurningOverACoin(boardCenterPosition, boardCenterPosition - 1, eDiscColor.FirstColor); // Up to Board Center Position
             m_FirstPlayer.DiscsCounter = 2;
             m_SecondPlayer.DiscsCounter = 2;
-            m_Turn = m_FirstPlayer;
+            m_ThisTurn = m_FirstPlayer;
             updateAvailableMoves();
         }
 
@@ -200,12 +183,12 @@ namespace Ex02_Othelo
             return result;
         }
 
-        private void invokeOnFlip(int i_X, int i_Y, eDiscColor i_DiscColor)
+        private void OnTurningOverACoin(int i_X, int i_Y, eDiscColor i_DiscColor)
         {
             m_Board[i_X, i_Y] = i_DiscColor;
-            if (OnFlip != null)
+            if (TurningOverACoin != null)
             {
-                OnFlip.Invoke(i_X, i_Y, i_DiscColor);
+                TurningOverACoin.Invoke(i_X, i_Y, i_DiscColor);
             }
         }
 
@@ -216,27 +199,26 @@ namespace Ex02_Othelo
 
         public void UpdateBoard(OthelloPoint i_Square)
         {
-            invokeOnFlip(i_Square.X, i_Square.Y, m_Turn.Color);
-
-            m_Turn.DiscsCounter++;
-            foreach (OthelloPoint toFlip in m_RequiredFlips[i_Square])
+            OnTurningOverACoin(i_Square.X, i_Square.Y, m_ThisTurn.Color);
+            m_ThisTurn.DiscsCounter++;
+            foreach (OthelloPoint toFlip in r_RequiredFlips[i_Square])
             {
-                invokeOnFlip(toFlip.X, toFlip.Y, m_Turn.Color);
+                OnTurningOverACoin(toFlip.X, toFlip.Y, m_ThisTurn.Color);
 
-                m_Turn.DiscsCounter++;
-                getOpponent(m_Turn).DiscsCounter--;
+                m_ThisTurn.DiscsCounter++;
+                getOpponent(m_ThisTurn).DiscsCounter--;
             }
         }
 
         public void SwitchTurns()
         {
-            m_Turn = getOpponent(m_Turn);
+            m_ThisTurn = getOpponent(m_ThisTurn);
             updateAvailableMoves();
         }
 
         public bool IsValidMove(OthelloPoint i_Move)
         {
-            return m_AvailableMoves.Contains(i_Move);
+            return r_AvailableMoves.Contains(i_Move);
         }
 
         public bool IsValidMove(int i_X, int i_Y)
@@ -246,7 +228,7 @@ namespace Ex02_Othelo
 
         public OthelloPoint GetRandomMove()
         {          
-            return m_AvailableMoves[sr_Random.Next(m_AvailableMoves.Count)];
+            return r_AvailableMoves[sr_Random.Next(r_AvailableMoves.Count)];
         }
 
         #region Private Boolean Tests
@@ -263,7 +245,7 @@ namespace Ex02_Othelo
 
         public bool HasMoves()
         {
-            return m_AvailableMoves.Count > 0;
+            return r_AvailableMoves.Count > 0;
         }
         #endregion
 
@@ -271,7 +253,6 @@ namespace Ex02_Othelo
         {
             const int k_Up = -1, k_Left = -1, k_Down = 1, k_Right = 1, k_Stay = 0;
             OthelloPoint desiredDeltaPoint = new OthelloPoint();
-
             switch (i_Direction)
             {
                 case eDirection.Down:

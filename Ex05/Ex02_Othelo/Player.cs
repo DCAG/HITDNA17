@@ -38,6 +38,7 @@
             {
                 return m_DiscsCounter;
             }
+
             set
             {
                 m_DiscsCounter = value;
@@ -50,6 +51,7 @@
             {
                 return m_RoundsWon;
             }
+
             set
             {
                 m_RoundsWon = value;

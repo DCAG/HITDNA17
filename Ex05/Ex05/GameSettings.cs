@@ -9,14 +9,14 @@ using Ex02_Othelo;
 
 namespace Ex05
 {
-    public partial class GameSettingsForm : Form
+    internal partial class GameSettings : Form
     {
-        const int k_MinBoardSize = 6;
-        const int k_MaxBoardSize = 12;
-        const int k_BoardSizeIncreaseDelta = 2;
+        private const int k_MinBoardSize = 6;
+        private const int k_MaxBoardSize = 12;
+        private const int k_BoardSizeIncreaseDelta = 2;
+        private readonly string r_ButtonBoardSizeText = "Board Size: {0}x{0} (click to increase)";
 
         private int m_BoardSize = k_MinBoardSize;
-        private readonly string r_ButtonBoardSizeText = "Board Size: {0}x{0} (click to increase)";
         private bool m_PlayerVsComputer = false;
 
         public int BoardSize
@@ -35,12 +35,12 @@ namespace Ex05
             }
         }
 
-        public GameSettingsForm()
+        public GameSettings()
         {
             InitializeComponent();
             MinimizeBox = false;
             MaximizeBox = false;
-            ButtonBoardSize.Text = string.Format(r_ButtonBoardSizeText, k_MinBoardSize);
+            buttonBoardSize.Text = string.Format(r_ButtonBoardSizeText, k_MinBoardSize);
         }
 
         private void buttonVsPlayer_Click(object sender, EventArgs e)
@@ -63,8 +63,12 @@ namespace Ex05
             {
                 m_BoardSize -= k_BoardSizeIncreaseDelta;
             }
+            else
+            {
+                m_BoardSize = k_MinBoardSize;
+            }
 
-            ButtonBoardSize.Text = string.Format(r_ButtonBoardSizeText, m_BoardSize);
+            buttonBoardSize.Text = string.Format(r_ButtonBoardSizeText, m_BoardSize);
         }
     }
 }

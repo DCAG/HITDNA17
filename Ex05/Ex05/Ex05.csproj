@@ -40,26 +40,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameBoard.cs">
+    <Compile Include="GameManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GameBoard.Designer.cs">
-      <DependentUpon>GameBoard.cs</DependentUpon>
+    <Compile Include="GameManager.Designer.cs">
+      <DependentUpon>GameManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="GameManager.cs" />
-    <Compile Include="GameSettingsForm.cs">
+    <Compile Include="GameSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GameSettingsForm.Designer.cs">
-      <DependentUpon>GameSettingsForm.cs</DependentUpon>
+    <Compile Include="GameSettings.Designer.cs">
+      <DependentUpon>GameSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="GameBoard.resx">
-      <DependentUpon>GameBoard.cs</DependentUpon>
+    <EmbeddedResource Include="GameManager.resx">
+      <DependentUpon>GameManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GameSettingsForm.resx">
-      <DependentUpon>GameSettingsForm.cs</DependentUpon>
+    <EmbeddedResource Include="GameSettings.resx">
+      <DependentUpon>GameSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

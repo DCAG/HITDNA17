@@ -1,6 +1,6 @@
 ﻿namespace Ex05
 {
-    partial class GameSettingsForm
+    internal partial class GameSettings
     {
         /// <summary>
         /// Required designer variable.
@@ -17,6 +17,7 @@
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
@@ -28,26 +29,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ButtonBoardSize = new System.Windows.Forms.Button();
+            this.buttonBoardSize = new System.Windows.Forms.Button();
             this.buttonVsPlayer = new System.Windows.Forms.Button();
             this.buttonVsComputer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // ButtonBoardSize
+            // buttonBoardSize
             // 
-            this.ButtonBoardSize.Location = new System.Drawing.Point(7, 7);
-            this.ButtonBoardSize.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.ButtonBoardSize.Name = "ButtonBoardSize";
-            this.ButtonBoardSize.Size = new System.Drawing.Size(275, 51);
-            this.ButtonBoardSize.TabIndex = 0;
-            this.ButtonBoardSize.Text = "Board Size: {0}x{0} (click to increase)";
-            this.ButtonBoardSize.UseVisualStyleBackColor = true;
-            this.ButtonBoardSize.Click += new System.EventHandler(this.buttonBoardSize_Click);
+            this.buttonBoardSize.Location = new System.Drawing.Point(7, 7);
+            this.buttonBoardSize.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonBoardSize.Name = "buttonBoardSize";
+            this.buttonBoardSize.Size = new System.Drawing.Size(275, 51);
+            this.buttonBoardSize.TabIndex = 0;
+            this.buttonBoardSize.Text = "Board Size: {0}x{0} (click to increase)";
+            this.buttonBoardSize.UseVisualStyleBackColor = true;
+            this.buttonBoardSize.Click += new System.EventHandler(this.buttonBoardSize_Click);
             // 
             // buttonVsPlayer
             // 
             this.buttonVsPlayer.Location = new System.Drawing.Point(152, 70);
-            this.buttonVsPlayer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonVsPlayer.Margin = new System.Windows.Forms.Padding(2);
             this.buttonVsPlayer.Name = "buttonVsPlayer";
             this.buttonVsPlayer.Size = new System.Drawing.Size(130, 51);
             this.buttonVsPlayer.TabIndex = 1;
@@ -58,7 +59,7 @@
             // buttonVsComputer
             // 
             this.buttonVsComputer.Location = new System.Drawing.Point(7, 70);
-            this.buttonVsComputer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonVsComputer.Margin = new System.Windows.Forms.Padding(2);
             this.buttonVsComputer.Name = "buttonVsComputer";
             this.buttonVsComputer.Size = new System.Drawing.Size(130, 51);
             this.buttonVsComputer.TabIndex = 2;
@@ -66,17 +67,17 @@
             this.buttonVsComputer.UseVisualStyleBackColor = true;
             this.buttonVsComputer.Click += new System.EventHandler(this.buttonVsComputer_Click);
             // 
-            // GameSettingsForm
+            // GameSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(289, 131);
             this.Controls.Add(this.buttonVsComputer);
             this.Controls.Add(this.buttonVsPlayer);
-            this.Controls.Add(this.ButtonBoardSize);
+            this.Controls.Add(this.buttonBoardSize);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Name = "GameSettingsForm";
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Name = "GameSettings";
             this.Text = "Othello - Game Settings";
             this.ResumeLayout(false);
 
@@ -84,7 +85,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button ButtonBoardSize;
+        private System.Windows.Forms.Button buttonBoardSize;
         private System.Windows.Forms.Button buttonVsComputer;
         private System.Windows.Forms.Button buttonVsPlayer;
     }
