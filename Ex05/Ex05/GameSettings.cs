@@ -61,10 +61,6 @@ namespace Ex05
             m_BoardSize += k_BoardSizeIncreaseDelta;
             if (m_BoardSize > k_MaxBoardSize)
             {
-                m_BoardSize -= k_BoardSizeIncreaseDelta;
-            }
-            else
-            {
                 m_BoardSize = k_MinBoardSize;
             }
 

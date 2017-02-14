@@ -5,6 +5,8 @@ namespace Ex02_Othelo
 {
     public delegate void TurnOverACoinDelegate(int i_X, int i_Y, eDiscColor i_DiscColor);
 
+    public delegate void UpdateAvailableMovesDelegate(int i_X, int i_Y);
+
     public class GameService
     {
         private static readonly Random sr_Random = new Random();
@@ -21,6 +23,8 @@ namespace Ex02_Othelo
         }
 
         public event TurnOverACoinDelegate TurningOverACoin;
+
+        public event UpdateAvailableMovesDelegate UpdatedPlayerAvailableMoves;
 
         private Player m_ThisTurn;
 
@@ -117,6 +121,7 @@ namespace Ex02_Othelo
                 if (toFlip.Count > 0)
                 {
                     r_AvailableMoves.Add(i_Square);
+                    OnUpdatedPlayerAvailableMove(i_Square.X, i_Square.Y);
                     r_RequiredFlips[i_Square] = toFlip;
                 }
             }
@@ -189,6 +194,14 @@ namespace Ex02_Othelo
             if (TurningOverACoin != null)
             {
                 TurningOverACoin.Invoke(i_X, i_Y, i_DiscColor);
+            }
+        }
+        
+        private void OnUpdatedPlayerAvailableMove(int i_X, int i_Y)
+        {
+            if (UpdatedPlayerAvailableMoves != null)
+            {
+                UpdatedPlayerAvailableMoves.Invoke(i_X, i_Y);
             }
         }
 

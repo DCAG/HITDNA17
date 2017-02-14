@@ -13,6 +13,8 @@ namespace Ex05
     {
         private const int k_SquareSize = 50;
         private const int k_BoardBorderSize = 3;
+        private readonly Color r_AvailableMoveColor;
+        private readonly Color r_DefaultSquareColor;
         private readonly Image r_CoinRed;
         private readonly Image r_CoinYellow;
         private readonly Image r_CoinPurple;
@@ -21,6 +23,8 @@ namespace Ex05
 
         public GameManager(GameService i_GameService)
         {
+            r_AvailableMoveColor = Color.LightGreen;
+            r_DefaultSquareColor = Color.DarkGray;
             r_CoinRed = Image.FromFile(@"images\CoinRed.png");
             r_CoinYellow = Image.FromFile(@"images\CoinYellow.png");
             r_CoinPurple = Image.FromFile(@"images\CoinPurple.png");
@@ -31,6 +35,7 @@ namespace Ex05
             ClientSize = new Size((m_Board.GetLength(0) * k_SquareSize) + (k_BoardBorderSize * 2), (m_Board.GetLength(1) * k_SquareSize) + (k_BoardBorderSize * 2));
 
             m_GameService.TurningOverACoin += m_GameService_TurningOverACoin;
+            m_GameService.UpdatedPlayerAvailableMoves += m_GameService_UpdatedPlayerAvailableMoves;
             startNewRound();
         }
 
@@ -62,13 +67,14 @@ namespace Ex05
                     m_Board[i, j] = new PictureBox();
                     m_Board[i, j].Location = new Point(Location.X + k_BoardBorderSize + (i * k_SquareSize), Location.Y + k_BoardBorderSize + (j * k_SquareSize));
                     m_Board[i, j].Size = new Size(k_SquareSize, k_SquareSize);
-                    m_Board[i, j].BackColor = (i + j) % 2 == 0 ? Color.MediumSeaGreen : Color.SeaGreen;
+                    m_Board[i, j].BackColor = r_DefaultSquareColor;
                     m_Board[i, j].BorderStyle = BorderStyle.FixedSingle;
                     m_Board[i, j].SizeMode = PictureBoxSizeMode.StretchImage;
                     m_Board[i, j].Click += m_BoardSquare_Click;
                     m_Board[i, j].MouseEnter += m_BoardSquare_MouseEnter;
                     m_Board[i, j].MouseLeave += m_BoardSquare_MouseLeave;
                     m_Board[i, j].Name = string.Format("{0},{1}", i, j);
+                    m_Board[i, j].Enabled = false;
                     Controls.Add(m_Board[i, j]);
                 }
             }
@@ -95,7 +101,7 @@ namespace Ex05
         {
             PictureBox currentSquare = sender as PictureBox;
             OthelloPoint move = getSquareLocation(currentSquare);
-            if (currentSquare.Image == null && m_GameService.IsValidMove(move))
+            if (currentSquare.BackColor == r_AvailableMoveColor)
             {
                 m_Board[move.X, move.Y].Image = r_CoinPurple;
             }
@@ -149,8 +155,17 @@ namespace Ex05
         {
             if (m_GameService.IsValidMove(move))
             {
+                resetBoardBackColors();
                 m_GameService.UpdateBoard(move);
                 SwitchTurns();
+            }
+        }
+
+        private void resetBoardBackColors()
+        {
+            foreach (PictureBox square in m_Board)
+            {
+                square.BackColor = r_DefaultSquareColor;
             }
         }
 
@@ -177,6 +192,12 @@ namespace Ex05
             }
 
             return coinImage;
+        }
+
+        private void m_GameService_UpdatedPlayerAvailableMoves(int i_X, int i_Y)
+        {
+            m_Board[i_X, i_Y].BackColor = r_AvailableMoveColor;
+            m_Board[i_X, i_Y].Enabled = true;
         }
 
         private void m_GameService_TurningOverACoin(int i_X, int i_Y, eDiscColor i_DiscColor)
