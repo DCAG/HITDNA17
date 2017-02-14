@@ -1,6 +1,6 @@
 ﻿namespace Ex02_Othelo
 {
-    public class Player
+    internal class Player : IPlayer
     {
         private readonly bool r_IsComputer;
         private readonly eDiscColor r_DiscColor;

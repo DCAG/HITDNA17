@@ -27,7 +27,7 @@ namespace Ex02_Othelo
         private Player m_Turn; // = m_WhitePlayer;
 
         private bool m_GameStarted = false;
-        public Player ThisTurn
+        public IPlayer ThisTurn
         {
             get
             {
@@ -35,7 +35,7 @@ namespace Ex02_Othelo
             }
         }
 
-        public Player Winner
+        public IPlayer Winner
         {
             get
             {
@@ -43,7 +43,7 @@ namespace Ex02_Othelo
             }
         }
 
-        public Player Loser
+        public IPlayer Loser
         {
             get
             {
@@ -67,7 +67,7 @@ namespace Ex02_Othelo
             }
         }
 
-        public Player GetOpponent(Player i_Player)
+        private Player getOpponent(Player i_Player)
         {
             return i_Player != m_FirstPlayer ? m_FirstPlayer : m_SecondPlayer;
         }
@@ -139,7 +139,7 @@ namespace Ex02_Othelo
                     toFlip.Clear();
                     break;
                 }
-                else if(m_Board[i_Square.X, i_Square.Y] == GetOpponent(m_Turn).Color)
+                else if(m_Board[i_Square.X, i_Square.Y] == getOpponent(m_Turn).Color)
                 {
                     toFlip.Add(i_Square);
                 }
@@ -197,13 +197,13 @@ namespace Ex02_Othelo
                 invokeOnFlip(toFlip.X, toFlip.Y, m_Turn.Color);
 
                 m_Turn.DiscsCounter++;
-                GetOpponent(ThisTurn).DiscsCounter--;
+                getOpponent(m_Turn).DiscsCounter--;
             }
         }
 
         public void SwitchTurns()
         {
-            m_Turn = GetOpponent(m_Turn);
+            m_Turn = getOpponent(m_Turn);
             updateAvailableMoves();
         }
 

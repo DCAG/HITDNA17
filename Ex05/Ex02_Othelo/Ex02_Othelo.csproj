@@ -38,6 +38,7 @@
     <Compile Include="eDirection.cs" />
     <Compile Include="eDiscColor.cs" />
     <Compile Include="GameService.cs" />
+    <Compile Include="IPlayer.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="OtheloPoint.cs" />
   </ItemGroup>

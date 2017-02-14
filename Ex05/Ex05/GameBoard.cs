@@ -165,8 +165,8 @@ namespace Ex05
         private void gameOver()
         {
             //Winners
-            Player winner = new Player("winner", eDiscColor.FirstColor, true);
-            Player loser = new Player("loser", eDiscColor.FirstColor, true);
+            IPlayer winner = m_GameService.Winner; // new Player("winner", eDiscColor.FirstColor, true);
+            IPlayer loser = m_GameService.Loser; //new Player("loser", eDiscColor.FirstColor, true);
             string resultsMessage = string.Format(@"{0} Won!! ({1}/{2}) ({3}/{4})
 Would you like another round?", winner.Name, winner.DiscsCounter, loser.DiscsCounter, winner.RoundsWon, loser.RoundsWon);
             //Tie
