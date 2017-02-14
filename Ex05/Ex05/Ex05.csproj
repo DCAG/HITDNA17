@@ -91,9 +91,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ex02_Othelo\Ex02_Othelo.csproj">
+    <ProjectReference Include="..\Ex02_Othelo\OthelloLogic.csproj">
       <Project>{975afc86-3a54-4a7c-8f73-d486138ef4c4}</Project>
-      <Name>Ex02_Othelo</Name>
+      <Name>OthelloLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

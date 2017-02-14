@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Ex02_Othelo
+namespace OthelloLogic
 {
     public delegate void TurnOverACoinDelegate(int i_X, int i_Y, eDiscColor i_DiscColor);
 

@@ -1,4 +1,4 @@
-﻿namespace Ex02_Othelo
+﻿namespace OthelloLogic
 {
     public enum eGameResult
     {

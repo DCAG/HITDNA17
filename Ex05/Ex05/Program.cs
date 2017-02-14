@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Ex02_Othelo;
+using OthelloLogic;
 
 namespace Ex05
 {

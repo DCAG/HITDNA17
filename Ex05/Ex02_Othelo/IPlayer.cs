@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ex02_Othelo
+namespace OthelloLogic
 {
     /// <summary>
     /// This is a Public interface that reveals all the properties of Player class for *readonly access* (get)
