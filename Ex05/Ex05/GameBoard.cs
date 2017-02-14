@@ -88,39 +88,45 @@ namespace Ex05
             }
         }
 
-        private void GameBoard_Click(object sender, EventArgs e) //-!-FIX THIS-!-//
+        private void GameBoard_Click(object sender, EventArgs e)
         {
             OthelloPoint move = getSquareLocation(sender as PictureBox);
-            playTurn(move);
+            playTurn(move); // To opponent
 
-            if (!m_GameService.HasMoves()) // Opponent
+            if (!m_GameService.HasMoves()) // Opponent (human/comp) has no moves
             {
-                SwitchTurns(); // back to this player
-                if (!m_GameService.HasMoves())
+                SwitchTurns(); // To this player
+                if (!m_GameService.HasMoves()) // This player has no moves either
                 {
                     gameOver();
                 }
             }
-            else if (m_GameService.ThisTurn.IsComputer) // Computer Opponent has moves
+            else if (m_GameService.ThisTurn.IsComputer) // Computer *has* moves
             {
-                do
+                playComputerTurn();
+            }
+        }
+
+        private void playComputerTurn()
+        {
+            bool isGameOver = false;
+            bool firstPlayerHasMoves = false;
+            OthelloPoint move;
+            do
+            {
+                move = m_GameService.GetRandomMove();
+                playTurn(move); // To this player
+                firstPlayerHasMoves = m_GameService.HasMoves();
+                if (!firstPlayerHasMoves) // This player no moves
                 {
-                    move = m_GameService.GetRandomMove();
-                    playTurn(move);
-                    if (!m_GameService.HasMoves()) // this player
-                    {
-                        SwitchTurns(); // back to Computer Opponent
-                        if (!m_GameService.HasMoves()) 
-                        {
-                            gameOver();
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        break; // this player has moves
-                    }
-                } while (m_GameService.HasMoves());
+                    SwitchTurns(); //To computer
+                    isGameOver = !m_GameService.HasMoves(); // Computer has no moves
+                }
+            } while (!firstPlayerHasMoves & !isGameOver);
+
+            if(isGameOver)
+            {
+                gameOver();
             }
         }
 
@@ -164,16 +170,7 @@ namespace Ex05
 
         private void gameOver()
         {
-            //Winners
-            IPlayer winner = m_GameService.Winner; // new Player("winner", eDiscColor.FirstColor, true);
-            IPlayer loser = m_GameService.Loser; //new Player("loser", eDiscColor.FirstColor, true);
-            string resultsMessage = string.Format(@"{0} Won!! ({1}/{2}) ({3}/{4})
-Would you like another round?", winner.Name, winner.DiscsCounter, loser.DiscsCounter, winner.RoundsWon, loser.RoundsWon);
-            //Tie
-            resultsMessage = string.Format(@"Its a tie! ({0}/{0}) ({1}/{2})
-Would you like another round?", winner.DiscsCounter, winner.RoundsWon, loser.RoundsWon);
-            //show message
-            if (DialogResult.Yes == MessageBox.Show(resultsMessage, "Othello", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
+            if (DialogResult.Yes == MessageBox.Show(generateResultsMessage(), "Othello", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
             {
                 startNewRound();
             }
@@ -181,6 +178,32 @@ Would you like another round?", winner.DiscsCounter, winner.RoundsWon, loser.Rou
             {
                 Close();
             }
+        }
+
+        private string generateResultsMessage()
+        {
+            IPlayer winner = m_GameService.FirstPlayer;
+            IPlayer loser = m_GameService.SecondPlayer;
+            string resultsMessage;
+            switch (m_GameService.GetGameResult())
+            {
+                case eGameResult.Tie:
+                    resultsMessage = string.Format(@"Its a tie! ({0}/{0}) ({1})
+Would you like another round?", winner.DiscsCounter, m_GameService.NumberOfPlayedRounds);
+                    break;
+                case eGameResult.FirstPlayerWon: // winner and lose assigned currectly at the beginning of this function
+                    goto default;
+                case eGameResult.SecondPlayerWon:
+                    winner = m_GameService.SecondPlayer;
+                    loser = m_GameService.FirstPlayer;
+                    goto default;
+                default:
+                    resultsMessage = string.Format(@"{0} Won!! ({1}/{2}) ({3}/{4})
+Would you like another round?", winner.Name, winner.DiscsCounter, loser.DiscsCounter, winner.RoundsWon, m_GameService.NumberOfPlayedRounds);
+                    break;
+            }
+
+            return resultsMessage;
         }
     }
 }

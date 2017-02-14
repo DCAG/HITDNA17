@@ -25,7 +25,7 @@ namespace Ex02_Othelo
         private Player m_FirstPlayer;
         private Player m_SecondPlayer;
         private Player m_Turn; // = m_WhitePlayer;
-
+        private int m_NumberOfPlayedRounds;
         private bool m_GameStarted = false;
         public IPlayer ThisTurn
         {
@@ -35,7 +35,7 @@ namespace Ex02_Othelo
             }
         }
 
-        public IPlayer Winner
+        public IPlayer FirstPlayer
         {
             get
             {
@@ -43,7 +43,7 @@ namespace Ex02_Othelo
             }
         }
 
-        public IPlayer Loser
+        public IPlayer SecondPlayer
         {
             get
             {
@@ -64,6 +64,14 @@ namespace Ex02_Othelo
                 {
                     m_ComputerOpponent = value;
                 }
+            }
+        }
+
+        public int NumberOfPlayedRounds
+        {
+            get
+            {
+                return m_NumberOfPlayedRounds;
             }
         }
 
@@ -89,6 +97,7 @@ namespace Ex02_Othelo
 
             m_FirstPlayer = new Player(i_FirstPlayerName, eDiscColor.FirstColor, v_FirstPlayerIsComputer);
             m_SecondPlayer = new Player(i_SecondPlayerName, eDiscColor.SecondColor, i_IsComputerOpponent);
+            m_NumberOfPlayedRounds = 0;
         }
 
         private void updateAvailableMoves()
@@ -171,6 +180,24 @@ namespace Ex02_Othelo
             m_SecondPlayer.DiscsCounter = 2;
             m_Turn = m_FirstPlayer;
             updateAvailableMoves();
+        }
+
+        public eGameResult GetGameResult()
+        {
+            eGameResult result = eGameResult.Tie;
+            if(m_FirstPlayer.DiscsCounter > m_SecondPlayer.DiscsCounter)
+            {
+                m_FirstPlayer.RoundsWon++;
+                result = eGameResult.FirstPlayerWon;
+            }
+            else if(m_FirstPlayer.DiscsCounter < m_SecondPlayer.DiscsCounter)
+            {
+                m_SecondPlayer.RoundsWon++;
+                result = eGameResult.SecondPlayerWon;
+            }
+
+            m_NumberOfPlayedRounds++;
+            return result;
         }
 
         private void invokeOnFlip(int i_X, int i_Y, eDiscColor i_DiscColor)
